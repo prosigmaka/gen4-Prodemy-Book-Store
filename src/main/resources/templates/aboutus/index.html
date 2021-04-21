@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html layout:decorate="~{baseaboutus}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About Us | The Prodemy Book Store</title>
+</head>
+
+<div class="content-top " layout:fragment="product-top">
+    <!--content top-->
+    <div class="container">
+        <div class="spec ">
+            <h3>About Us</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+
+        <div class=" contact-w3">
+            <div class="contact-left text-justify">
+                <h1>Company Profile</h1>
+                <br>
+                <h4>
+                    <p>
+                        The Prodemy Book Store is an Indonesian Online Book Store Company with a mission to educate
+                        Indonesian through reading habits,
+                        especially to educate the nation's children as a milestone who will carry on the nation's
+                        struggle.
+                    </p>
+                    <p>
+                        The Prodemy Book Store makes books prices cheaper, because we helps customers save on searching,
+                        communication and transportation costs. With PBS, Indonesians become more savvy in digital
+                        financial
+                        products, boosting financial literacy and inclusion in the country.
+                    </p>
+                    <p>
+                        We always provide high quality previews for every book. We also perform visual inspections
+                        before
+                        our customer's order is shipped, because our costumers satisfaction is the main thing for us.
+                    </p>
+                    <p>
+                        Feel free to contact us at any time if you require more information on any product in our store.
+                    </p>
+                </h4>
+                <br>
+                <br>
+                <h1>Achievement</h1>
+                <div class="col-md-6 contact-right text-center">
+                    <img src="https://img.freepik.com/free-vector/premium-quality-gold-medal-badge-label-seal-isolated_118124-6022.jpg?size=338&ext=jpg"
+                         class="img-responsive" alt>
+                    <h2>Best Online Book Store</h2>
+                    <h2>2020</h2>
+                </div>
+                <div class="col-md-6 contact-left text-center">
+                    <br>
+                    <img src="https://media.istockphoto.com/vectors/gold-medal-victory-orden-or-best-winner-trophy-isolated-vector-of-vector-id1217030554?k=6&m=1217030554&s=612x612&w=0&h=fgbTs7Pj4rXnZjgGhPC6A5kiwuEMMJ6x9WURGULuCGU="
+                         class="img-responsive" alt>
+                    <h2>Support Children Reading Habit</h2>
+                    <h2>Social Achievement - 2020</h2>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/assets/dist/js/demo.js}"></script>
+    <script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
+</th:block>
+
+</html>
