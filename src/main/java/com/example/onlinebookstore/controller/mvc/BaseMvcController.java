@@ -18,5 +18,13 @@ public class BaseMvcController {
         return "aboutus/index";
     }
 
+    @GetMapping("home-company")
+    public String hc() {
+        return "home-company/index";
+    }
 
+    @GetMapping("product-company")
+    public String product() {
+        return "product-company/index";
+    }
 }

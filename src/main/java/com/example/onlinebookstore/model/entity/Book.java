@@ -22,7 +22,7 @@ public class Book {
     private Integer stokBuku;
     @Column(name="harga_buku", nullable = false)
     private Long hargaBuku;
-    @Column(name="gambar", nullable = false)
+    @Column(name="gambar")
     private String gambar;
 
     @ManyToOne
