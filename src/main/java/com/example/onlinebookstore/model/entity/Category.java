@@ -11,7 +11,7 @@ public class Category {
     public static final String CATEGORY = "cat";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CATEGORY)
-    @SequenceGenerator(name = CATEGORY, sequenceName = "cat_seq")
+    @SequenceGenerator(name = CATEGORY, sequenceName = "cat_seq", allocationSize = 1, initialValue = 1)
 
     private Integer id;
     private String namaKategori;

@@ -11,7 +11,7 @@ public class Author {
     public static final String AUTHOR = "author";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = AUTHOR)
-    @SequenceGenerator(name = AUTHOR, sequenceName = "author_seq")
+    @SequenceGenerator(name = AUTHOR, sequenceName = "author_seq", allocationSize = 1, initialValue = 1)
 
     private Integer id;
     private String namaPengarang;
