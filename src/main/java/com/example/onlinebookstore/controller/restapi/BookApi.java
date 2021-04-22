@@ -25,6 +25,13 @@ public class BookApi {
 //    public List<Book> getAll() {
 //        return bookRepository.findAll();
 //    }
+    @GetMapping("/{id}")
+    public Book getById(@PathVariable Integer id) {
+        return bookRepository.findById(id).get();
+    }
 
-
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Integer id) {
+        bookRepository.deleteById(id);
+    }
 }

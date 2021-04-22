@@ -23,8 +23,8 @@ public class BaseMvcController {
         return "home-company/index";
     }
 
-    @GetMapping("product-company")
+    @GetMapping("product")
     public String product() {
-        return "product-company/index";
+        return "product/index";
     }
 }
