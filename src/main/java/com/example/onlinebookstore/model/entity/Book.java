@@ -17,7 +17,7 @@ public class Book {
     @Column(name="judul_buku", nullable = false)
     private String judulBuku;
     @Column(name="tahun_terbit", nullable = false)
-    private Integer tahunTerbit;
+    private String tahunTerbit;
     @Column(name="stok_buku", nullable = false)
     private Integer stokBuku;
     @Column(name="harga_buku", nullable = false)
