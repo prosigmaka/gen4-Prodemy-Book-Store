@@ -1,13 +1,12 @@
 package com.example.onlinebookstore.controller.restapi;
 
+import com.example.onlinebookstore.service.BookService;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.entity.Book;
+import com.example.onlinebookstore.model.dto.BookDto;
 import com.example.onlinebookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/book")
@@ -16,8 +15,14 @@ public class BookApi {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
-    public List<Book> getAll() {
+    Iterable<Book> getAll() {
         return bookRepository.findAll();
     }
 
@@ -30,6 +35,14 @@ public class BookApi {
         return bookRepository.findById(id).get();
     }
 
+    @PostMapping("/{id}")
+    public BookDto saveOrEditBook(@RequestBody BookDto bookDto){
+        Book book = modelMapper.map(bookDto, Book.class);
+        book.setIdPengarang(bookDto.getIdPengarang());
+        book.setIdPenerbit(bookDto.getIdPenerbit());
+        book.setIdKategori(bookDto.getIdKategori());
+        return bookService.saveBookService(book);
+    }
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         bookRepository.deleteById(id);

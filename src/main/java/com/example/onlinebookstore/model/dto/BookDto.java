@@ -2,7 +2,7 @@ package com.example.onlinebookstore.model.dto;
  import lombok.Data;
 
  @Data
-public class ProductDto {
+public class BookDto {
      private Integer id;
      private String judulBuku;
      private String tahunTerbit;
