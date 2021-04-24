@@ -42,9 +42,7 @@ var bookCRUD = {
                     document.getElementById('judulBuku').value = res.judulBuku;
                     document.getElementById('namaPengarang').value = res.author.namaPengarang;
                     document.getElementById('hargaBuku').value = res.hargaBuku;
-                    console.log("Berhasil")
-                    // document.getElementById("modal-book").showModal();
-                    $("#modal-book").modal('show')
+                    $('#modal-book').modal('show')
                     console.log('Success!')
                 } else {
 
