@@ -19,6 +19,8 @@ public class Keranjang {
     @Column(name="subtotal_harga_buku", nullable = false)
     private Integer subTotalHargaBuku;
 
+
+
     @ManyToOne
     @JoinColumn(name = "id_buku", updatable = false, insertable = false)
     private Book book;
@@ -28,6 +30,7 @@ public class Keranjang {
 //    @ManyToOne
 //    @JoinColumn(name = "id_customer", updatable = false, insertable = false)
 //    private Customer customer;
+
     @Column(name="id_customer")
     private Integer idCustomer;
 
