@@ -6,8 +6,8 @@ public class BookDto {
      private Integer id;
      private String judulBuku;
      private String tahunTerbit;
-     private String stokBuku;
-     private String hargaBuku;
+     private Integer stokBuku;
+     private Long hargaBuku;
      private String gambar;
      private String namaPengarang;
      private String namaKategori;

@@ -26,7 +26,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Book saveBookService(Book book){
-
+    authorRepository
     book = bookRepository.save(book);
     book.setAuthor(authorRepository.findById(book.getIdPengarang()).get());
     book.setCategory(categoryRepository.findById(book.getIdKategori()).get());
@@ -34,4 +34,7 @@ public class BookServiceImp implements BookService {
 
     return book;
     }
+
+
+
 }

@@ -1,19 +1,49 @@
 package com.example.onlinebookstore.model.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = Author.AUTHOR)
+@Table(name = User.TABLE_NAME)
 @Data
-public class Author {
-    public static final String AUTHOR = "author";
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = AUTHOR)
-    @SequenceGenerator(name = AUTHOR, sequenceName = "author_seq", allocationSize = 1, initialValue = 1)
+public class User extends CommonEntity {
+    public static final String TABLE_NAME = "t_user";
 
-    private Integer id;
-    private String namaPengarang;
-    private String emailPengarang;
+    @Id
+    @Column(name = "id")
+    @GenericGenerator(
+            name = "user-generator",
+            strategy = "com.example.onlinebookstore.configuration.MyGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "prefix", value = "UID")
+            }
+    )
+
+    @GeneratedValue(generator = "user-generator")
+    private String id;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String userName;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+    @Column(name = "token_expired")
+    private Boolean tokenExpired;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 }
