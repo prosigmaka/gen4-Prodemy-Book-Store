@@ -4,15 +4,16 @@ import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class CheckoutOrderDto {
     private Integer id;
-    private LocalDateTime tanggalCi;
+    private Date tanggalCi;
     private Integer tipePembayaran;
-    private Integer totalHargalCi;
-    private LocalDateTime batasTanggalPembayaran;
+    private Double totalHargalCi;
+    private Date batasTanggalPembayaran;
     private Enum statusPesanan;
 
     private List<CheckoutItemDto> items;

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,9 +21,9 @@ public class CheckoutOrder {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="tanggal_ci", nullable = false)
-    private LocalDateTime tanggalCi;
+    private Date tanggalCi;
     @Column(name="total_harga_ci", nullable = false)
-    private Integer totalHargalCi;
+    private Double totalHargalCi;
     @Column(name="tipe_pembayaran", nullable = false)
     private String tipePembayaran;
     @Enumerated(EnumType.STRING)
@@ -31,7 +32,7 @@ public class CheckoutOrder {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="batas_tanggal_pembayaran", nullable = false)
-    private LocalDateTime batasTanggalPembayaran;
+    private Date batasTanggalPembayaran;
 
 //    @ManyToOne
 //    @JoinColumn(name = "id_user", updatable = false, insertable = false)

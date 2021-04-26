@@ -1,5 +1,6 @@
 package com.example.onlinebookstore.controller.restapi;
 
+import com.example.onlinebookstore.model.entity.Author;
 import com.example.onlinebookstore.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

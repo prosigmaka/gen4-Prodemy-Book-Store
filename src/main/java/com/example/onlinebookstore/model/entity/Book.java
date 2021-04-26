@@ -42,4 +42,5 @@ public class Book {
     private Publisher publisher;
     @Column(name="id_penerbit", nullable = false)
     private Integer idPenerbit;
+
 }
