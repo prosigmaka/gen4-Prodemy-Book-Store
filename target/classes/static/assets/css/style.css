@@ -101,6 +101,13 @@ button.close.close-w3 {
     bottom: 0px;
     right: 0;
 }
+
+.modal-dialog-centered {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+}
+
 /*----*/
 img.img-head {
     position: absolute;

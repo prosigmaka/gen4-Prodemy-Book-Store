@@ -40,7 +40,7 @@ public class BookApi {
     }
 
     @PostMapping
-    public BookDto saveOrEditBook(@RequestBody BookDto bookDto){
+    public BookDto saveOrEditBook(@RequestBody BookDto bookDto) {
         Book book = modelMapper.map(bookDto, Book.class);
         book.setIdPengarang(bookDto.getIdPengarang());
         book.setIdPenerbit(bookDto.getIdPenerbit());
@@ -50,13 +50,14 @@ public class BookApi {
 
         return bookDto1;
     }
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         bookRepository.deleteById(id);
     }
 
 
-    private BookDto mapToDto(Book book){
+    private BookDto mapToDto(Book book) {
         BookDto bookDto = modelMapper.map(book, BookDto.class);
 
         bookDto.setIdPengarang(book.getAuthor().getId());
@@ -72,22 +73,12 @@ public class BookApi {
 
         return bookDto;
     }
-//    private TransactionDto mapToDto(Keranjang keranjang){
-//        BookDto bookDto = modelMapper.map(book, BookDto.class);
-//
-//        bookDto.setIdPengarang(book.getAuthor().getId());
-//        bookDto.setNamaPengarang(book.getAuthor().getNamaPengarang());
-//
-//        bookDto.setIdKategori(book.getCategory().getId());
-//        bookDto.setNamaKategori(book.getCategory().getNamaKategori());
-//
-//        bookDto.setIdPenerbit(book.getPublisher().getId());
-//        bookDto.setNamaPenerbit(book.getPublisher().getNamaPenerbit());
-//
-//        bookDto.setId(book.getId());
-//
-//        return bookDto;
-//    }
 
+    @GetMapping("/search/{keyword}")
+    public List<BookDto> listBookSearch(String keyword) {
+        List<Book> list = bookRepository.searchBook(keyword);
+        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
+        return bookDto;
+    }
 }
 
