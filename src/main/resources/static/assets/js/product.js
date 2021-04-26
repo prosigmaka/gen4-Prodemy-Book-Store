@@ -39,9 +39,9 @@ var bookCRUD = {
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
                     document.getElementById('judulBuku').value = res.judulBuku;
-                    document.getElementById('namaPengarang').value = res.namaPengarang;
-                    document.getElementById('namaPenerbit').value = res.namaPenerbit;
-                    document.getElementById('kuantitasBuku').value = res.kuantitasBuku;
+                    document.getElementById('namaPengarang').value = res.author.namaPengarang;
+                    document.getElementById('namaPenerbit').value = res.publisher.namaPenerbit;
+                    document.getElementById('stokBuku').value = res.stokBuku;
                     document.getElementById('hargaBuku').value = res.hargaBuku;
                     $('#modal-book').modal('show')
                     console.log('Success!')
