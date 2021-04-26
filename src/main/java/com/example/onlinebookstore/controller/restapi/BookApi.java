@@ -51,9 +51,10 @@ public class BookApi {
     @PostMapping
     public BookDto saveOrEditBook(@RequestBody BookDto bookDto) {
         Book book = modelMapper.map(bookDto, Book.class);
-        book = manageAuthor(bookDto, book);
-        book = managePublisher(bookDto, book);
-        book = manageCategory(bookDto, book);
+        book = bookService.manageDetailBookService(book, bookDto);
+//        book = manageAuthor(bookDto, book);
+//        book = managePublisher(bookDto, book);
+//        book = manageCategory(bookDto, book);
         book = bookService.saveBookService(book);
         BookDto bookDto1 = mapToDto(book);
 
@@ -82,36 +83,37 @@ public class BookApi {
 
         return bookDto;
     }
-    private Book manageAuthor(BookDto bookDto, Book book){
-        List<Author> authors = authorRepository.findAll();
-        for(Author author:authors){
-            if(author.getNamaPengarang().equals(bookDto.getNamaPengarang())){
-                book.setIdPengarang(author.getId());
-            }
-        }
-        return book;
-    }
-
-    private Book managePublisher(BookDto bookDto, Book book){
-        List<Publisher> publishers = publisherRepository.findAll();
-        for(Publisher publisher:publishers){
-            if(publisher.getNamaPenerbit().equals(bookDto.getNamaPenerbit())){
-                book.setIdPenerbit(publisher.getId());
-            }
-        }
-        return book;
-    }
-
-    private Book manageCategory(BookDto bookDto, Book book){
-        List<Category> categories = categoryRepository.findAll();
-        for(Category category:categories){
-            if(category.getNamaKategori().equals(bookDto.getNamaKategori())){
-                book.setIdKategori(category.getId());
-            }
-        }
-        return book;
-    }
-
+//    private Book manageAuthor(BookDto bookDto, Book book){
+//        List<Author> authors = authorRepository.findAll();
+//        for(Author author:authors){
+//            if(author.getNamaPengarang().equals(bookDto.getNamaPengarang())){
+//                book.setIdPengarang(author.getId());
+//            }
+//        }
+//
+//        return book;
+//    }
+//
+//    private Book managePublisher(BookDto bookDto, Book book){
+//        List<Publisher> publishers = publisherRepository.findAll();
+//        for(Publisher publisher:publishers){
+//            if(publisher.getNamaPenerbit().equals(bookDto.getNamaPenerbit())){
+//                book.setIdPenerbit(publisher.getId());
+//            }
+//        }
+//        return book;
+//    }
+//
+//    private Book manageCategory(BookDto bookDto, Book book){
+//        List<Category> categories = categoryRepository.findAll();
+//        for(Category category:categories){
+//            if(category.getNamaKategori().equals(bookDto.getNamaKategori())){
+//                book.setIdKategori(category.getId());
+//            }
+//        }
+//        return book;
+//    }
+//
 
 
 //    @GetMapping("/search/{keyword}")
