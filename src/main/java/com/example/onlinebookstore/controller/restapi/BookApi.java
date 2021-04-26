@@ -45,6 +45,8 @@ public class BookApi {
         book.setIdPengarang(bookDto.getIdPengarang());
         book.setIdPenerbit(bookDto.getIdPenerbit());
         book.setIdKategori(bookDto.getIdKategori());
+
+
         book = bookService.saveBookService(book);
         BookDto bookDto1 = mapToDto(book);
 

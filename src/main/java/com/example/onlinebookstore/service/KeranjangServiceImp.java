@@ -20,13 +20,6 @@ public class KeranjangServiceImp implements KeranjangService {
     @Override
     public Keranjang simpanKeKeranjang(Keranjang keranjang){
 
-
-//        book = bookRepository.save(book);
-//        book.setAuthor(authorRepository.findById(book.getIdPengarang()).get());
-//        book.setCategory(categoryRepository.findById(book.getIdKategori()).get());
-//        book.setPublisher(publisherRepository.findById(book.getIdPenerbit()).get());
-//
-//        return book;
         return keranjang;
     }
 }
