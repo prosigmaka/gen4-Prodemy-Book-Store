@@ -3,11 +3,10 @@ $.ajax({
     method: 'get',
     contentType: 'application/json',
     success: function (res, status, xhr) {
-        var bs;
         var i;
         if (xhr.status == 200 || xhr.status == 201) {
             for (i = 0; i < res.length; i++) {
-                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1">' +
+                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("'+res[i].id+'");>' +
                     "<div class='col-m'>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
@@ -47,7 +46,7 @@ $.ajax({
                     document.getElementById('new-arrival').innerHTML += '<div class="col-md-3 pro-1">' +
                         "<div class='col-m'>" +
                         "<div class='mid-1'>" +
-                        "<div class='women'>" +
+                        "<div class='women' onclick=bookDescription('"+res[i].id+"');>" +
                         "<h6>" + res[i].judulBuku + "</h6>" +
                         "</div>" +
                         "<div class='mid-2'>" +
@@ -57,7 +56,7 @@ $.ajax({
                         "</div>" +
                         "<div class='clearfix'></div>" +
                         "</div>" +
-                        '<div class="add add-2"><button type="button" class="btn btn-success" id="add-to-cart" onclick= "addToCart();">Add to Cart</button>' +
+                        '<div class="add add-2"><button type="button" class="btn btn-success" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
                         "</div>" +
                         "</div>" +
                         "</div>" +
@@ -72,10 +71,17 @@ $.ajax({
         }
     }
 );
+
 $("#show-cart").click(function () {
     $("#modal-cart").modal('show')
 })
 
-function addToCart(){
+function addToCart(id){
     $('#modal-cart').modal('show')
+}
+
+function bookDescription(id){
+    console.log(id);
+    $('#modal-book-description').modal('show');
+
 }

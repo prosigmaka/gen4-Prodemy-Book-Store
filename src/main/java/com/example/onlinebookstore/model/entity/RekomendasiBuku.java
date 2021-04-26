@@ -18,5 +18,7 @@ public class RekomendasiBuku {
     private Integer idCustomer;
     @Column(name="kategori_buku", nullable = false)
     private String kategoriBuku;
+    @Column(name="judul_buku", nullable = false)
+    private String judulBuku;
 
 }
