@@ -1,6 +1,7 @@
 package com.example.onlinebookstore.service;
 
 import com.example.onlinebookstore.controller.restapi.RequestOrder;
+import com.example.onlinebookstore.model.dto.KeranjangDto;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import com.example.onlinebookstore.model.entity.Keranjang;
@@ -35,8 +36,9 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService{
 
     @Override
     public CheckoutOrder insertOrder(RequestOrder requestOrder) {
-        Object keys[] = requestOrder.getKeranjang().keySet().toArray();
-        int keranjang_index[] = new int[keys.length];
+        Object list[]= requestOrder.getCarts().toArray();
+//        Object keys[] = requestOrder.getKeranjang().keySet().toArray();
+        int keranjang_index[] = new int[list.length];
         for (int i = 0; i < keranjang_index.length; i++){
             keranjang_index[i] = (Integer) requestOrder.getKeranjang().keySet().toArray()[i];
         }
