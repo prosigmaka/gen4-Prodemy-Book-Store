@@ -5,6 +5,7 @@ import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.service.CheckoutOrderService;
 import com.example.onlinebookstore.service.KeranjangService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
