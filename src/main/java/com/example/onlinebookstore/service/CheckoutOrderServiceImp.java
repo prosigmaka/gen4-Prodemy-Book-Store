@@ -9,10 +9,12 @@ import com.example.onlinebookstore.repository.CheckoutItemRepository;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
 
+@Service
 public class CheckoutOrderServiceImp implements CheckoutOrderService{
 
     @Autowired

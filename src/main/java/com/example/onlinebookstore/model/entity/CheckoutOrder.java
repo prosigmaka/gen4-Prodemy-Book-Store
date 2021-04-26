@@ -19,7 +19,7 @@ public class CheckoutOrder {
     private Integer id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="tanggal_ci", nullable = false)
     private Date tanggalCi;
     @Column(name="total_harga_ci", nullable = false)
@@ -30,7 +30,7 @@ public class CheckoutOrder {
     @Column(name="status_pesanan", nullable = false)
     private PesananStatus statusPesanan;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="batas_tanggal_pembayaran", nullable = false)
     private Date batasTanggalPembayaran;
 

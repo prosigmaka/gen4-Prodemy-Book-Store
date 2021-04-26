@@ -18,7 +18,7 @@ public class BuktiPembayaran {
     private Integer id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="tanggal_pembayaran", nullable = false)
     private LocalDateTime tanggalPembayaran;
     @Column(name="gambar_bukti_pembayaran", nullable = false)
