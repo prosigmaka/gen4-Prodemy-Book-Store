@@ -1,13 +1,10 @@
 package com.example.onlinebookstore.controller.restapi;
 
-import org.modelmapper.ModelMapper;
-import com.example.onlinebookstore.model.entity.Author;
 import com.example.onlinebookstore.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/author")
