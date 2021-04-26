@@ -19,10 +19,6 @@ public class AuthorApi {
         return authorRepository.findAll();
     }
 
-    //    @GetMapping("/best-seller")
-//    public List<Book> getAll() {
-//        return bookRepository.findAll();
-//    }
     @GetMapping("/{id}")
     public Author getById(@PathVariable Integer id) {
         return authorRepository.findById(id).get();
