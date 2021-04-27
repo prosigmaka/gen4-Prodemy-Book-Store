@@ -14,6 +14,7 @@ public class Publisher {
     @SequenceGenerator(name = PUBLISHER, sequenceName = "publisher_seq", allocationSize = 1, initialValue = 1)
 
     private Integer id;
+    @Column(name = "nama_penerbit", nullable = false)
     private String namaPenerbit;
     private String alamatPenerbit;
     private String teleponPenerbit;
