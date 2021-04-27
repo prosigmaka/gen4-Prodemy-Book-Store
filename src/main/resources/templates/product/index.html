@@ -1,128 +1,135 @@
 <!DOCTYPE html>
 <html layout:decorate="~{base-company}"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 
 <div class="content-top " layout:fragment="product-top">
-	<!--content top-->
-<!--	<div class="container">-->
-<!--		<div class="spec ">-->
-<!--			<h3>Best Seller</h3>-->
-<!--			<div class="ser-t">-->
-<!--				<b></b>-->
-<!--				<span><i></i></span>-->
-<!--				<b class="line"></b>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div class=" con-w3l" id="best-seller">-->
-<!--			<div class="clearfix"></div>-->
-<!--		</div>-->
-<!--	</div>-->
-	<div class="table-responsive container">
-	<table class="table table-hover" id="authorTable">
-		<thead>
-		<tr>
-			<th scope="col">Numb.</th>
-			<th scope="col">Book</th>
-			<th scope="col">Author</th>
-			<th scope="col"> </th>
-		</tr>
-		</thead>
-		<tbody id="bookTable">
-		</tbody>
-	</table>
-	</div>
+    <!--content top-->
+    <!--	<div class="container">-->
+    <!--		<div class="spec ">-->
+    <!--			<h3>Best Seller</h3>-->
+    <!--			<div class="ser-t">-->
+    <!--				<b></b>-->
+    <!--				<span><i></i></span>-->
+    <!--				<b class="line"></b>-->
+    <!--			</div>-->
+    <!--		</div>-->
+    <!--		<div class=" con-w3l" id="best-seller">-->
+    <!--			<div class="clearfix"></div>-->
+    <!--		</div>-->
+    <!--	</div>-->
+    <div class="table-responsive container">
+        <table class="table table-hover" id="authorTable">
+            <thead>
+            <tr>
+                <th scope="col">Numb.</th>
+                <th scope="col">Book</th>
+                <th scope="col">Author</th>
+                <th scope="col">
+                    <button type='button' class='btn btn-primary' onclick=bookCRUD.addBook()>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
+                             class='bi bi-pencil' viewBox='0 0 16 16'>
+                            <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+                        </svg>
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="bookTable">
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
 <div class="product " layout:fragment="product-bottom">
-	<!--content top-->
+    <!--content top-->
 
-	<div class="modal fade" id="modal-book">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Book</h4>
-					<button aria-label="Close" class="close" data-dismiss="modal" type="button">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+    <div class="modal fade" id="modal-book">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Book</h4>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-				<div class="modal-body">
-					<form id="form-book" role="form">
+                <div class="modal-body">
+                    <form id="form-book" role="form">
 
-						<input id="id" name="id" type="hidden"/>
-
-
-						<div class="form-group">
-							<label>Judul Buku :</label>
-							<input class="form-control" id="judulBuku" name="judulBuku"
-								   placeholder="Judul Buku" required type="text" value=''>
-						</div>
-
-						<div class="form-group">
-							<label>Author : </label>
-							<input class="form-control" id="namaPengarang" name="namaPengarang"
-								   placeholder="Daniel Kahneman" required type="text" value=''>
-						</div>
-
-						<div class="form-group">
-							<label>Penerbit : </label>
-							<input class="form-control" id="namaPenerbit" name="namaPenerbit"
-								   placeholder="Contoh : Gramedia" required type="text" value=''>
-						</div>
-						<div class="form-group">
-							<label>Kategori : </label>
-							<input class="form-control" id="namaKategori" name="namaKategori"
-								   placeholder="Contoh :Novel" required type="text" value=''>
-						</div>
-						<div class="form-group">
-							<label>Tahun terbit : </label>
-							<input class="form-control" id="tahunTerbit" name="tahunTerbit"
-								   placeholder="Contoh :2018" required type="text" value=''>
-						</div>
-						<div class="form-group">
-							<label>Jumlah : </label>
-							<input class="form-control" id="stokBuku" name="stokBuku"
-								   placeholder="Jumlah" required type="number" value=''>
-						</div>
-						<div class="form-group">
-							<label>Harga (Rp) : </label>
-							<input class="form-control" id="hargaBuku" name="hargaBuku"
-								   placeholder="Harga" required type="text" value=''>
-						</div>
+                        <input id="id" name="id" type="hidden"/>
 
 
-					</form>
+                        <div class="form-group">
+                            <label>Judul Buku :</label>
+                            <input class="form-control" id="judulBuku" name="judulBuku"
+                                   placeholder="Judul Buku" required type="text" value=''>
+                        </div>
 
-				</div>
+                        <div class="form-group">
+                            <label>Author : </label>
+                            <input class="form-control" id="namaPengarang" name="namaPengarang"
+                                   placeholder="Daniel Kahneman" required type="text" value=''>
+                        </div>
 
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-					<button class="btn btn-success" id="save-book" type="button" onclick="bookCRUD.saveBook(); on">Save</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
+                        <div class="form-group">
+                            <label>Penerbit : </label>
+                            <input class="form-control" id="namaPenerbit" name="namaPenerbit"
+                                   placeholder="Contoh : Gramedia" required type="text" value=''>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori : </label>
+                            <input class="form-control" id="namaKategori" name="namaKategori"
+                                   placeholder="Contoh :Novel" required type="text" value=''>
+                        </div>
+                        <div class="form-group">
+                            <label>Tahun terbit : </label>
+                            <input class="form-control" id="tahunTerbit" name="tahunTerbit"
+                                   placeholder="Contoh :2018" required type="text" value=''>
+                        </div>
+                        <div class="form-group">
+                            <label>Jumlah : </label>
+                            <input class="form-control" id="stokBuku" name="stokBuku"
+                                   placeholder="Jumlah" required type="number" value=''>
+                        </div>
+                        <div class="form-group">
+                            <label>Harga (Rp) : </label>
+                            <input class="form-control" id="hargaBuku" name="hargaBuku"
+                                   placeholder="Harga" required type="text" value=''>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-success" id="save-book" type="button" onclick="bookCRUD.saveBook(); on">
+                        Save
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 
 
 <!-- /.row -->
 <th:block layout:fragment="add-scripts">
-	<script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
-	<script th:src="@{/assets/dist/js/demo.js}"></script>
-	<script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
-	<script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
-	<script th:src="@{/assets/dist/js/product.js}"></script>
+    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/assets/dist/js/demo.js}"></script>
+    <script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
+    <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/assets/dist/js/product.js}"></script>
 
-<!--	<script>-->
-<!--		document.getElementById("btn-save-book").onclick = function (){-->
-<!--			console.log("step0")-->
-<!--		}-->
-<!--	</script>-->
+    <script>
+
+    </script>
 </th:block>
 
 </html>
