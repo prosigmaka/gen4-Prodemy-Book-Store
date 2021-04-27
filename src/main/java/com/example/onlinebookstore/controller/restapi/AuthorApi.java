@@ -24,4 +24,14 @@ public class AuthorApi {
         return authorRepository.findById(id).get();
     }
 
+    @PostMapping
+    public Author saveAuthor(Author author){
+        return authorRepository.save(author);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAuthor(@PathVariable Integer id){
+        authorRepository.deleteById(id);
+    }
+
 }
