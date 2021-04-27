@@ -28,10 +28,7 @@ public class KeranjangApi {
         return keranjangRepository.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    public Book getById(@PathVariable Integer id) {
-//        return bookRepository.findById(id).get();
-//    }
+
 
     @PostMapping()
     public Keranjang simpanKeranjang(@RequestBody KeranjangDto keranjangDto){
