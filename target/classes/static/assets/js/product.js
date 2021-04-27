@@ -169,6 +169,11 @@ var bookCRUD = {
                 }
             });
 
+    },
+    
+    addBook: function () {
+        $('#modal-book').modal('show')
+        this.saveBook();
     }
 }
 

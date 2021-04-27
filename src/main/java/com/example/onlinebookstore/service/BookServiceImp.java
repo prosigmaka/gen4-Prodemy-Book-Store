@@ -45,7 +45,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Book manageDetailBookService(Book book, BookDto bookDto) {
-        bookDto.setIdPengarang(null);
+        bookDto.setIdPengarang();
         bookDto.setIdPenerbit(null);
         bookDto.setIdKategori(null);
 
