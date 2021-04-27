@@ -27,4 +27,14 @@ public class BaseMvcController {
     public String product() {
         return "product/index";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 }
