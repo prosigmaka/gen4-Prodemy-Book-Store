@@ -57,17 +57,23 @@ public class BookApi {
 
         book = bookService.manageDetailBookService(book, bookDto);
 
-        author.setId(bookDto.getIdPengarang());
-        author.setNamaPengarang(bookDto.getNamaPengarang());
-        authorRepository.save(author);
+        if(bookDto.getIdPengarang()==null) {
+            author.setNamaPengarang(bookDto.getNamaPengarang());
+            author = authorRepository.save(author);
+            book.setIdPengarang(author.getId());
+        }
 
-        category.setId(bookDto.getIdKategori());
-        category.setNamaKategori(bookDto.getNamaKategori());
-        categoryRepository.save(category);
+        if(bookDto.getIdKategori()==null) {
+            category.setNamaKategori(bookDto.getNamaKategori());
+            category = categoryRepository.save(category);
+            book.setIdKategori(category.getId());
+        }
 
-        publisher.setId(bookDto.getIdPenerbit());
-        publisher.setNamaPenerbit(bookDto.getNamaPenerbit());
-        publisherRepository.save(publisher);
+        if(bookDto.getIdPenerbit()==null) {
+            publisher.setNamaPenerbit(bookDto.getNamaPenerbit());
+            publisher = publisherRepository.save(publisher);
+            book.setIdPenerbit(publisher.getId());
+        }
 
         book = bookService.saveBookService(book);
 
@@ -102,6 +108,7 @@ public class BookApi {
 
 //    @GetMapping("/search/{keyword}")
 //    public List<BookDto> listBookSearch(String keyword) {
+//        String src = "'\y{keyword}\y'";
 //        List<Book> list = bookRepository.searchBook(keyword);
 //        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
 //        return bookDto;

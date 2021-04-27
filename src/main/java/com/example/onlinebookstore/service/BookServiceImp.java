@@ -45,15 +45,12 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Book manageDetailBookService(Book book, BookDto bookDto) {
-        bookDto.setIdPengarang();
-        bookDto.setIdPenerbit(null);
-        bookDto.setIdKategori(null);
 
         List<Author> authors = authorRepository.findAll();
         for (Author author1 : authors) {
             if (author1.getNamaPengarang().equals(bookDto.getNamaPengarang())) {
                 book.setIdPengarang(author1.getId());
-                bookDto.setIdPengarang(book.getIdPengarang());
+                bookDto.setIdPengarang(author1.getId());
             }
         }
 

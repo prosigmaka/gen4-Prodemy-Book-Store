@@ -170,9 +170,14 @@ var bookCRUD = {
             });
 
     },
-    
+    resetForm: function () {
+        $('#form-book')[0].reset();
+    },
     addBook: function () {
-        $('#modal-book').modal('show')
+      //  document.getElementById('form-book').reset();
+
+        this.resetForm();
+        $('#modal-book').modal('show');
         this.saveBook();
     }
 }
