@@ -72,7 +72,7 @@ public class BookServiceImp implements BookService {
 
     public List<Book> recommendation(Book book){
         List<Category> categories = categoryRepository.findAll();
-        Integer catMaxCount = null;
+        Integer catMaxCount = 0;
         String recommendationCategory = null;
         Integer idCategory = null;
         for(Category cat : categories){

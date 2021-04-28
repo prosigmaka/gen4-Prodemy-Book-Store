@@ -18,10 +18,10 @@ public class SearchController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("search-book")
-    public String home(Model model, @RequestParam(defaultValue = "") String judulBuku) {
-        model.addAttribute("search-book", bookService.findBookByTitle(judulBuku));
-        return "search/index";
-    }
+//    @GetMapping("search-book")
+//    public String home(Model model, @RequestParam(defaultValue = "") String judulBuku) {
+//        model.addAttribute("search-book", bookService.findBookByTitle(judulBuku));
+//        return "search/index";
+//    }
 
 }

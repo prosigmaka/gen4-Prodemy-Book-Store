@@ -1,6 +1,7 @@
 package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.RequestRecommendationBookDto;
+import com.example.onlinebookstore.model.dto.ResponseRecommendationBookDto;
 import com.example.onlinebookstore.model.entity.Book;
 import com.example.onlinebookstore.model.entity.Category;
 import com.example.onlinebookstore.repository.BookRepository;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/rekomendasi")
@@ -31,11 +33,19 @@ public class RekomendasiBukuApi {
     private BookService bookService;
 
     @GetMapping
-    public List<Book> getAll(Book book) {
+    public List<ResponseRecommendationBookDto> getAll(Book book) {
         List<Book> bookList = bookService.recommendation(book);
-        return bookList;
+        List<ResponseRecommendationBookDto> respRecBookDto = bookList.stream()
+                .map(book1 -> mapToRespDto(book1))
+                .collect(Collectors.toList());
+        return respRecBookDto;
 
 
+    }
+
+    private ResponseRecommendationBookDto mapToRespDto(Book book){
+        ResponseRecommendationBookDto resp = modelMapper.map(book, ResponseRecommendationBookDto.class);
+        return resp;
     }
 
     @PostMapping
