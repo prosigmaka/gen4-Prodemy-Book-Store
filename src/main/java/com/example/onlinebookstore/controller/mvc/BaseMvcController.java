@@ -27,4 +27,9 @@ public class BaseMvcController {
     public String product() {
         return "product/index";
     }
+
+    @GetMapping("searchpage")
+    public String findBook(){
+        return "search/index";
+    }
 }

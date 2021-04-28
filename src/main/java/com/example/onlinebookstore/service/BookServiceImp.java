@@ -73,5 +73,10 @@ public class BookServiceImp implements BookService {
         return book;
     }
 
+    public List<Book> findBookByTitle(String title){
+        String key = "\\y"+title+"\\y";
+        return bookRepository.searchBook(key);
+    }
+
 
 }

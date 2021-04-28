@@ -106,12 +106,12 @@ public class BookApi {
 
 
 
-//    @GetMapping("/search/{keyword}")
-//    public List<BookDto> listBookSearch(String keyword) {
-//        String src = "'\y{keyword}\y'";
-//        List<Book> list = bookRepository.searchBook(keyword);
-//        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
-//        return bookDto;
-//    }
+    @GetMapping("/search/{keyword}")
+    public List<BookDto> listBookSearch(@PathVariable String keyword) {
+        String key = "\\y"+keyword+"\\y";
+        List<Book> list = bookRepository.searchBook(key);
+        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
+        return bookDto;
+    }
 }
 
