@@ -5,7 +5,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <div class="content-top " layout:fragment="product-top">
-
+    <input id="myInput" type="text" placeholder="Search..">
     <div class="table-responsive container">
         <table class="table table-hover" id="authorTable">
             <thead>
@@ -115,7 +115,12 @@
     <script th:src="@{/assets/dist/js/product.js}"></script>
 
     <script>
-
+        $("#myInput").onclick(function() {
+            var value = $(this).val().toLowerCase();
+            $("#bookTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     </script>
 </th:block>
 

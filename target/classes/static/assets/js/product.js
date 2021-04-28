@@ -23,7 +23,6 @@ $.ajax({
                     "</td>" +
                     "</tr>"
             }
-
         } else {
         }
     },
@@ -138,7 +137,7 @@ var bookCRUD = {
                         var i;
                         if (xhr.status == 200 || xhr.status == 201) {
                             for (i = 0; i < res.length; i++) {
-                                document.getElementById('bookTable').innerHTML += "<tr>" +
+                                document.getElementById('authorTable').innerHTML += "<tr>" +
                                     "<th scope='row'>" + res[i].id + "</th>" +
                                     "<td>" + res[i].judulBuku + "</td>" +
                                     "<td>" + res[i].namaPengarang + "</td>" +

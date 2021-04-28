@@ -5,11 +5,10 @@ function searchBook() {
 
 
     $.ajax({
-        url: '/api/book/search/'+searchKey,
+        url: '/api/book/search/' + searchKey,
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
-            console.log("berhasil masuk ke API")
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
