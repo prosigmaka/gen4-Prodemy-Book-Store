@@ -80,8 +80,8 @@ function addToCart(id){
     $('#modal-cart').modal('show')
 }
 
-function bookDescription(id){
-    console.log(id);
-    $('#modal-book-description').modal('show');
+function bookDescription(data){
+    console.log(data);
+
 
 }

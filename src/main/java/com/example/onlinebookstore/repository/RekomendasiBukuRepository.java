@@ -9,5 +9,8 @@ import java.util.List;
 
 @Repository
 public interface RekomendasiBukuRepository extends JpaRepository<RekomendasiBuku, Integer> {
+    @Query(value = "select * from RekomendasiBuku rek_buku order by kategori", nativeQuery = true)
+    List<RekomendasiBuku> findAllOrderByCategory();
+
 
 }

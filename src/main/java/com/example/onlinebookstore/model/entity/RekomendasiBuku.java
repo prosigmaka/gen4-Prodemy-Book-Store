@@ -14,11 +14,9 @@ public class RekomendasiBuku {
     @SequenceGenerator(name = REK_BUKU, sequenceName = "rek_buku_seq", allocationSize = 1, initialValue = 1)
 
     private Integer id;
-    @Column(name = "id_customer", nullable = false)
-    private Integer idCustomer;
-    @Column(name="kategori_buku", nullable = false)
-    private String kategoriBuku;
-    @Column(name="judul_buku", nullable = false)
-    private String judulBuku;
+    @Column(name = "id_user", nullable = false)
+    private Integer idUser;
+    @Column(name="kategori")
+    private String kategori;
 
 }
