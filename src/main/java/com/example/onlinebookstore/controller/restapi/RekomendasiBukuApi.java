@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.RecommendationBookDto;
 import com.example.onlinebookstore.model.entity.Book;
+import com.example.onlinebookstore.model.entity.Category;
 import com.example.onlinebookstore.repository.BookRepository;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.entity.RekomendasiBuku;
@@ -9,7 +10,7 @@ import com.example.onlinebookstore.repository.RekomendasiBukuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,8 +27,12 @@ public class RekomendasiBukuApi {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public List<RekomendasiBuku> getAll() {
-        return rekomendasiBukuRepository.findAllOrderByCategory();
+    public List<RekomendasiBuku> getAll(Category category, Book book) {
+
+        List<RekomendasiBuku> rek = rekomendasiBukuRepository.findRekomendasiBukuByKategori("Science");
+        return rek;
+
+
     }
 
     @PostMapping

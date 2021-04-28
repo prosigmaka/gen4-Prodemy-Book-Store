@@ -2,14 +2,8 @@ package com.example.onlinebookstore.service;
 
 
 import com.example.onlinebookstore.model.dto.BookDto;
-import com.example.onlinebookstore.model.entity.Author;
-import com.example.onlinebookstore.model.entity.Book;
-import com.example.onlinebookstore.model.entity.Category;
-import com.example.onlinebookstore.model.entity.Publisher;
-import com.example.onlinebookstore.repository.BookRepository;
-import com.example.onlinebookstore.repository.AuthorRepository;
-import com.example.onlinebookstore.repository.CategoryRepository;
-import com.example.onlinebookstore.repository.PublisherRepository;
+import com.example.onlinebookstore.model.entity.*;
+import com.example.onlinebookstore.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +22,9 @@ public class BookServiceImp implements BookService {
     private CategoryRepository categoryRepository;
     @Autowired
     private PublisherRepository publisherRepository;
+
+    @Autowired
+    private RekomendasiBukuRepository rekomendasiBukuRepository;
     @Autowired
     private AuthorService authorService;
 
@@ -73,9 +70,21 @@ public class BookServiceImp implements BookService {
         return book;
     }
 
-    public List<Book> findBookByTitle(String title){
-        String key = "\\y"+title+"\\y";
-        return bookRepository.searchBook(key);
+    public List<Book> recommendation(Book book){
+        List<Category> categories = categoryRepository.findAll();
+        Integer catMaxCount = null;
+        String recommendationCategory = null;
+        Integer idCategory = null;
+        for(Category cat : categories){
+            Integer cnt = rekomendasiBukuRepository.countRekomendasiBukuByKategori(cat.getNamaKategori());
+            if(catMaxCount <= cnt){
+                catMaxCount = cnt;
+                recommendationCategory = cat.getNamaKategori();
+                idCategory = cat.getId();
+            }
+        }
+        return bookRepository.findAllByIdKategori(idCategory);
+
     }
 
 

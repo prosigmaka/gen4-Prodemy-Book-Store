@@ -9,10 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RekomendasiBukuRepository extends JpaRepository<RekomendasiBuku, Integer>, CrudRepository<RekomendasiBuku, Integer> {
+public interface RekomendasiBukuRepository extends JpaRepository<RekomendasiBuku, Integer>{
 
-    @Query(value = "SELECT * FROM rek_buku rb ORDER BY rb.kategori", nativeQuery = true)
-    List<RekomendasiBuku> findAllOrderByCategory();
+//    @Query(value = "SELECT * FROM rek_buku rb ORDER BY rb.kategori", nativeQuery = true)
+//    List<RekomendasiBuku> findAllOrderByCategory();
 
+
+    List<RekomendasiBuku> findRekomendasiBukuByKategori(String str);
+
+    Integer countRekomendasiBukuByKategori(String category);
 
 }
