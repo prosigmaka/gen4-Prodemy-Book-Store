@@ -14,24 +14,27 @@ public class UserRegistrationController {
 
 	private UserService userService;
 
+	//constructor
 	public UserRegistrationController(UserService userService) {
-		super();
 		this.userService = userService;
 	}
-	
+
+	//user object used in registration.html
 	@ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
     }
-	
+
+    //show registration.html
 	@GetMapping
 	public String showRegistrationForm() {
 		return "registration";
 	}
-	
+
+	//"user" object contain form data
 	@PostMapping
 	public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
 		userService.save(registrationDto);
-		return "redirect:/registration?success";
+		return "redirect:/registration?success"; //success message
 	}
 }

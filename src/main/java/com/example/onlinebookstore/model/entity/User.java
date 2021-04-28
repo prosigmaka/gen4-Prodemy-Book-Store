@@ -33,11 +33,12 @@ public class User {
 	//one user can have multiple roles
 	private Collection<Role> roles;
 
+	//we need to provide default constructor
 	public User() {
 
 	}
 
-	//constructor
+	//constructor using parameter
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		this.firstName = firstName;
 		this.lastName = lastName;

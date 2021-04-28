@@ -11,10 +11,12 @@ public class Role {
 	private Long id;
 	private String name;
 
+	//we need provide default constructor
 	public Role() {
 
 	}
 
+	//constructor using parameter
 	public Role(String name) {
 		this.name = name;
 	}

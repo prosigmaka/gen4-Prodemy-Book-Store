@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	//needed for DaoAuthenticationProvider
 	@Autowired
 	private UserService userService;
 	
@@ -23,7 +24,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-	
+
+    //to integrate spring data JPA and hibernate in spring security, we need to provide this
+	//spring security provide UserDetailsService interface and to use this, we need to provide userService
+	//so that, UserService need to extends UserDetailService interface
+	//and in UserServiceImpl, we need to override loadUserByUsername
 	@Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
@@ -31,7 +36,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
-	
+
+    //to pass authenticationProvider
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -40,20 +46,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(
-				 "/registration**",
-	                "/js/**",
-	                "/css/**", "/assets/**", "/fonts/**", "/video/**",
-	                "/images/**", "/home*", "/aboutus*", "/home-company*", "/product*").permitAll()
+				 "/registration**", "/assets/**", "/home*", "/aboutus*", "/home-company*", "/product*").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login")
-		.permitAll()
+		.loginPage("/login").permitAll()
 		.and()
 		.logout()
 		.invalidateHttpSession(true)
 		.clearAuthentication(true)
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+
+				//once user click logout button, user will go to login page with "logout" page
 		.logoutSuccessUrl("/login?logout")
 		.permitAll();
 	}
