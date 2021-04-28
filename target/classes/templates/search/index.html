@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{base}"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<div class="content-top " layout:fragment="product-top">
+	<!--content top-->
+	<div class="container">
+		<div class="spec ">
+			<h3>Search Result</h3>
+			<div class="ser-t">
+				<b></b>
+				<span><i></i></span>
+				<b class="line"></b>
+			</div>
+		</div>
+		<div class=" con-w3l" id="search-result">
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+	<script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+	<script th:src="@{/assets/dist/js/demo.js}"></script>
+	<script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
+	<script th:src="@{/assets/dist/js/search.js}"></script>
+	<script>
+
+	</script>
+</th:block>
+
+</html>
