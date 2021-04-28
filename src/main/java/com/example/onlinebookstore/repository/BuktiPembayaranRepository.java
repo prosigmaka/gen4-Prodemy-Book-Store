@@ -1,6 +1,6 @@
 package com.example.onlinebookstore.repository;
 
-import com.example.onlinebookstore.model.entity.Book;
+import com.example.onlinebookstore.model.entity.BuktiPembayaran;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,15 +15,12 @@ import java.util.Optional;
     1? = berisi model entity
     2? = berisi tipe data primary key dari model entity*/
 @Repository
-public interface CheckoutOrderRepository extends JpaRepository<CheckoutOrder, Integer> {
+public interface BuktiPembayaranRepository extends JpaRepository<BuktiPembayaran, Integer> {
 
-    List<CheckoutOrder> findAll();
+    List<BuktiPembayaran> findAll();
 
-
-    Optional<CheckoutOrder> findById(Integer id);
-
-    @Query(value = "SELECT * FROM CheckoutOrder checkoutOrder order by id", nativeQuery = true)
-    List<CheckoutOrder> findAllOrderById();
+    @Query(value = "SELECT * FROM BuktiPembayaran buktiPembayaran order by id", nativeQuery = true)
+    List<BuktiPembayaran> findAllOrderById();
 
 
     /* CARA PERTAMA

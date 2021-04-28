@@ -11,7 +11,7 @@ import java.util.List;
 public class CheckoutOrderDto {
     private Integer id;
     private Date tanggalCi;
-    private Integer tipePembayaran;
+    private String tipePembayaran;
     private Double totalHargalCi;
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;

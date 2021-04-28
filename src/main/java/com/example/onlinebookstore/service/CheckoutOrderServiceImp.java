@@ -1,19 +1,19 @@
 package com.example.onlinebookstore.service;
 
 import com.example.onlinebookstore.controller.restapi.RequestOrder;
-import com.example.onlinebookstore.model.dto.KeranjangDto;
-import com.example.onlinebookstore.model.entity.CheckoutItem;
-import com.example.onlinebookstore.model.entity.CheckoutOrder;
-import com.example.onlinebookstore.model.entity.Keranjang;
-import com.example.onlinebookstore.model.entity.PesananStatus;
+import com.example.onlinebookstore.model.dto.*;
+import com.example.onlinebookstore.model.entity.*;
 import com.example.onlinebookstore.repository.CheckoutItemRepository;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CheckoutOrderServiceImp implements CheckoutOrderService{
@@ -45,12 +45,14 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService{
         CheckoutOrder checkoutOrder = new CheckoutOrder();
         double total = 0.0;
         for (int i = 0; i < keranjang_index.length; i++){
+//            Keranjang keranjang = keranjangRepository.findById(keranjang_index[i]).get();
             Optional<Keranjang> keranjang = keranjangRepository.findById(keranjang_index[i]);
             Keranjang k = keranjang.get();
             CheckoutItem checkoutItem = new CheckoutItem();
             checkoutItem.setKeranjang(k);
             total += k.getSubTotalHargaBuku();
             checkoutOrder.getItems().add(checkoutItem);
+//            requestOrderDTO.getCartsId().add(keranjang.getId());
             checkoutItemRepository.save(checkoutItem);
         }
         checkoutOrder.setTanggalCi(new Date());
@@ -60,4 +62,26 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService{
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
         return checkoutOrderRepository.save(checkoutOrder);
     }
+
+//    @Override
+//    public CheckoutItem checkoutItem(RequestOrder requestOrder) {
+//        Object list[]= requestOrder.getCarts().toArray();
+//        int keranjang_index[] = new int[list.length];
+//
+//        double total = 0.0;
+//        for (int i = 0; i < keranjang_index.length; i++){
+//            keranjang_index[i] = (Integer) requestOrder.getCarts().toArray()[i];
+////            Keranjang keranjang = keranjangRepository.findById(keranjang_index[i]).get();
+//            Optional<Keranjang> keranjang = keranjangRepository.findById(keranjang_index[i]);
+//            Keranjang k = keranjang.get();
+//            CheckoutItem checkoutItem = new CheckoutItem();
+//            checkoutItem.setKeranjang(k);
+//            total += k.getSubTotalHargaBuku();
+////            requestOrderDTO.getCartsId().add(keranjang.getId());
+//            CheckoutItem newCheckoutItem = checkoutItemRepository.save(checkoutItem);
+//        }
+//
+//        return ;
+//    }
+
 }
