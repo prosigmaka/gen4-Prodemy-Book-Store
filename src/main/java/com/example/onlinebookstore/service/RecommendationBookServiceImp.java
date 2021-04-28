@@ -20,6 +20,6 @@ public class RecommendationBookServiceImp implements RecommendationBookService {
 
     @Override
     public RekomendasiBuku recommendationBook(RekomendasiBuku rekomendasiBuku){
-        return 
+        return rekomendasiBuku;
     }
 }

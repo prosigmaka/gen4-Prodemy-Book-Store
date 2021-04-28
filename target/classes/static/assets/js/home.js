@@ -80,8 +80,29 @@ function addToCart(id){
     $('#modal-cart').modal('show')
 }
 
-function bookDescription(data){
-    console.log(data);
+function bookDescription(id){
+    console.log(id)
+    var jsonData = {"id":null, "idUser":null, "idBuku":id};
+    $.ajax({
+        url: '/api/rekomendasi',
+        method: 'post',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        success: function (res, status, xhr) {
+            console.log("step3")
+            if (xhr.status == 200 || xhr.status == 201) {
+                console.log("success to send id!");
 
+            } else {
 
+            }
+        },
+        erorrr: function (err) {
+            console.log(err);
+        }
+    });
 }
+
+
+
