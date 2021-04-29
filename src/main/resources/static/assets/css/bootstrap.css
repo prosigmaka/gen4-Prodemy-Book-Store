@@ -2124,6 +2124,12 @@ fieldset[disabled] .btn-primary.active {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  border-radius: 40px;
+}
+.btn-add-to-cart {
+  color: #fff;
+  background-color: #BD9354;
+  border-color: #BD9354;
 }
 .btn-success:hover,
 .btn-success:focus,

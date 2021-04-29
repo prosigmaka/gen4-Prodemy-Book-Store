@@ -19,7 +19,7 @@ $.ajax({
                     "</div>" +
                     "<div class='clearfix'></div>" +
                     "</div>" +
-                    '<div class="add add-2"><button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/of16.png">Add to Cart</button>' +
+                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
                     "</div>" +
                     "</div>" +
                     "</div>" +
@@ -35,7 +35,7 @@ $.ajax({
 });
 
 $.ajax({
-        url: '/api/book',
+        url: '/api/rekomendasi',
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
@@ -43,7 +43,7 @@ $.ajax({
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < 4; i++) {
-                    document.getElementById('new-arrival').innerHTML += '<div class="col-md-3 pro-1">' +
+                    document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
                         "<div class='col-m'>" +
                         "<div class='mid-1'>" +
                         "<div class='women' onclick=bookDescription('"+res[i].id+"');>" +
@@ -56,7 +56,7 @@ $.ajax({
                         "</div>" +
                         "<div class='clearfix'></div>" +
                         "</div>" +
-                        '<div class="add add-2"><button type="button" class="btn btn-success" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
+                        '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
                         "</div>" +
                         "</div>" +
                         "</div>" +
@@ -77,7 +77,25 @@ $("#show-cart").click(function () {
 })
 
 function addToCart(id){
-    $('#modal-cart').modal('show')
+    $.ajax({
+        url: '/api/book/'+id,
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            var i;
+            if (xhr.status == 200 || xhr.status == 201) {
+                console.log(res);
+                console.log(localStorage.length==0)
+                if(res.stokBuku<5){
+                    console.log("stok habis");
+                }
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }
 
 function bookDescription(id){
