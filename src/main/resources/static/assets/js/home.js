@@ -6,7 +6,7 @@ $.ajax({
         var i;
         if (xhr.status == 200 || xhr.status == 201) {
             for (i = 0; i < 8; i++) {
-                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("'+res[i].id+'");>' +
+                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
                     "<div class='col-m'>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
@@ -19,7 +19,7 @@ $.ajax({
                     "</div>" +
                     "<div class='clearfix'></div>" +
                     "</div>" +
-                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
+                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
                     "</div>" +
                     "</div>" +
                     "</div>" +
@@ -35,48 +35,48 @@ $.ajax({
 });
 
 $.ajax({
-        url: '/api/rekomendasi',
-        method: 'get',
-        contentType: 'application/json',
-        success: function (res, status, xhr) {
-            var bs;
-            var i;
-            if (xhr.status == 200 || xhr.status == 201) {
-                for (i = 0; i < 4; i++) {
-                    document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
-                        "<div class='col-m'>" +
-                        "<div class='mid-1'>" +
-                        "<div class='women' onclick=bookDescription('"+res[i].id+"');>" +
-                        "<h6>" + res[i].judulBuku + "</h6>" +
-                        "</div>" +
-                        "<div class='mid-2'>" +
-                        "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
-                        "<div class='block'>" +
-                        "<div class='starbox small ghosting'></div>" +
-                        "</div>" +
-                        "<div class='clearfix'></div>" +
-                        "</div>" +
-                        '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("'+res[i].id+'");>'+'Add to Cart</button>' +
-                        "</div>" +
-                        "</div>" +
-                        "</div>" +
-                        "</div>"
-                }
-
-            } else {
+    url: '/api/rekomendasi',
+    method: 'get',
+    contentType: 'application/json',
+    success: function (res, status, xhr) {
+        var bs;
+        var i;
+        if (xhr.status == 200 || xhr.status == 201) {
+            for (i = 0; i < 4; i++) {
+                document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
+                    "<div class='col-m'>" +
+                    "<div class='mid-1'>" +
+                    "<div class='women' onclick=bookDescription('" + res[i].id + "');>" +
+                    "<h6>" + res[i].judulBuku + "</h6>" +
+                    "</div>" +
+                    "<div class='mid-2'>" +
+                    "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
+                    "<div class='block'>" +
+                    "<div class='starbox small ghosting'></div>" +
+                    "</div>" +
+                    "<div class='clearfix'></div>" +
+                    "</div>" +
+                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>"
             }
-        },
-        error: function (err) {
-            console.log(err);
+
+        } else {
         }
-    });
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
 
 $("#show-cart").click(function () {
     $("#modal-cart").modal('show')
 })
 
-function addToCart(id){
-    var jsonAddToCart = {"id":id, "idBuku":id, "kuantitasBuku":1};
+function addToCart(id) {
+    var jsonAddToCart = {"id": id, "idBuku": id, "kuantitasBuku": 1};
     $.ajax({
         url: '/api/cart/add-direct',
         method: 'post',
@@ -96,9 +96,9 @@ function addToCart(id){
     });
 }
 
-function bookDescription(id){
+function bookDescription(id) {
     console.log(id)
-    var jsonData = {"id":null, "idUser":null, "idBuku":id};
+    var jsonData = {"id": null, "idUser": null, "idBuku": id};
     $.ajax({
         url: '/api/rekomendasi',
         method: 'post',
@@ -119,11 +119,11 @@ function bookDescription(id){
 }
 
 function deleteCart() {
-    var checkList = [1,2]; // id yang telah di checklist untuk dihapus
-    for(var i=0; i<checkList.length; i++){
+    var checkList = [1, 2]; // id yang telah di checklist untuk dihapus
+    for (var i = 0; i < checkList.length; i++) {
         $.ajax({
-            url:'/api/cart/' + checkList[i],
-            method:'delete',
+            url: '/api/cart/' + checkList[i],
+            method: 'delete',
             success: function (data, status, xhr) {
                 console.log("id " + checkList[i] + " telah dihapus");
             },
@@ -131,16 +131,4 @@ function deleteCart() {
     }
 }
 
-$('#deleteCart').click(function () {
-    var checkList = [1,2];
-    for(var i=0; i<checkList.length; i++){
-        $.ajax({
-            url:'/api/cart/' + i,
-            method:'delete',
-            success: function (data, status, xhr) {
-                console.log("id " + id + "telah dihapus, status:" + xhr.statusCode());
-            },
-        })
-    }
-})
 
