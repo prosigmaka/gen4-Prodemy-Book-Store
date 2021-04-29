@@ -2084,6 +2084,11 @@ fieldset[disabled] .btn-default.active {
   background-color: #1B242F;
   border-color: #357ebd;
 }
+.btn-cart-checkout {
+  color: #fff;
+  background-color: #1B242F;
+  border-color: #357ebd;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,

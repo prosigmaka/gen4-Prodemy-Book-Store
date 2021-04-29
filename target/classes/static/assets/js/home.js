@@ -141,21 +141,22 @@ function showTableCart() {
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid">' +
-                        '<div class="col-sm-2">' +
-                        '<input type="checkbox">' +
+                        '<div class="row">' +
+                        '<div class="col-sm-1">' +
+                        '<input type="checkbox" value="'+res[i].id+'">' +
                         '</div>' +
                         '<div class="col-sm-2">' +
-                        '<h5>'+ "JUDULBUKU" +'</h5>' +
+                        "JUDULBUKU" +
                         '</div>' +
-                        '<div class="col-sm-2">' +
-                        '<h5>'+ res[i].judulBuku +'</h5>' +
-
+                        '<div class="col-sm-1">' +
+                        res[i].judulBuku +
                         '</div>' +
-                        '<div class="col-sm-2">' +
-                        '<h5>'+res[i].hargaBuku+'</h5>' +
+                        '<div class="col-sm-1">' +
+                        res[i].hargaBuku +
                         '</div>' +
-                        '<div class="col-sm-2">' +
+                        '<div class="col-sm-1">' +
                         '<h5>'+ "TOMBOL" +'</h5>' +
+                        '</div>' +
                         '</div>' +
                         '</div>'
                 }
