@@ -16,7 +16,7 @@
             <div class="main-agileits">
                 <div class="form-w3agile">
 
-                    <h3> User Login Page </h3>
+                    <h3> Login </h3>
                     <form th:action="@{/login}" method="post">
 
                         <!-- error message -->
@@ -24,28 +24,27 @@
                             <div class="alert alert-danger">Invalid username or password!
                             </div>
                         </div>
-                        
-                        <div class="key">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <input type="text" value="username" id="username" name="username" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'username';}" required="">
+
+                        <div class="form-group">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <label for ="username"> Username : </label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="username">
                             <div class="clearfix"></div>
                         </div>
 
-                        <div class="key">
+                        <br>
+                        <div class="form-group">
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" value="password" id="password" name="password"
-                                   onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'password';}" required="">
+                            <label for ="password"> Password : </label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password">
                             <div class="clearfix"></div>
                         </div>
-                        <input type="submit" value="Login" name="login-submit" id="login-submit"
-                               class="form-control btn btn-primary"/>
+                        <br>
+                        <input type="submit" value="Login" name="login-submit" id="login-submit">
                     </form>
                 </div>
                 <div class="forg">
-						<span>New user? <a href="/" th:href="@{/registration}">Register
-								here</a></span>
+						<a href="/" class="forg-right" th:href="@{/registration}">Registration</a>
                 </div>
             </div>
         </div>

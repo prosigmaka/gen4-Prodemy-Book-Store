@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(),
-                registrationDto.getLastName(), registrationDto.getEmail(),
+                registrationDto.getLastName(), registrationDto.getUsername(), registrationDto.getEmail(), registrationDto.getAddress(), registrationDto.getPhone(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
 
         return userRepository.save(user);
@@ -47,11 +47,11 @@ public class UserServiceImpl implements UserService {
         //if the user null, throw the message below
         //if not null, we just create a User object, that is provided by spring security
         //then we pass the email, password and roles to User object
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password");
+            throw new UsernameNotFoundException("Invalid username or password!");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles())); //get the role from user object
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles())); //get the role from user object
     }
 
     //convert role into authorities, because spring security expecting authorities

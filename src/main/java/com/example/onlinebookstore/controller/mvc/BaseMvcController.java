@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/")
 public class BaseMvcController {
     //    dashboard
-    @GetMapping("home")
+    @GetMapping("")
     public String home() {
         return "home/index";
     }
@@ -29,13 +29,5 @@ public class BaseMvcController {
     }
 
     @GetMapping("login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("")
-    public String homelogin() {
-        return "home/index";
-    }
-
+    public String login() { return "login"; }
 }
