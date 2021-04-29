@@ -40,8 +40,6 @@ public class KeranjangApi {
         return keranjangDtoList;
     }
 
-
-
     @PostMapping()
     public Keranjang simpanKeranjang(@RequestBody KeranjangDto keranjangDto){
         Keranjang keranjang = modelMapper.map(keranjangDto, Keranjang.class);
@@ -54,6 +52,12 @@ public class KeranjangApi {
         keranjangService.saveToCartDirect(keranjang, directAddToCartDto);
         return keranjang;
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Integer id){
+        keranjangRepository.deleteById(id);
+    }
+
 
     private KeranjangDto mappingToKeranjangDto(Keranjang keranjang){
         KeranjangDto keranjangDto = modelMapper.map(keranjang, KeranjangDto.class);
