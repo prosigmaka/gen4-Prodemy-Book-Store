@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -30,8 +31,13 @@ public class KeranjangApi {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public List<Keranjang> getAll() {
-        return keranjangRepository.findAll();
+    public List<KeranjangDto> getAll() {
+        List<Keranjang> keranjangList = keranjangRepository.findAll();
+        List<KeranjangDto> keranjangDtoList = keranjangList
+                .stream()
+                .map(cart -> mappingToKeranjangDto(cart))
+                .collect(Collectors.toList());
+        return keranjangDtoList;
     }
 
 
@@ -47,5 +53,12 @@ public class KeranjangApi {
         Keranjang keranjang = modelMapper.map(directAddToCartDto, Keranjang.class);
         keranjangService.saveToCartDirect(keranjang, directAddToCartDto);
         return keranjang;
+    }
+
+    private KeranjangDto mappingToKeranjangDto(Keranjang keranjang){
+        KeranjangDto keranjangDto = modelMapper.map(keranjang, KeranjangDto.class);
+        keranjangDto.setJudulBuku(keranjang.getBook().getJudulBuku());
+        keranjangDto.setHargaBuku(keranjang.getBook().getHargaBuku());
+        return keranjangDto;
     }
 }
