@@ -242,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="notif">
             <span class="fa fa-bell" style="color:#997b60" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></span>
         </div>
-        <div class="cart" id="show-cart">
+        <div class="cart" id="show-cart" onclick="showTableCart()">
             <span class="fa fa-shopping-cart" style="color:#997b60"></span>
             <span class="badge badge-secondary" style="color:#997b60">
                 6</span>
@@ -298,19 +298,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //footer-->
 
 <!-- smooth scrolling -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        /*
-            var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-            };
-        */
-        $().UItoTop({easingType: 'easeOutQuart'});
-    });
-</script>
+<!--<script type="text/javascript">-->
+<!--    $(document).ready(function () {-->
+<!--        /*-->
+<!--            var defaults = {-->
+<!--            containerID: 'toTop', // fading element id-->
+<!--            containerHoverID: 'toTopHover', // fading element hover id-->
+<!--            scrollSpeed: 1200,-->
+<!--            easingType: 'linear'-->
+<!--            };-->
+<!--        */-->
+<!--        $().UItoTop({easingType: 'easeOutQuart'});-->
+<!--    });-->
+<!--</script>-->
 <a href="#" id="toTop" style="display: block;">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
          viewBox="0 0 16 16">
@@ -326,51 +326,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type='text/javascript' th:src="@{/assets/js/jquery.mycart.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/home.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/search.js}"></script>
-<script type="text/javascript">
-    $(function () {
+<!--<script type="text/javascript">-->
+<!--    $(function () {-->
 
-        var goToCartIcon = function ($addTocartBtn) {
-            var $cartIcon = $(".my-cart-icon");
-            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
-                "position": "fixed",
-                "z-index": "0"
-            });
-            $addTocartBtn.prepend($image);
-            var position = $cartIcon.position();
-            $image.animate({
-                top: position.top,
-                left: position.left
-            }, 500, "linear", function () {
-                $image.remove();
-            });
-        }
+<!--        var goToCartIcon = function ($addTocartBtn) {-->
+<!--            var $cartIcon = $(".my-cart-icon");-->
+<!--            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({-->
+<!--                "position": "fixed",-->
+<!--                "z-index": "0"-->
+<!--            });-->
+<!--            $addTocartBtn.prepend($image);-->
+<!--            var position = $cartIcon.position();-->
+<!--            $image.animate({-->
+<!--                top: position.top,-->
+<!--                left: position.left-->
+<!--            }, 500, "linear", function () {-->
+<!--                $image.remove();-->
+<!--            });-->
+<!--        }-->
 
-        $('.my-cart-btn').myCart({
-            classCartIcon: 'my-cart-icon',
-            classCartBadge: 'my-cart-badge',
-            affixCartIcon: true,
-            checkoutCart: function (products) {
-                $.each(products, function () {
-                    console.log(this);
-                });
-            },
-            clickOnAddToCart: function ($addTocart) {
-                goToCartIcon($addTocart);
-            },
-            getDiscountPrice: function (products) {
-                var total = 0;
-                $.each(products, function () {
-                    total += this.quantity * this.price;
-                });
-                return total * 1;
-            }
-        });
+<!--        $('.my-cart-btn').myCart({-->
+<!--            classCartIcon: 'my-cart-icon',-->
+<!--            classCartBadge: 'my-cart-badge',-->
+<!--            affixCartIcon: true,-->
+<!--            checkoutCart: function (products) {-->
+<!--                $.each(products, function () {-->
+<!--                    console.log(this);-->
+<!--                });-->
+<!--            },-->
+<!--            clickOnAddToCart: function ($addTocart) {-->
+<!--                goToCartIcon($addTocart);-->
+<!--            },-->
+<!--            getDiscountPrice: function (products) {-->
+<!--                var total = 0;-->
+<!--                $.each(products, function () {-->
+<!--                    total += this.quantity * this.price;-->
+<!--                });-->
+<!--                return total * 1;-->
+<!--            }-->
+<!--        });-->
 
-    });
-</script>
+<!--    });-->
+<!--</script>-->
 
 
-<!--Modal cart-->
+<!--&lt;!&ndash;Modal cart&ndash;&gt;-->
 
 <div class="modal fade" id="modal-cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
@@ -384,55 +384,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                    <div class="col-sm-4">
+            <div class="modal-body" id="cartTable">
+<!--                <div class="container-fluid">-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
 
-                        <p>harga</p>
-                    </div>
-                    <div class="col-sm-4">
+<!--                        <p>harga</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
 
-                        <p>tombol tambah</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="container-fluid">
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="container-fluid">
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Nama Buku</h5>
-                        <p>Deskripsi</p>
-                    </div>
-                </div>
+<!--                        <p>tombol tambah</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr>-->
+<!--                <div class="container-fluid">-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr>-->
+<!--                <div class="container-fluid">-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <h5>Nama Buku</h5>-->
+<!--                        <p>Deskripsi</p>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primar">Save changes</button>
                 <button type="button" class="btn btn-danger" onclick="deleteCart()">Delete</button>
             </div>
         </div>

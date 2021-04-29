@@ -130,5 +130,42 @@ function deleteCart() {
         })
     }
 }
+function showTableCart() {
+    $('#cartTable').empty();
+    $.ajax({
+        url:'/api/cart',
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            var i;
+            if (xhr.status == 200 || xhr.status == 201) {
+                for (i = 0; i < res.length; i++) {
+                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid">' +
+                        '<div class="col-sm-2">' +
+                        '<input type="checkbox">' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                        '<h5>'+ "JUDULBUKU" +'</h5>' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                        '<h5>'+ res[i].judulBuku +'</h5>' +
 
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                        '<h5>'+res[i].hargaBuku+'</h5>' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                        '<h5>'+ "TOMBOL" +'</h5>' +
+                        '</div>' +
+                        '</div>'
+                }
 
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+
+    })
+}
