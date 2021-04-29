@@ -53,7 +53,7 @@ public class RekomendasiBukuApi {
         Book book = bookRepository.findById(requestRecommendationBookDto.getIdBuku()).get();
         RekomendasiBuku rekomendasiBuku = new RekomendasiBuku();
         rekomendasiBuku.setKategori(book.getCategory().getNamaKategori());
-        rekomendasiBuku.setIdUser(1);
+        rekomendasiBuku.setIdUser(1); // sementara 1
         rekomendasiBukuRepository.save(rekomendasiBuku);
     }
 }

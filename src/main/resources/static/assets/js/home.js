@@ -77,18 +77,17 @@ $("#show-cart").click(function () {
 })
 
 function addToCart(id){
+    var jsonAddToCart = {"id":id, "idBuku":id, "kuantitasBuku":1};
     $.ajax({
-        url: '/api/book/'+id,
-        method: 'get',
+        url: '/api/cart/add-direct',
+        method: 'post',
         contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(jsonAddToCart),
         success: function (res, status, xhr) {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
-                console.log(res);
-                console.log(localStorage.length==0)
-                if(res.stokBuku==0){
-                    console.log("stok habis");
-                }
+                console.log(jsonAddToCart);
             } else {
             }
         },
