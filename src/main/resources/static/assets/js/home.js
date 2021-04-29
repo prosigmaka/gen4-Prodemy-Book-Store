@@ -86,7 +86,7 @@ function addToCart(id){
             if (xhr.status == 200 || xhr.status == 201) {
                 console.log(res);
                 console.log(localStorage.length==0)
-                if(res.stokBuku<5){
+                if(res.stokBuku==0){
                     console.log("stok habis");
                 }
             } else {
