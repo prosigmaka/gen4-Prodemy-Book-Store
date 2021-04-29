@@ -5,7 +5,7 @@ $.ajax({
     success: function (res, status, xhr) {
         var i;
         if (xhr.status == 200 || xhr.status == 201) {
-            for (i = 0; i < res.length; i++) {
+            for (i = 0; i < 8; i++) {
                 document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("'+res[i].id+'");>' +
                     "<div class='col-m'>" +
                     "<div class='mid-1'>" +
