@@ -17,6 +17,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> searchBook(String keyword);
 
     List<Book> findAllByIdKategori(Integer id);
+
     @Query(value = "select harga_buku from book where id = ?1", nativeQuery = true)
     Long getHargaById(Integer id);
 }

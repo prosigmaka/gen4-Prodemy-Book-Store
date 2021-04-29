@@ -2,7 +2,9 @@ function searchBook() {
     console.log("search work")
     var searchKey = $("#search").val();
     console.log(searchKey);
-
+    $('#best-seller').empty();
+    $('.product').empty();
+    $('#heading-1').text('Search Result');
 
     $.ajax({
         url: '/api/book/search/' + searchKey,
@@ -12,7 +14,7 @@ function searchBook() {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
-                    document.getElementById('search-result').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
+                    document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
                         "<div class='col-m'>" +
                         "<div class='mid-1'>" +
                         "<div class='women'>" +

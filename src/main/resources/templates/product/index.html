@@ -5,7 +5,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <div class="content-top " layout:fragment="product-top">
-    <input id="myInput" type="text" placeholder="Search..">
+
+    <div class="container">
+        <input id="search-input" type="text" placeholder="Search.." style="padding: 5px">
+        <button class="btn btn-info" type="button" onclick="searchInTable()">Search</button>
+    </div>
     <div class="table-responsive container">
         <table class="table table-hover" id="authorTable">
             <thead>
