@@ -424,7 +424,8 @@ ul.multi-column-dropdown h6 {
 }
 
 .dropdown-menu.multi {
-    min-width: 745px;
+    min-width: 200px;
+    max-width: 300px;
     padding: 30px 30px;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {

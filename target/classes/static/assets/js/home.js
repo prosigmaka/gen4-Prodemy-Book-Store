@@ -97,6 +97,8 @@ function addToCart(id) {
 }
 
 function bookDescription(id) {
+    $('#modal-book-description').modal('show');
+    $('#modal-description-data').text(id);
     console.log(id)
     var jsonData = {"id": null, "idUser": null, "idBuku": id};
     $.ajax({
