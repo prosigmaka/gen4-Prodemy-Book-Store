@@ -110,7 +110,7 @@ public class BookApi {
 
     @GetMapping("/search/{keyword}")
     public List<BookDto> listBookSearch(@PathVariable String keyword) {
-        String key = "\\y"+keyword+"\\y";
+        String key = "\\y"+keyword+"\\y"; //regex
         List<Book> list = bookRepository.searchBook(key);
         List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
         return bookDto;
