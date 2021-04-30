@@ -75,7 +75,7 @@ $("#show-cart").click(function () {
 })
 
 function addToCart(id) {
-    var jsonAddToCart = {"id": id, "idBuku": id, "kuantitasBuku": 1};
+    var jsonAddToCart = {"addToCart":{"id": id, "idBuku": id, "kuantitasBuku": 1}};
     $.ajax({
         url: '/api/cart/add-direct',
         method: 'post',
