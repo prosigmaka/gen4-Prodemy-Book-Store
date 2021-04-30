@@ -41,13 +41,13 @@ public class KeranjangApi {
         return keranjangDtoList;
     }
 
-    @PostMapping()
-    public Keranjang simpanKeranjang(@RequestBody KeranjangDto keranjangDto){
-        Keranjang keranjang = modelMapper.map(keranjangDto, Keranjang.class);
-       return keranjang;
-    }
+//    @PostMapping()
+//    public Keranjang simpanKeranjang(@RequestBody KeranjangDto keranjangDto){
+//        Keranjang keranjang = modelMapper.map(keranjangDto, Keranjang.class);
+//       return keranjang;
+//    }
 
-    @PostMapping("/add-direct")
+    @PostMapping()
     public List<DirectAddToCartDto> simpanKeranjang(@RequestBody CartUpdateDto cartUpdateDto){
         List<DirectAddToCartDto> directAddToCartDtoList = cartUpdateDto.getAddToCart()
                 .stream()

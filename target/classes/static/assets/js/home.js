@@ -75,9 +75,9 @@ $("#show-cart").click(function () {
 })
 
 function addToCart(id) {
-    var jsonAddToCart = {"addToCart":{"id": id, "idBuku": id, "kuantitasBuku": 1}};
+    var jsonAddToCart = {"addToCart":[{"id": id, "idBuku": id, "kuantitasBuku": 1}]};
     $.ajax({
-        url: '/api/cart/add-direct',
+        url: '/api/cart',
         method: 'post',
         contentType: 'application/json',
         dataType: 'json',
@@ -86,6 +86,7 @@ function addToCart(id) {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
                 console.log(jsonAddToCart);
+                $('#modal-book-description').modal('hide');
             } else {
             }
         },
@@ -120,13 +121,14 @@ function bookDescription(id) {
 }
 
 function deleteCart() {
-    var checkList = [1, 2]; // id yang telah di checklist untuk dihapus
+    var checkList = [12]; // id yang telah di checklist untuk dihapus
     for (var i = 0; i < checkList.length; i++) {
         $.ajax({
             url: '/api/cart/' + checkList[i],
             method: 'delete',
             success: function (data, status, xhr) {
                 console.log("id " + checkList[i] + " telah dihapus");
+                $('#modal-cart').modal('hide');
             },
         })
     }
