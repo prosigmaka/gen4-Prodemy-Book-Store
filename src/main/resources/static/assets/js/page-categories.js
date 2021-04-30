@@ -38,6 +38,9 @@ function pageCategories(categoryName) {
 }
 
 pageCategories('Academic')
+pageCategories('Comic')
+pageCategories('Family')
+pageCategories('Novel')
 
 
 
