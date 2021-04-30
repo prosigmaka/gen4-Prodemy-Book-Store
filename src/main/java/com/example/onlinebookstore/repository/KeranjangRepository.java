@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
-        @Query(value = "select exists(select * from keranjang where id_buku=?1)", nativeQuery = true)
+        @Query(value = "select exists(select * from keranjang where id_buku = ?1)", nativeQuery = true)
         Boolean findIdBukuKeranjang(Integer id);
 
         Keranjang findByIdBuku(Integer id);

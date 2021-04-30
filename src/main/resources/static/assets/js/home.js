@@ -39,7 +39,6 @@ $.ajax({
     method: 'get',
     contentType: 'application/json',
     success: function (res, status, xhr) {
-        var bs;
         var i;
         if (xhr.status == 200 || xhr.status == 201) {
             for (i = 0; i < 4; i++) {
@@ -76,7 +75,7 @@ $("#show-cart").click(function () {
 })
 
 function addToCart(id) {
-    var jsonAddToCart = {"id": id, "idBuku": id, "kuantitasBuku": 1};
+    var jsonAddToCart = {"addToCart":{"id": id, "idBuku": id, "kuantitasBuku": 1}};
     $.ajax({
         url: '/api/cart/add-direct',
         method: 'post',
@@ -132,6 +131,7 @@ function deleteCart() {
         })
     }
 }
+
 function showTableCart() {
     $('#cartTable').empty();
     $.ajax({
