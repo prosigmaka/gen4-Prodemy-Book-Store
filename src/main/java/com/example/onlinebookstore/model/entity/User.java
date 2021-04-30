@@ -2,6 +2,7 @@ package com.example.onlinebookstore.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
@@ -32,7 +33,6 @@ public class User {
 	@Column(name = "phone", nullable = false, unique = true)
 	private Integer phone;
 
-	@Size(min = 8)
 	@Column(name = "password", nullable = false)
 	private String password;
 
