@@ -47,20 +47,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/registration**", "/js/**", "/css/**", "/fonts/**", "/images/**", "/assets/**",
-				"/home*", "/aboutus*", "/home-company*", "/product*").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/registration**", "/login**", "/js/**", "/css/**", "/fonts/**", "/images/**", "/assets/**",
+				"/*", "/aboutus*", "/home-company*", "/product*").permitAll()
+//				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login").permitAll()
+				.defaultSuccessUrl("/")
 				.and()
 				.logout()
-				.invalidateHttpSession(true)
-				.clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.invalidateHttpSession(true)
+//				.clearAuthentication(true)
+//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 
 				//once user click logout button, user will go to login page with "logout" page
-				.logoutSuccessUrl("/login?logout").permitAll();
+				.logoutSuccessUrl("/login?logout");
 	}
 
 }
