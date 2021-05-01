@@ -20,7 +20,7 @@
 
                     <div th:if="${param.success}">
                         <div class="alert alert-info">You've successfully registered
-                            to The Prodemy Book Store!
+                            to The Prodemy Book Store! Login to Continue Your Session!
                         </div>
                     </div>
 
@@ -28,9 +28,9 @@
                     <!--				object user from controller-->
                     <form th:action="@{/registration}" method="post" th:object="${user}">
 
-                        <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
-                           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
-                            error</p>
+<!--                        <p class="error-message" th:if="${#fields.hasGlobalErrors()}"-->
+<!--                           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation-->
+<!--                            error</p>-->
 
                         <!--					firstName as define in dto-->
                         <div class="form-group">
@@ -62,9 +62,9 @@
                         <br>
                         <div class="form-group">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <label for ="email"> Email : </label>
-                            <a th:field="*{email}"></a>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="email">
+                            <label for ="emailUser"> Email : </label>
+                            <a th:field="*{emailUser}"></a>
+                            <input type="email" class="form-control" name="emailUser" id="emailUser" placeholder="email">
                             <div class="clearfix"></div>
                         </div>
 

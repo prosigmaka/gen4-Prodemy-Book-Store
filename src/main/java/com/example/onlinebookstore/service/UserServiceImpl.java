@@ -3,6 +3,7 @@ package com.example.onlinebookstore.service;
 import com.example.onlinebookstore.model.entity.Role;
 
 import com.example.onlinebookstore.model.entity.User;
+import com.example.onlinebookstore.repository.RoleRepository;
 import com.example.onlinebookstore.repository.UserRepository;
 import com.example.onlinebookstore.model.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,34 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    //constructor
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+//    //constructor
+//    public UserServiceImpl(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
 
     //save registration data to database
     @Override
     public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getFirstName(),
-                registrationDto.getLastName(), registrationDto.getUsername(), registrationDto.getEmail(), registrationDto.getAddress(), registrationDto.getPhone(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+//        User user = new User(registrationDto.getFirstName(),
+//                registrationDto.getLastName(), registrationDto.getUsername(), registrationDto.getEmail(), registrationDto.getAddress(), registrationDto.getPhone(),
+//                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
 
+//        Role role = roleRepository.findById(2L).get();
+        User user = new User();
+        user.setFirstName(registrationDto.getFirstName());
+        user.setLastName(registrationDto.getLastName());
+        user.setUsername(registrationDto.getUsername());
+        user.setEmailUser(registrationDto.getEmailUser());
+        user.setAddress(registrationDto.getAddress());
+        user.setPhone(registrationDto.getPhone());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+//        user.setRole(role);
+        user.setRoleId(2L);
         return userRepository.save(user);
     }
 
@@ -52,7 +67,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password!");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles())); //get the role from user object
+        return new org.springframework.security.core.userdetails.User
+                (user.getUsername(), user.getPassword(), mapRolesToAuthorities(Arrays.asList(user.getRoles()))); //get the role from user object
     }
 
     //convert role into authorities, because spring security expecting authorities
