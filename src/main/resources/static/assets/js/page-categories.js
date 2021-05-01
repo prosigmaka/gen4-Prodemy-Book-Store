@@ -10,6 +10,7 @@ function pageCategories(categoryName) {
                 for (i = 0; i < 8; i++) {
                     document.getElementById(category).innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
                         "<div class='col-m'>" +
+                        "<img class='img-responsive' src='"+res[i].gambar+"' alt>" +
                         "<div class='mid-1'>" +
                         "<div class='women'>" +
                         "<h6>" + res[i].judulBuku + "</h6>" +
