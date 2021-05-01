@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.mvc;
 
 import com.example.onlinebookstore.service.UserService;
 import com.example.onlinebookstore.model.dto.UserRegistrationDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
+	@Autowired
 	private UserService userService;
 
 	//constructor
