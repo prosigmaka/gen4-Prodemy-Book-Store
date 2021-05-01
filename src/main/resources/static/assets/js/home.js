@@ -11,6 +11,7 @@ $.ajax({
             for (i = 0; i < 8; i++) {
                 document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
                     "<div class='col-m'>" +
+                    "<img class='img-responsive' src='/assets/images/of.png' alt>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
                     "<h6>" + res[i].judulBuku + "</h6>" +
@@ -47,6 +48,7 @@ $.ajax({
             for (i = 0; i < 4; i++) {
                 document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
                     "<div class='col-m'>" +
+                    "<img class='img-responsive' src='/assets/images/of9.png' alt>" +
                     "<div class='mid-1'>" +
                     "<div class='women' onclick=bookDescription('" + res[i].id + "');>" +
                     "<h6>" + res[i].judulBuku + "</h6>" +
@@ -155,9 +157,7 @@ function deleteCart() {
             url: '/api/cart/' + idChecked,
             method: 'delete',
             success: function (data, status, xhr) {
-                getCart();
-                console.log(idChecked);
-                console.log('telah dihapus');
+                getCart()
                 $('#modal-cart').modal('hide');
             },
         })
@@ -183,7 +183,7 @@ function showTableCart() {
                         '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
                         '</div>' +
                         '<div class="col-sm-2">' +
-                        "Gambar" +
+                        '<img class="img-responsive" src="/assets/images/of9.png" alt>' +
                         '</div>' +
                         '<div class="col-sm-3">' +
                         res[i].judulBuku +
