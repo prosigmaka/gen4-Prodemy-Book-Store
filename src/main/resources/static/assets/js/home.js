@@ -1,3 +1,6 @@
+var totalQuantity = 0;
+
+
 $.ajax({
     url: '/api/book',
     method: 'get',
@@ -69,24 +72,29 @@ $.ajax({
         console.log(err);
     }
 });
-var totalQuantity = 0;
-$.ajax({
-    url: '/api/cart',
-    method: 'get',
-    contentType: 'application/json',
-    success: function (res, status, xhr) {
-        if (xhr.status == 200 || xhr.status == 201) {
-            for (var i = 0; i < res.length; i++) {
-                totalQuantity += res[i].kuantitasBuku;
-            }
-        } else {
-        }
-    },
-    error: function (err) {
-        console.log(err);
-    }
 
-})
+function getCart() {
+    $.ajax({
+        url: '/api/cart',
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            if (xhr.status == 200 || xhr.status == 201) {
+                for (var i = 0; i < res.length; i++) {
+                    totalQuantity += res[i].kuantitasBuku;
+                }
+                $('#total-quantity-badge').text(totalQuantity);
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+
+    })
+}
+
+getCart();
 
 $("#show-cart").click(function () {
     $("#modal-cart").modal('show')
@@ -104,6 +112,7 @@ function addToCart(id) {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
                 totalQuantity += 1;
+                $('#total-quantity-badge').text(totalQuantity);
                 console.log(jsonAddToCart);
                 $('#modal-book-description').modal('hide');
             } else {
@@ -146,6 +155,7 @@ function deleteCart() {
             url: '/api/cart/' + idChecked,
             method: 'delete',
             success: function (data, status, xhr) {
+                getCart();
                 console.log(idChecked);
                 console.log('telah dihapus');
                 $('#modal-cart').modal('hide');
@@ -169,7 +179,8 @@ function showTableCart() {
                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid">' +
                         '<div class="row">' +
                         '<div class="col-sm-1">' +
-                        '<input type="checkbox" value="' + res[i].id + '">' +
+                        '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
+                        '<input class="book-id" name="id" value="'+res[i].idBuku+'" type="hidden"/>' +
                         '</div>' +
                         '<div class="col-sm-2">' +
                         "Gambar" +
@@ -178,18 +189,17 @@ function showTableCart() {
                         res[i].judulBuku +
                         '</div>' +
                         '<div class="col-sm-1">' +
-                        '<input type="number" value="'+res[i].kuantitasBuku+'" aria-valuemin=1>' +
+                        '<input class="book-quantity" type="number" value="'+res[i].kuantitasBuku+'" aria-valuemin=1>' +
                         '</div>' +
                         '<div class="col-sm-1">' +
                         res[i].hargaBuku +
                         '</div>' +
-                        '<div class="col-sm-1">' +
-                        "TOMBOL" +
-                        '</div>' +
+
                         '</div>' +
                         '</div>'
                 }
 
+                $('#total-quantity-badge').text(totalQuantity);
             } else {
             }
         },
@@ -200,4 +210,17 @@ function showTableCart() {
     })
 }
 
-$('#total-quantity-badge').text(totalQuantity);
+function saveCart() {
+    $.each($('.book-id'), function (i) {
+        console.log($(this).val());
+    })
+    $.each($('.book-quantity'), function (i) {
+        console.log($(this).val());
+    })
+    $.each($('.cart-id'), function (i) {
+        console.log($(this).val());
+    })
+
+    $('#modal-cart').modal('hide')
+}
+
