@@ -69,13 +69,31 @@ $.ajax({
         console.log(err);
     }
 });
+var totalQuantity = 0;
+$.ajax({
+    url: '/api/cart',
+    method: 'get',
+    contentType: 'application/json',
+    success: function (res, status, xhr) {
+        if (xhr.status == 200 || xhr.status == 201) {
+            for (var i = 0; i < res.length; i++) {
+                totalQuantity += res[i].kuantitasBuku;
+            }
+        } else {
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+
+})
 
 $("#show-cart").click(function () {
     $("#modal-cart").modal('show')
 })
 
 function addToCart(id) {
-    var jsonAddToCart = {"addToCart":[{"id": id, "idBuku": id, "kuantitasBuku": 1}]};
+    var jsonAddToCart = {"addToCart": [{"id": id, "idBuku": id, "kuantitasBuku": 1}]};
     $.ajax({
         url: '/api/cart',
         method: 'post',
@@ -85,6 +103,7 @@ function addToCart(id) {
         success: function (res, status, xhr) {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
+                totalQuantity += 1;
                 console.log(jsonAddToCart);
                 $('#modal-book-description').modal('hide');
             } else {
@@ -121,45 +140,51 @@ function bookDescription(id) {
 }
 
 function deleteCart() {
-    var checkList = [12]; // id yang telah di checklist untuk dihapus
-    for (var i = 0; i < checkList.length; i++) {
+    $(':checkbox:checked').each(function (id) {
+        var idChecked = $(this).val();
         $.ajax({
-            url: '/api/cart/' + checkList[i],
+            url: '/api/cart/' + idChecked,
             method: 'delete',
             success: function (data, status, xhr) {
-                console.log("id " + checkList[i] + " telah dihapus");
+                console.log(idChecked);
+                console.log('telah dihapus');
                 $('#modal-cart').modal('hide');
             },
         })
-    }
+    })
 }
 
 function showTableCart() {
     $('#cartTable').empty();
     $.ajax({
-        url:'/api/cart',
+        url: '/api/cart',
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
             var i;
+            var totalQuantity = 0;
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
+                    totalQuantity += res[i].kuantitasBuku;
                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid">' +
                         '<div class="row">' +
                         '<div class="col-sm-1">' +
-                        '<input type="checkbox" value="'+res[i].id+'">' +
+                        '<input type="checkbox" value="' + res[i].id + '">' +
                         '</div>' +
                         '<div class="col-sm-2">' +
-                        "JUDULBUKU" +
+                        "Gambar" +
+                        '</div>' +
+                        '<div class="col-sm-3">' +
+                        res[i].judulBuku +
                         '</div>' +
                         '<div class="col-sm-1">' +
-                        res[i].judulBuku +
+                        '<input type="number" value="'+res[i].kuantitasBuku+'" aria-valuemin=1>' +
                         '</div>' +
                         '<div class="col-sm-1">' +
                         res[i].hargaBuku +
                         '</div>' +
                         '<div class="col-sm-1">' +
-                        '<h5>'+ "TOMBOL" +'</h5>' +
+                        "TOMBOL" +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -174,3 +199,5 @@ function showTableCart() {
 
     })
 }
+
+$('#total-quantity-badge').text(totalQuantity);
