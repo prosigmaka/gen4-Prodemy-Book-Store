@@ -138,26 +138,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 
-<div data-vide-bg th:src="@{/assets/video/video.gif}">
+<div data-vide-bg th:src="@{/assets/images/wall-book-store.jpg}">
     <div style="position: absolute; z-index: -1; inset: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;">
-        <video autoplay="" loop="" muted=""
-               style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; width: 1351px; height: auto;">
-            <source th:src="@{/assets/video/video.mp4}" type="video/mp4">
-            <source src="video/video.webm" type="video/webm">
-            <source src="video/video.ogv" type="video/ogg">
-        </video>
+        <img src="/assets/images/wall-book-store.jpg" style="height: 100%; width: 100%" alt>
     </div>
     <div class="container">
         <div class="banner-info">
             <div class="logo">
                 <h1><a href="/dashboard"><b>T<br>H<br>E</b>
-                    <p style="text-indent:6px">Prodemy Book Store</p><span>The Best Book Store Ever</span></a>
+                    <p style="text-indent:6px;color:antiquewhite;-webkit-text-stroke: 2px saddlebrown; font-weight: bold">Prodemy Book Store</p><span>The Best Book Store Ever</span></a>
                 </h1>
             </div>
             <div class="search-form">
                 <form>
-                    <input type="text" placeholder="" id="search" name="search">
-                    <button type="button" id="search-button" onclick="searchBook()"><i class="fa fa-search"></i>
+                    <input type="text" placeholder="" id="search" name="search" style="border-radius: 5px; backface-visibility: revert">
+                    <button style="width: 40px;height: 40px; color: #e3d18a; background-color: #8a6d3b; border-radius: 5px; border-color: #8a6d3b" type="button" id="search-button" onclick="searchBook()"><i class="fa fa-search"></i>
                     </button>
                 </form>
             </div>
@@ -168,43 +163,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 <script th:src="@{/assets/js/jquery.vide.min.js}"></script>
 
-<!--content product best seller-->
+
 <div layout:fragment="product-top"/>
 
-<!--content product new arrival-->
 <div layout:fragment="product-bottom"/>
-<!--content-->
 
-<!--footer-->
 <th:block layout:replace="~{fragment/footer}"></th:block>
-<!-- //footer-->
 
-<!-- smooth scrolling -->
-<!--<script type="text/javascript">-->
-<!--    $(document).ready(function () {-->
-<!--        /*-->
-<!--            var defaults = {-->
-<!--            containerID: 'toTop', // fading element id-->
-<!--            containerHoverID: 'toTopHover', // fading element hover id-->
-<!--            scrollSpeed: 1200,-->
-<!--            easingType: 'linear'-->
-<!--            };-->
-<!--        */-->
-<!--        $().UItoTop({easingType: 'easeOutQuart'});-->
-<!--    });-->
-<!--</script>-->
 <a href="#" id="toTop" style="display: block;">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
          viewBox="0 0 16 16">
         <path fill-rule="evenodd"
               d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
     </svg>
-    <!--    <span id="toTopHover" style="opacity: 1;"> </span>-->
+
 </a>
-<!-- //smooth scrolling -->
-<!-- for bootstrap working -->
+
 <script th:src="@{/assets/js/bootstrap.js}"></script>
-<!-- //for bootstrap working -->
+
 <script type='text/javascript' th:src="@{/assets/js/home.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/search.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/page-categories.js}"></script>
