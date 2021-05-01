@@ -10,6 +10,7 @@ $.ajax({
                 document.getElementById('bookTable').innerHTML += "<tr>" +
                     // "<th scope='row'>" + res[i].id + "</th>" +
                     "<td>" + res[i].judulBuku + "</td>" +
+                    "<td>" + "<img class='img-responsive' src='"+res[i].gambar+"' style='width: 80px; height: 80px' alt>" + "</td>" +
                     "<td>" + res[i].namaPengarang + "</td>" +
                     "<td>" + res[i].namaPenerbit + "</td>" +
                     "<td>" + res[i].stokBuku + "</td>" +
@@ -92,6 +93,8 @@ var bookCRUD = {
                                 for (i = 0; i < res.length; i++) {
                                     document.getElementById('bookTable').innerHTML += "<tr>" +
                                         // "<th scope='row'>" + res[i].id + "</th>" +
+                                        "<td>" + res[i].judulBuku + "</td>" +
+                                        "<td>" + res[i].gambar + "</td>" +
                                         "<td>" + res[i].judulBuku + "</td>" +
                                         "<td>" + res[i].namaPengarang + "</td>" +
                                         "<td>" + res[i].namaPenerbit + "</td>" +
@@ -202,6 +205,7 @@ function searchInTable() {
                         document.getElementById('bookTable').innerHTML += "<tr>" +
                             // "<th scope='row'>" + res[i].id + "</th>" +
                             "<td>" + res[i].judulBuku + "</td>" +
+                            "<td>" + "<img class='img-responsive' src='"+res[i].gambar+"' style='width: 80px; height: 80px' alt>" + "</td>" +
                             "<td>" + res[i].namaPengarang + "</td>" +
                             "<td>" + res[i].namaPenerbit + "</td>" +
                             "<td>" + res[i].stokBuku + "</td>" +

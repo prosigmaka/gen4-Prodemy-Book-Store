@@ -47,28 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--- start-rate---->
     <script th:src="@{/assets/js/jstarbox.js}"></script>
     <link rel="stylesheet" th:href="@{/assets/css/jstarbox.css}" type="text/css" media="screen" charset="utf-8"/>
-    <script type="text/javascript">
-        // jQuery(function () {
-        //     jQuery('.starbox').each(function () {
-        //         var starbox = jQuery(this);
-        //         starbox.starbox({
-        //             average: starbox.attr('data-start-value'),
-        //             changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-        //             ghosting: starbox.hasClass('ghosting'),
-        //             autoUpdateAverage: starbox.hasClass('autoupdate'),
-        //             buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-        //             stars: starbox.attr('data-star-count') || 5
-        //         }).bind('starbox-value-changed', function (event, value) {
-        //             if (starbox.hasClass('random')) {
-        //                 var val = Math.random();
-        //                 starbox.next().text(' ' + val);
-        //                 return val;
-        //             }
-        //         })
-        //     });
-        // });
-    </script>
-    <!---//End-rate---->
+
 
 </head>
 
@@ -92,32 +71,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav ">
-                    <li class=" active">
+                    <li>
                         <a href="/home-company" class="hyper "><span>HOME</span></a>
                     </li>
 
-                    <li class="dropdown ">
-                        <a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown"><span>PRODUCT<b
-                                class="caret"></b></span></a>
-                        <ul class="dropdown-menu multi">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Author</a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Book</a>
-                                        </li>
-                                        <li><a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>Publisher</a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Book Category</a>
-                                        </li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </ul>
+                    <li>
+                        <a href="/product" class="hyper "><span>PRODUCT</span></a>
                     </li>
 
                     <li class="dropdown ">
