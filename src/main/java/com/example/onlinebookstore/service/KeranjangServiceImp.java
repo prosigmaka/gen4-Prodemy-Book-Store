@@ -21,12 +21,19 @@ public class KeranjangServiceImp implements KeranjangService {
     @Override
     public void saveToCartDirect(Keranjang keranjang, DirectAddToCartDto dto) {
         Long harga = bookRepository.getHargaById(dto.getIdBuku());
-       if (keranjangRepository.findIdBukuKeranjang(dto.getIdBuku())) {   //kondisi jika buku sudah ada di keranjang maka tambah kuantitas
+        if (dto.getId()==null) {   //kondisi jika buku sudah ada di keranjang maka tambah kuantitas
             Keranjang keranjang1 = keranjangRepository.findByIdBuku(dto.getIdBuku());
-            keranjang1.setKuantitasBuku(keranjang1.getKuantitasBuku() + dto.getKuantitasBuku());
+            keranjang1.setKuantitasBuku(dto.getKuantitasBuku());
             Long kuantitas1 = Long.valueOf(keranjang1.getKuantitasBuku());
             keranjang1.setSubTotalHargaBuku(harga * kuantitas1);
             keranjangRepository.save(keranjang1);
+        }
+        else if (keranjangRepository.findIdBukuKeranjang(dto.getIdBuku())) {   //kondisi jika buku sudah ada di keranjang maka tambah kuantitas
+            Keranjang keranjang2 = keranjangRepository.findByIdBuku(dto.getIdBuku());
+            keranjang2.setKuantitasBuku(keranjang2.getKuantitasBuku() + dto.getKuantitasBuku());
+            Long kuantitas2 = Long.valueOf(keranjang2.getKuantitasBuku());
+            keranjang2.setSubTotalHargaBuku(harga * kuantitas2);
+            keranjangRepository.save(keranjang2);
         } else {                            //kondisi jika belum ada buku di keranjang / buat baru
             keranjang.setKuantitasBuku(1);
             keranjang.setSubTotalHargaBuku(harga);

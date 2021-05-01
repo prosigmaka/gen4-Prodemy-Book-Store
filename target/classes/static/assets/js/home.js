@@ -213,7 +213,6 @@ function showTableCart() {
 function saveCart() {
     var jsonCart = {};
     var arrayList = [];
-
     var idBuku = [];
     var kuantitasBuku = [];
     var idKeranjang = [];
@@ -224,7 +223,7 @@ function saveCart() {
         kuantitasBuku[i] = $(this).val()
     })
     $.each($('.cart-id'), function (i) {
-        idKeranjang[i] = $(this).val()
+        idKeranjang[i] = null
 
     })
     for (var i = 0; i < idKeranjang.length; i++) {
@@ -244,12 +243,13 @@ function saveCart() {
         contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(jsonCart),
-        success: function (res, status, xhr) {
-            var i;
+        success: function (data, status, xhr) {
+            var quantity = 0;
             if (xhr.status == 200 || xhr.status == 201) {
-                console.log(res.id)
-                $('#total-quantity-badge').text(totalQuantity);
-                console.log(jsonCart);
+                for(var i=0; i<data.length; i++){
+                    quantity += data[i].kuantitasBuku;
+                }
+                $('#total-quantity-badge').text(quantity);
             } else {
             }
         },
