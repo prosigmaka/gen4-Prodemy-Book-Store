@@ -19,6 +19,8 @@ public class Keranjang extends DirectAddToCartDto {
     private Integer kuantitasBuku;
     @Column(name="subtotal_harga_buku", nullable = false)
     private Long subTotalHargaBuku;
+    @Column(name = "status")
+    private String status;
 
 
 
