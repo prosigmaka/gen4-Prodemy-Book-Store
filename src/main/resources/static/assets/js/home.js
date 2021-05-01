@@ -9,9 +9,9 @@ $.ajax({
         var i;
         if (xhr.status == 200 || xhr.status == 201) {
             for (i = 0; i < 8; i++) {
-                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
+                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1">' +
                     "<div class='col-m'>" +
-                    "<img class='img-responsive' src='"+res[i].gambar+"' alt>" +
+                    "<img class='img-responsive' src='"+res[i].gambar+"' alt  onclick=bookDescription(" + res[i].id + ");>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
                     "<h6>" + res[i].judulBuku + "</h6>" +
