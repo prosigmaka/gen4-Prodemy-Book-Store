@@ -108,6 +108,13 @@ button.close.close-w3 {
     right: 0;
 }
 
+.modal-dialog-cart {
+    position: sticky;
+    bottom: 10px;
+    right: 0;
+    width: 100%;
+}
+
 /*----*/
 img.img-head {
     position: absolute;
@@ -417,7 +424,8 @@ ul.multi-column-dropdown h6 {
 }
 
 .dropdown-menu.multi {
-    min-width: 745px;
+    min-width: 200px;
+    max-width: 300px;
     padding: 30px 30px;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {

@@ -2084,6 +2084,11 @@ fieldset[disabled] .btn-default.active {
   background-color: #1B242F;
   border-color: #357ebd;
 }
+.btn-cart-checkout {
+  color: #fff;
+  background-color: #1B242F;
+  border-color: #357ebd;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -2124,6 +2129,12 @@ fieldset[disabled] .btn-primary.active {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  border-radius: 40px;
+}
+.btn-add-to-cart {
+  color: #fff;
+  background-color: #BD9354;
+  border-color: #BD9354;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -3002,7 +3013,7 @@ input[type="button"].btn-block {
   border-left: 4px solid transparent;
 }
 .dropdown {
-  position: relative;
+  position:absolute;
 }
 .dropdown-toggle:focus {
   outline: 0;
@@ -3010,20 +3021,20 @@ input[type="button"].btn-block {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 110;
   z-index: 1000;
   display: none;
   float: left;
   min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
-  font-size: 14px;
+  font-size: 23px;
   list-style: none;
   background-color: #d0af84;
   background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 4px;
+  border-radius: 20px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
           box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
@@ -5127,6 +5138,24 @@ button.close {
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
           box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
 }
+.modal-content-cart {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+  width: 100%;
+}
+
+.modal-content-cart {
+  position:sticky;
+  margin-top: 10px;
+  right: 40%;
+}
+
 .modal-backdrop {
   position: fixed;
   top: 0;

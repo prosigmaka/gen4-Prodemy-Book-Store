@@ -12,6 +12,9 @@ import com.example.onlinebookstore.model.dto.BookDto;
 import com.example.onlinebookstore.repository.BookRepository;
 import com.example.onlinebookstore.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -105,13 +108,22 @@ public class BookApi {
     }
 
 
+    @GetMapping("/search/{keyword}")
+    public List<BookDto> listBookSearch(@PathVariable String keyword) {
+        String key = "\\y"+keyword+"\\y"; //regex
+        List<Book> list = bookRepository.searchBook(key);
+        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
+        return bookDto;
+    }
 
-//    @GetMapping("/search/{keyword}")
-//    public List<BookDto> listBookSearch(String keyword) {
-//        String src = "'\y{keyword}\y'";
-//        List<Book> list = bookRepository.searchBook(keyword);
-//        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
-//        return bookDto;
-//    }
+    @GetMapping("/page/{categories}")
+    public List<BookDto> listBookCategories(@PathVariable String categories) {
+        Integer idCategory = categoryRepository.getIdCategory(categories);
+        List<Book> list = bookRepository.findAllByIdKategori(idCategory);
+        List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
+        return bookDto;
+    }
+
+
 }
 

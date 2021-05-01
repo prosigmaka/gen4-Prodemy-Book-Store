@@ -6,5 +6,5 @@ import lombok.Data;
 public class AuthorDto {
     private Integer id;
     private String namaPengarang;
-    private String emailPengarang;
+//    private String emailPengarang;
 }

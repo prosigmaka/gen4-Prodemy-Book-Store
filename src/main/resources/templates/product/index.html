@@ -6,13 +6,20 @@
 
 <div class="content-top " layout:fragment="product-top">
 
+    <div class="container">
+        <input id="search-input" type="text" placeholder="Search.." style="padding: 5px">
+        <button class="btn btn-info" type="button" onclick="searchInTable()">Search</button>
+    </div>
     <div class="table-responsive container">
         <table class="table table-hover" id="authorTable">
             <thead>
             <tr>
-                <th scope="col">Numb.</th>
                 <th scope="col">Book</th>
+                <th scope="col">Picture</th>
                 <th scope="col">Author</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Price</th>
                 <th scope="col">
                     <button type='button' class='btn btn-primary' onclick=bookCRUD.addBook()>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
@@ -86,6 +93,11 @@
                             <input class="form-control" id="hargaBuku" name="hargaBuku"
                                    placeholder="Harga" required type="text" value=''>
                         </div>
+                        <div class="form-group">
+                            <label>Alamat Gambar : </label>
+                            <input class="form-control" id="gambar" name="gambar"
+                                   placeholder="Alamat Gambar" required type="text" value=''>
+                        </div>
 
 
                     </form>
@@ -114,9 +126,7 @@
     <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
     <script th:src="@{/assets/dist/js/product.js}"></script>
 
-    <script>
 
-    </script>
 </th:block>
 
 </html>

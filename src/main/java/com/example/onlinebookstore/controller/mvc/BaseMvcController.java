@@ -28,13 +28,20 @@ public class BaseMvcController {
         return "product/index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @GetMapping("academic")
+    public String academic(){
+        return "academic/index";
     }
-
-    @GetMapping("/")
-    public String index() {
-        return "index";
+    @GetMapping("family")
+    public String family(){
+        return "family/index";
+    }
+    @GetMapping("novel")
+    public String novel(){
+        return "novel/index";
+    }
+    @GetMapping("comic")
+    public String comic(){
+        return "comic/index";
     }
 }
