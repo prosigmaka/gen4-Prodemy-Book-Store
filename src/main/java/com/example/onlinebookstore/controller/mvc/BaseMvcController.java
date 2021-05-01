@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/")
 public class BaseMvcController {
     //    dashboard
-    @GetMapping("home")
+    @GetMapping("")
     public String home() {
         return "home/index";
     }
@@ -44,4 +44,7 @@ public class BaseMvcController {
     public String comic(){
         return "comic/index";
     }
+
+    @GetMapping("login")
+    public String login() { return "login"; }
 }
