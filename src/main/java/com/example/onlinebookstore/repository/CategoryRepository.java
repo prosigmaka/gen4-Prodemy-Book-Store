@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
-
+    @Query(value = "select id from cat where nama_kategori = ?1", nativeQuery = true)
+    Integer getIdCategory(String category);
 }

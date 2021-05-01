@@ -6,18 +6,24 @@
 
 <div class="content-top " layout:fragment="product-top">
 
+    <div class="container">
+        <input id="search-input" type="text" placeholder="Search.." style="padding: 5px; border-radius: 5px; border-color: #8a6d3b">
+        <button class="btn btn-info" type="button" onclick="searchInTable()" style="border-radius: 5px; background-color: #8a6d3b; border-color: #8a6d3b">Search</button>
+    </div>
     <div class="table-responsive container">
-        <table class="table table-hover" id="authorTable">
+        <table class="table table-hover table-responsive" id="authorTable" style="border-radius: 50px">
             <thead>
             <tr>
-                <th scope="col">Numb.</th>
                 <th scope="col">Book</th>
+                <th scope="col">Picture</th>
                 <th scope="col">Author</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Price</th>
                 <th scope="col">
-                    <button type='button' class='btn btn-primary' onclick=bookCRUD.addBook()>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                             class='bi bi-pencil' viewBox='0 0 16 16'>
-                            <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+                    <button type='button' class='btn btn-add-to-cart' onclick=bookCRUD.addBook()>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#66512c" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z"/>
                         </svg>
                     </button>
                 </th>
@@ -86,6 +92,11 @@
                             <input class="form-control" id="hargaBuku" name="hargaBuku"
                                    placeholder="Harga" required type="text" value=''>
                         </div>
+                        <div class="form-group">
+                            <label>Alamat Gambar : </label>
+                            <input class="form-control" id="gambar" name="gambar"
+                                   placeholder="Alamat Gambar" required type="text" value=''>
+                        </div>
 
 
                     </form>
@@ -93,8 +104,8 @@
                 </div>
 
                 <div class="modal-footer justify-content-between">
-                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-success" id="save-book" type="button" onclick="bookCRUD.saveBook();">
+                    <button class="btn btn-white-brown" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-brown" id="save-book" type="button" onclick="bookCRUD.saveBook();">
                         Save
                     </button>
                 </div>
@@ -114,9 +125,7 @@
     <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
     <script th:src="@{/assets/dist/js/product.js}"></script>
 
-    <script>
 
-    </script>
 </th:block>
 
 </html>

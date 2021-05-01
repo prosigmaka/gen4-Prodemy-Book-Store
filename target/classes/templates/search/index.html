@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html layout:decorate="~{base}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="content-top " layout:fragment="product-top">
+    <!--content top-->
+    <div class="container">
+        <div class="spec ">
+            <h3>Search Result</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <div class=" con-w3l" id="search-result">
+<!--            <div th:each="book:${search-page}" class="col-md-3 pro-1" onclick=bookDescription(res[i].id); >-->
+<!--                <div class='col-m'>-->
+<!--                    <div class='mid-1'>-->
+<!--                        <div class='women'>-->
+<!--                            <h6 th:text="${book.judulBuku}"></h6>-->
+<!--                        </div>-->
+<!--                        <div class='mid-2'>-->
+<!--                            <p><em class='item_price' th:text="${book.hargaBuku}"></em></p>-->
+<!--                            <div class='block'>-->
+<!--                                <div class='starbox small ghosting'></div>-->
+<!--                            </div>-->
+<!--                            <div class='clearfix'></div>-->
+<!--                        </div>-->
+<!--                        <div class="add add-2">-->
+<!--                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"-->
+<!--                                    data-summary="summary 1" data-price="6.00" data-quantity="1"-->
+<!--                                    data-image="images/of16.png">Add to Cart-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/assets/dist/js/demo.js}"></script>
+    <script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
+    <script th:src="@{/assets/dist/js/search.js}"></script>
+    <script>
+
+    </script>
+</th:block>
+
+</html>
