@@ -180,7 +180,7 @@ function showTableCart() {
                         '<div class="row">' +
                         '<div class="col-sm-1">' +
                         '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
-                        '<input class="book-id" name="id" value="'+res[i].idBuku+'" type="hidden"/>' +
+                        '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
                         '</div>' +
                         '<div class="col-sm-2">' +
                         "Gambar" +
@@ -189,7 +189,7 @@ function showTableCart() {
                         res[i].judulBuku +
                         '</div>' +
                         '<div class="col-sm-1">' +
-                        '<input class="book-quantity" type="number" value="'+res[i].kuantitasBuku+'" aria-valuemin=1>' +
+                        '<input class="book-quantity" type="number" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
                         '</div>' +
                         '<div class="col-sm-1">' +
                         res[i].hargaBuku +
@@ -211,16 +211,51 @@ function showTableCart() {
 }
 
 function saveCart() {
+    var jsonCart = {};
+    var arrayList = [];
+
+    var idBuku = [];
+    var kuantitasBuku = [];
+    var idKeranjang = [];
     $.each($('.book-id'), function (i) {
-        console.log($(this).val());
+        idBuku[i] = $(this).val()
     })
     $.each($('.book-quantity'), function (i) {
-        console.log($(this).val());
+        kuantitasBuku[i] = $(this).val()
     })
     $.each($('.cart-id'), function (i) {
-        console.log($(this).val());
-    })
+        idKeranjang[i] = $(this).val()
 
+    })
+    for (var i = 0; i < idKeranjang.length; i++) {
+        var fillArray = {};
+        fillArray.id = idKeranjang[i]
+        fillArray.idBuku = idBuku[i]
+        fillArray.kuantitasBuku = kuantitasBuku[i]
+
+        console.log(fillArray)
+        arrayList.push(fillArray)
+    }
+    jsonCart.addToCart = arrayList
     $('#modal-cart').modal('hide')
+    $.ajax({
+        url: '/api/cart',
+        method: 'post',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(jsonCart),
+        success: function (res, status, xhr) {
+            var i;
+            if (xhr.status == 200 || xhr.status == 201) {
+                console.log(res.id)
+                $('#total-quantity-badge').text(totalQuantity);
+                console.log(jsonCart);
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }
 
