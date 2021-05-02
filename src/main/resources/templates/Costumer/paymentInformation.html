@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html layout:decorate="~{orderInformation}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--<div class="content-top " layout:fragment="content-top">-->
+<!--	&lt;!&ndash; main-heading &ndash;&gt;-->
+<!--	<h2 class="main-title-w3layouts mb-2 text-center">Responsive Table</h2>-->
+<!--	&lt;!&ndash;// main-heading &ndash;&gt;-->
+<!--&lt;!&ndash;	<div class="panel-heading-table text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;		Responsive Table&ndash;&gt;-->
+<!--&lt;!&ndash;	</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;	<section class="wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;	</section>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="product " layout:fragment="main-content">
+
+    <div class="main-agileits">
+
+        <div class="table-agile-info">
+            <div class="panel">
+
+                <div class="row about-info-grids mt-md-5 pt-5" style="text-align: center">
+                    <div class="col-md-4 about-info about-info1" >
+                        <i class="fa fa-graduation-cap"></i>
+                        <h4>Undergraduate Study</h4>
+                        <div class="h4-underline"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                    <div class="col-md-4 about-info about-info2" style="border-left: 1px solid #8a6d3b; border-right: 1px solid #8a6d3b">
+                        <i class="fa fa-book"></i>
+                        <h4>Professional Study</h4>
+                        <div class="h4-underline"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                    <div class="col-md-4 about-info about-info3">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Programs</h4>
+                        <div class="h4-underline"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="form-w3agile">
+                    <h3>Order Detail</h3>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped b-t b-light">
+                        <thead>
+                        <tr>
+                            <th style="width:20px;">
+                                <label class="i-checks m-b-none">
+                                    <input type="checkbox"><i></i>
+                                </label>
+                            </th>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Date</th>
+                            <th style="width:30px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><label class="i-checks m-b-none"><input type="checkbox"
+                                                                        name="post[]"><i></i></label></td>
+                            <td>Idrawfast prototype design prototype design prototype design prototype design
+                                prototype design
+                            </td>
+                            <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
+                            <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
+                            <td>
+                                <button class='btn-success' data-toggle='tooltip' title='view' data-placement='bottom' style='border-radius: 20%'><i class='fa fa-search'></i></button>
+                                <button class='btn-danger' data-toggle='tooltip' title='delete' data-placement='bottom' style='border-radius: 20%'><i class='fa fa-trash'></i></button>
+
+                            </td>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--				<footer class="panel-footer">-->
+                <!--					-->
+                <!--				</footer>-->
+            </div>
+        </div>
+
+        <!--		<div class="forg">-->
+        <!--			<a href="#" class="forg-left">Forgot Password</a>-->
+        <!--			<a href="register.html" class="forg-right">Register</a>-->
+        <!--			<div class="clearfix"></div>-->
+        <!--		</div>-->
+
+        <div class="forg">
+            <hr class="mb-4">
+            <button class="btn btn-dark btn-lg btn-block error-w3l-btn align-content-center" type="submit">Continue to checkout</button>
+        </div>
+
+    </div>
+
+
+    <!--	<section class="tables-section">-->
+    <!--	</section>-->
+
+    <!--// Tables content -->
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+    <!-- Required common Js -->
+    <script th:src='@{/assets2/js/jquery-2.2.3.min.js}'></script>
+    <!-- //Required common Js -->
+
+    <!-- Js for bootstrap working-->
+    <script th:src="@{/assets2/js/bootstrap.min.js}"></script>
+    <!-- //Js for bootstrap working -->
+</th:block>
+
+</html>

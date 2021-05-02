@@ -1,12 +1,12 @@
 package com.example.onlinebookstore.model.dto;
 
-import com.example.onlinebookstore.model.entity.Keranjang;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
+@Service
 public class RequestOrderDTO {
 //    private Integer userId;
 
@@ -14,8 +14,9 @@ public class RequestOrderDTO {
 //    private Map<Integer, Integer> keranjang;
 
     //<idKeranjang>
-    private List<Integer> cartsId;
+    private List<IdKeranjangDTO> idKeranjangDTOList;
 
-//    {cartsId:{1,2,,}}
+
+
 
 }
