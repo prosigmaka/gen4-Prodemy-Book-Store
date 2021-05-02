@@ -128,8 +128,25 @@ function addToCart(id) {
 
 function bookDescription(id) {
     $('#modal-book-description').modal('show');
-    $('#modal-description-data').text(id);
-    console.log(id)
+    $.ajax({
+        url: '/api/book/'+ id,
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            if (xhr.status == 200 || xhr.status == 201) {
+                $('#modal-description-image').html("<img class='img-responsive' src='"+res.gambar+"' alt style='height: 100px; width: 90px'>");
+                $("#modal-book-title").text(res.judulBuku);
+                $("#modal-book-author").text(res.author.namaPengarang);
+                $("#modal-book-publisher").text(res.publisher.namaPenerbit);
+                $("#modal-book-price").text(res.hargaBuku);
+                console.log(res.publisher.namaPenerbit, res.author.namaPengarang, res.category.namaKategori)
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
     var jsonData = {"id": null, "idUser": null, "idBuku": id};
     $.ajax({
         url: '/api/rekomendasi',
@@ -140,6 +157,7 @@ function bookDescription(id) {
         success: function (res, status, xhr) {
             if (xhr.status == 200 || xhr.status == 201) {
                 console.log("success to send id!");
+
             } else {
 
             }
