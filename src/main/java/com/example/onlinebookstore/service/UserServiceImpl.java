@@ -1,5 +1,6 @@
 package com.example.onlinebookstore.service;
 
+import com.example.onlinebookstore.model.dto.LoginDto;
 import com.example.onlinebookstore.model.entity.Role;
 
 import com.example.onlinebookstore.model.entity.User;
@@ -56,6 +57,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+//    @Override
+//    public void saveLoginDto(User user) {
+//
+//    }
+
+//    @Override
+//    public void saveLoginDto(User user) {
+//
+//    }
+
     //this is provided because UserService extends UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -67,9 +78,24 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password!");
         }
+
+//        LoginDto loginDto = new LoginDto();
         return new org.springframework.security.core.userdetails.User
                 (user.getUsername(), user.getPassword(), mapRolesToAuthorities(Arrays.asList(user.getRoles()))); //get the role from user object
     }
+
+//    public void saveLoginDto (User user) {
+//        LoginDto loginDto = new LoginDto();
+//        loginDto.setIdUserLogin(user.getId());
+//        return userRepository.saveLoginDto(user);
+//    }
+
+//    @Override
+//    public User save (LoginDto loginDto) {
+//        User user = new User();
+//        user.setId(loginDto.getIdUserLogin());
+//        return userRepository.save(user);
+//    }
 
     //convert role into authorities, because spring security expecting authorities
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
