@@ -14,6 +14,7 @@ public class Author {
     @SequenceGenerator(name = AUTHOR, sequenceName = "author_seq", allocationSize = 1, initialValue = 1)
 
     private Integer id;
+    @Column(name="nama_pengarang", nullable = false)
     private String namaPengarang;
     private String emailPengarang;
 }

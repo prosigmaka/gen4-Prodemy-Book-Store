@@ -21,15 +21,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <!-- //for-mobile-apps -->
+
+    <base href="/">
     <link th:href="@{/assets/css/bootstrap.css}" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <link th:href="@{/assets/css/style.css}" rel='stylesheet' type='text/css'/>
     <!-- js -->
     <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.24/datatables.min.css"/>-->
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" th:src="@{/assets/js/move-top.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/easing.js}"></script>
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -45,28 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--- start-rate---->
     <script th:src="@{/assets/js/jstarbox.js}"></script>
     <link rel="stylesheet" th:href="@{/assets/css/jstarbox.css}" type="text/css" media="screen" charset="utf-8"/>
-    <script type="text/javascript">
-        jQuery(function () {
-            jQuery('.starbox').each(function () {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function (event, value) {
-                    if (starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' ' + val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
+
 
 </head>
 
@@ -90,32 +73,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav ">
-                    <li class=" active">
+                    <li>
                         <a href="/home-company" class="hyper "><span>HOME</span></a>
                     </li>
 
-                    <li class="dropdown ">
-                        <a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown"><span>PRODUCT<b
-                                class="caret"></b></span></a>
-                        <ul class="dropdown-menu multi">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Author</a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Book</a>
-                                        </li>
-                                        <li><a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>Publisher</a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Book Category</a>
-                                        </li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </ul>
+                    <li>
+                        <a href="/product" class="hyper "><span>PRODUCT</span></a>
                     </li>
 
                     <li class="dropdown ">
@@ -139,13 +102,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </ul>
                     </li>
+
+                    <li><a href="/login" class="hyper "><span>LOGOUT</span></a></li>
                 </ul>
             </div>
         </nav>
 
-        <div class="profile">
-            <span class="material-icons" style="color:#997b60">face</span>
-        </div>
+<!--        <div class="profile">-->
+<!--            <span class="material-icons" style="color:#997b60">face</span>-->
+<!--        </div>-->
 
 
         <!--        <div class="cart">-->
@@ -229,48 +194,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type='text/javascript' th:src="@{/assets/js/home.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/default.js}"></script>
 <script type='text/javascript' th:src="@{/assets/js/product.js}"></script>
-<script type="text/javascript">
-    // $(function () {
-    //
-    //     var goToCartIcon = function ($addTocartBtn) {
-    //         var $cartIcon = $(".my-cart-icon");
-    //         var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
-    //             "position": "fixed",
-    //             "z-index": "0"
-    //         });
-    //         $addTocartBtn.prepend($image);
-    //         var position = $cartIcon.position();
-    //         $image.animate({
-    //             top: position.top,
-    //             left: position.left
-    //         }, 500, "linear", function () {
-    //             $image.remove();
-    //         });
-    //     }
-    //
-    //     $('.my-cart-btn').myCart({
-    //         classCartIcon: 'my-cart-icon',
-    //         classCartBadge: 'my-cart-badge',
-    //         affixCartIcon: true,
-    //         checkoutCart: function (products) {
-    //             $.each(products, function () {
-    //                 console.log(this);
-    //             });
-    //         },
-    //         clickOnAddToCart: function ($addTocart) {
-    //             goToCartIcon($addTocart);
-    //         },
-    //         getDiscountPrice: function (products) {
-    //             var total = 0;
-    //             $.each(products, function () {
-    //                 total += this.quantity * this.price;
-    //             });
-    //             return total * 1;
-    //         }
-    //     });
-    //
-    // });
-</script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 <!-- product -->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

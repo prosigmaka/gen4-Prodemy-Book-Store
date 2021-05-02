@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template| Home ::
-        w3layouts</title>
+    <title>The Prodemy Book Store</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -21,6 +21,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <!-- //for-mobile-apps -->
+
+    <base href="/">
     <link th:href="@{/assets/css/bootstrap.css}" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <link th:href="@{/assets/css/style.css}" rel='stylesheet' type='text/css'/>
@@ -85,13 +87,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-
             </div>
+
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+
                 <ul class="nav navbar-nav ">
                     <li class=" active">
-                        <a href="/home" class="hyper "><span>HOME</span></a>
+                        <a href="/" class="hyper "><span>HOME</span></a>
                     </li>
 
                     <li class="dropdown ">
@@ -117,7 +119,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </ul>
                     </li>
-<!--                    <li class="dropdown">-->
+
+                    <li><a href="/login" class="hyper" sec:authorize="!isAuthenticated()"> <span>LOGIN</span></a></li>
+
+                    <li><a href="/registration" class="hyper" sec:authorize="!isAuthenticated()">
+                        <span> REGISTRATION</span></a></li>
+
+                    <li><a href="/aboutus" class="hyper"> <span>ABOUT US</span></a></li>
+
+                    <!--                    <li class="dropdown">-->
 
 <!--                        <a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Personal Care <b-->
 <!--                                class="caret"></b></span></a>-->
@@ -229,22 +239,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--                        </ul>-->
 <!--                    </li>-->
 
-                    <li><a href="/aboutus" class="hyper"> <span>ABOUT US</span></a></li>
                 </ul>
             </div>
         </nav>
 
-        <div class="profile">
-            <span class="material-icons" style="color:#997b60">face</span>
-        </div>
+        <form class="cart" th:action="@{/logout}" method="post"
+              sec:authorize="isAuthenticated()" style="color: #997b60">
+            <button type="submit" class="fa fa-user"> Logout</button>
+        </form>
+
         <div class="notif">
             <span class="fa fa-bell" style="color:#997b60"></span>
         </div>
         <div class="cart">
-            <span class="fa fa-shopping-cart my-cart-icon" style="color:#997b60">
-                <span class="badge badge-notify my-cart-badge" style="color:#997b60">
-                </span>
-            </span>
+				<span class="fa fa-shopping-cart my-cart-icon" style="color:#997b60">
+					<span class="badge badge-notify my-cart-badge" style="color:#997b60">
+					</span>
+				</span>
         </div>
 
 <!--        <div class="cart">-->
@@ -256,14 +267,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!---->
-<div data-vide-bg th:src="@{/assets/video/video.gif}">
+<div data-vide-bg th:src="@{/assets/images/wall-book-store.jpg}">
     <div style="position: absolute; z-index: -1; inset: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;">
-        <video autoplay="" loop="" muted=""
-               style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; width: 1351px; height: auto;">
-            <source th:src="@{/assets/video/video.mp4}" type="video/mp4">
-            <source src="video/video.webm" type="video/webm">
-            <source src="video/video.ogv" type="video/ogg">
-        </video>
+        <img src="/assets/images/wall-book-store.jpg" style="height: 100%; width: 100%" alt>
     </div>
     <div class="container">
         <div class="banner-info">

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html layout:decorate="~{baseaboutus}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login | The Prodemy Book Store</title>
+</head>
+<body>
+
+<div class="content-top " layout:fragment="product-top">
+    <!--content top-->
+    <div class="container">
+        <div class="login">
+            <div class="main-agileits">
+                <div class="form-w3agile">
+
+                    <h3> Registration </h3>
+
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info">You've successfully registered
+                            to The Prodemy Book Store! Login to Continue Your Session!
+                        </div>
+                    </div>
+
+                    <!--				once user submit the registration form, data will store in "user", and the request will go to the controller (postmapping)-->
+                    <!--				object user from controller-->
+                    <form th:action="@{/registration}" method="post" th:object="${user}">
+
+<!--                        <p class="error-message" th:if="${#fields.hasGlobalErrors()}"-->
+<!--                           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation-->
+<!--                            error</p>-->
+
+                        <!--					firstName as define in dto-->
+                        <div class="form-group">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <label for ="firstName"> First Name : </label>
+                            <a th:field="*{firstName}"></a>
+                            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="first name" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <label for ="lastName"> Last Name : </label>
+                            <a th:field="*{lastName}"></a>
+                            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="last name" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <label for ="lastName"> Username : </label>
+                            <a th:field="*{username}"></a>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="username" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <label for ="emailUser"> Email : </label>
+                            <a th:field="*{emailUser}"></a>
+                            <input type="email" class="form-control" name="emailUser" id="emailUser" placeholder="email" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                            <label for ="address"> Address : </label>
+                            <a th:field="*{address}"></a>
+                            <input type="text" class="form-control" name="address" id="address" placeholder="address" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <label for ="phone"> Phone Number : </label>
+                            <a th:field="*{phone}"></a>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="phone number" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <label for ="password"> Password : </label>
+                            <a th:field="*{password}"></a>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required="required">
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <div class="forg">
+						<a href="/" class="forg-right" th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

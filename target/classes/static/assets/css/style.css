@@ -22,7 +22,8 @@ h1,h2,h3,h4,h5,h6{
 	font-family: 'Montserrat', sans-serif;
 }
 p,label{
-	margin:0;
+	/*margin:0;*/
+    margin-bottom:1em;
 }
 ul{
 	margin:0;
@@ -106,6 +107,13 @@ button.close.close-w3 {
     position: absolute;
     bottom: 0px;
     right: 0;
+}
+
+.modal-dialog-cart {
+    position: sticky;
+    bottom: 10px;
+    right: 0;
+    width: 100%;
 }
 
 /*----*/
@@ -417,7 +425,8 @@ ul.multi-column-dropdown h6 {
 }
 
 .dropdown-menu.multi {
-    min-width: 745px;
+    min-width: 200px;
+    max-width: 300px;
     padding: 30px 30px;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
@@ -1823,13 +1832,13 @@ a#myTabDrop1 {
     margin-bottom: 2em;
 }
 .form-w3agile h3{
-    color: #029241;
+    color: #997B60;
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 1.5em;
 }
 .form-w3agile input[type="submit"] {
-    background: #fdb515;
+    background: #997B60;
     color: #FFFFFF;
     text-align: center;
     padding: 10px 0;
@@ -1850,7 +1859,7 @@ a#myTabDrop1 {
 }
 .forg a {
     text-decoration: none;
-    color: #029241;
+    color: #997B60;
     font-size:1em;
 }
 .forg a:hover{
