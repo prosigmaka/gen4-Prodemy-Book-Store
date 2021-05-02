@@ -138,7 +138,7 @@ function bookDescription(id) {
                 $("#modal-book-title").text(res.judulBuku);
                 $("#modal-book-author").text(res.author.namaPengarang);
                 $("#modal-book-publisher").text(res.publisher.namaPenerbit);
-                $("#modal-book-price").text(res.hargaBuku);
+                $("#modal-book-price").text("Rp "+ res.hargaBuku);
                 console.log(res.publisher.namaPenerbit, res.author.namaPengarang, res.category.namaKategori)
             } else {
             }
