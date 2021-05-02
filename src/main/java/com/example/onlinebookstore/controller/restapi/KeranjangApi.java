@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -77,7 +78,9 @@ public class KeranjangApi {
         KeranjangDto keranjangDto = modelMapper.map(keranjang, KeranjangDto.class);
         keranjangDto.setJudulBuku(keranjang.getBook().getJudulBuku());
         keranjangDto.setHargaBuku(keranjang.getBook().getHargaBuku());
+        keranjangDto.setGambar(keranjang.getBook().getGambar());
         return keranjangDto;
     }
+
 
 }

@@ -32,14 +32,17 @@ public class BaseMvcController {
     public String academic(){
         return "academic/index";
     }
+
     @GetMapping("family")
     public String family(){
         return "family/index";
     }
+
     @GetMapping("novel")
     public String novel(){
         return "novel/index";
     }
+
     @GetMapping("comic")
     public String comic(){
         return "comic/index";

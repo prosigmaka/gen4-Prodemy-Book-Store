@@ -108,7 +108,7 @@ public class BookApi {
     }
 
 
-    @GetMapping("/search/{keyword}")
+    @GetMapping("/search/{keyword}") //search
     public List<BookDto> listBookSearch(@PathVariable String keyword) {
         String key = "\\y"+keyword+"\\y"; //regex
         List<Book> list = bookRepository.searchBook(key);

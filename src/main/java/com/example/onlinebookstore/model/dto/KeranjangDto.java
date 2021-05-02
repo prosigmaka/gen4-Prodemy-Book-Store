@@ -8,6 +8,7 @@ public class KeranjangDto {
     private Integer kuantitasBuku;
     private Long hargaBuku;
     private Long subTotalHargaBuku;
+    private String gambar;
 
     private Integer idCustomer;
     private Integer idBuku;
