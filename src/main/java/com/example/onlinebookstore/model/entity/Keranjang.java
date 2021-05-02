@@ -17,7 +17,7 @@ public class Keranjang {
     @Column(name="kuantitas_buku", nullable = false)
     private Integer kuantitasBuku;
     @Column(name="subtotal_harga_buku", nullable = false)
-    private Integer subTotalHargaBuku;
+    private Long subTotalHargaBuku;
 
 
 

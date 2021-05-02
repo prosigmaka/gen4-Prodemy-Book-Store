@@ -1,11 +1,16 @@
 package com.example.onlinebookstore.controller.restapi;
 
+import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
 import com.example.onlinebookstore.model.dto.RequestOrderDTO;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/json")
 public class ApiJSon {
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping("/jsonArray")
     public RequestOrderDTO getJsonArray() {
@@ -14,9 +19,9 @@ public class ApiJSon {
     }
 
     @PostMapping("/jsonArray")
-    public RequestOrderDTO postJsonArray(@RequestBody RequestOrderDTO requestOrderDTO) {
-        RequestOrderDTO requestOrderDTOS= new RequestOrderDTO();
-        return requestOrderDTOS;
+    public RequestOrderDTO postJsonArray(@RequestBody RequestListOrderDTO requestListOrderDTO) {
+        RequestOrderDTO requestOrderDTO = modelMapper.map(requestListOrderDTO,RequestOrderDTO.class);
+        return requestOrderDTO;
     }
 
 

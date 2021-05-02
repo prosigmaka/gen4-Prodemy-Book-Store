@@ -31,9 +31,11 @@ public class BuktiPembayaranApi {
     public ModelMapper modelMapper;
 
 
-    @GetMapping("/{id}")
-    public BuktiPembayaran getById(@PathVariable Integer id) {
-        return buktiPembayaranRepository.findById(id).get();
+    @GetMapping("/{idPembayaran}")
+    public BuktiPembayaranDto getById(@PathVariable Integer id) {
+        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(id).get();
+        BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran,BuktiPembayaranDto.class);
+        return buktiPembayaranDto;
     }
 
     @PostMapping
@@ -50,7 +52,7 @@ public class BuktiPembayaranApi {
         BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran, BuktiPembayaranDto.class);
 
         buktiPembayaranDto.setIdCo(buktiPembayaran.getCheckoutOrder().getId());
-        buktiPembayaranDto.setTanggalCi(buktiPembayaran.getCheckoutOrder().getTanggalCi());
+        buktiPembayaranDto.setTanggalCo(buktiPembayaran.getCheckoutOrder().getTanggalCo());
         buktiPembayaranDto.setTotalHargalCi(buktiPembayaran.getCheckoutOrder().getTotalHargalCi());
         buktiPembayaranDto.setBatasTanggalPembayaran(buktiPembayaran.getCheckoutOrder().getBatasTanggalPembayaran());
         buktiPembayaranDto.setTipePembayaran(buktiPembayaran.getCheckoutOrder().getTipePembayaran());
@@ -61,14 +63,14 @@ public class BuktiPembayaranApi {
     }
 
     @GetMapping("/{idAja}")
-    public BuktiPembayaranDto getCheckoutOrder(@PathVariable Integer idAja) {
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idAja).get();
+    public BuktiPembayaranDto getCheckoutOrder(@PathVariable Integer idCO) {
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
         BuktiPembayaran buktiPembayaran = new BuktiPembayaran();
         buktiPembayaran.setIdCo(checkoutOrder.getId());
         BuktiPembayaranDto buktiPembayaranDto = new BuktiPembayaranDto();
         // jika tidak pakai model mapper maka perlu setter getter satu satu
         buktiPembayaranDto.setIdCo(checkoutOrder.getId());
-        buktiPembayaranDto.setTanggalCi(checkoutOrder.getTanggalCi());
+        buktiPembayaranDto.setTanggalCo(checkoutOrder.getTanggalCo());
         buktiPembayaranDto.setBatasTanggalPembayaran(checkoutOrder.getBatasTanggalPembayaran());
         buktiPembayaranDto.setTipePembayaran(checkoutOrder.getTipePembayaran());
         buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());

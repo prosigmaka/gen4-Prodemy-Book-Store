@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 public class CheckoutOrderDto {
     private Integer id;
-    private Date tanggalCi;
+    private Date tanggalCo;
     private String tipePembayaran;
-    private Double totalHargalCi;
+    private Long totalHargalCi;
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;
 

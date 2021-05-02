@@ -1,11 +1,10 @@
 package com.example.onlinebookstore.controller.restapi;
 
-import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
-import com.example.onlinebookstore.model.dto.RequestOrderDTO;
+import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
+import com.example.onlinebookstore.model.entity.BuktiPembayaran;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
-import com.example.onlinebookstore.model.entity.Keranjang;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.CheckoutOrderService;
@@ -27,9 +26,6 @@ public class CheckoutOrderApi {
     public KeranjangRepository keranjangRepository;
     @Autowired
     public ModelMapper modelMapper;
-
-//    @Autowired
-//    private CheckoutOrderService checkoutOrderService;
 
     @GetMapping
     public List<CheckoutOrderDto> getCheckoutOrderList() {
@@ -66,8 +62,9 @@ public class CheckoutOrderApi {
 
     @PostMapping(path = "/insert")
     public @ResponseBody
-    CheckoutOrder insertOrder(@RequestBody RequestOrder requestOrder) {
-        return checkoutOrderService.insertOrder(requestOrder);
+    CheckoutOrder insertOrder(@RequestBody CheckoutItem checkoutItem) {
+//    CheckoutOrder insertOrder(@RequestBody RequestListOrderDTO requestListOrderDTO) {
+        return checkoutOrderService.insertOrder(checkoutItem);
 
     }
 
