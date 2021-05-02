@@ -248,9 +248,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
 
-<!--        <div class="profile">-->
-<!--            <span class="material-icons" style="color:#997b60">face</span>-->
-<!--        </div>-->
+        <!--        <div class="profile">-->
+        <!--            <span class="material-icons" style="color:#997b60">face</span>-->
+        <!--        </div>-->
         <div class="notif">
             <span class="fa fa-bell" style="color:#997b60" data-toggle="popover" data-placement="top"
                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></span>
@@ -337,9 +337,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </button>
             </div>
             <div class="modal-body" id="cartTable">
-
+<!--                <div class="table table-responsive">-->
+<!--                    <table>-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>a</th>-->
+<!--                            <th>b</th>-->
+<!--                            <th>c</th>-->
+<!--                            <th>d</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="cart-table">-->
+<!--                            <tr>-->
+<!--                                <td>1</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>3</td>-->
+<!--                                <td>4</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>1</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>3</td>-->
+<!--                                <td>4</td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-white-brown">Checkout!</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-add-to-cart" onclick="saveCart()">Save</button>
                 <button type="button" class="btn btn-danger" onclick="deleteCart()">Delete</button>
@@ -363,14 +389,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                        <div id="modal-description-image" class="col-md-5">
+                    <div id="modal-description-image" class="col-md-5">
 
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row"><p id="modal-book-title"
+                                            style="color: #66512c;font-weight: bold; font-size: large"></p></div>
+                        <div class="row"><p id="modal-book-author" style="font-family:cursive; font-style: italic"></p>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="row"><p id="modal-book-title" style="color: #66512c;font-weight: bold; font-size: large"></p></div>
-                            <div class="row"><p id="modal-book-author" style="font-family:cursive; font-style: italic"></p></div>
-                            <div class="row"><p id="modal-book-publisher"></p></div>
-                            <div class="row"><p id="modal-book-price" style="font-weight: bold"></p></div>
+                        <div class="row"><p id="modal-book-publisher"></p></div>
+                        <div class="row"><p id="modal-book-price" style="font-weight: bold"></p></div>
                     </div>
                 </div>
             </div>

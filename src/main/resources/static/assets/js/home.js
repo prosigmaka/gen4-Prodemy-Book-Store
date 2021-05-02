@@ -201,7 +201,7 @@ function showTableCart() {
                         '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
                         '</div>' +
                         "<div class='col-sm-3'>" +
-                        "<img src='"+res[i].gambar+"' alt style='height: 100px; width: 90px'>" +
+                        "<img src='"+res[i].gambar+"' alt style='height: 60px; width: 50px'>" +
                         "</div>" +
                         '<div class="col-sm-3">' +
                         res[i].judulBuku +
@@ -212,8 +212,20 @@ function showTableCart() {
                         '<div class="col-sm-1">' +
                         res[i].hargaBuku +
                         '</div>' +
+                        // '<div class="col-sm-1">' +
+                        //     res[i].hargaBuku * $('input[type=number]').val() +
+                        // '</div>' +
                         '</div>' +
-                        '</div>'
+                        '</div>' +
+                        '<hr>'
+
+
+                    // document.getElementById('cart-table').innerHTML += "<tr>" +
+                    //     "<td>"+"<input type='checkbox'/>"+"</td>"+
+                    //     "<td>"+"<img src='"+res[i].gambar+"' alt style='height: 100px; width: 90px'>"+"</td>" +
+                    //     "<td>"+res[i].judulBuku+"</td>" +
+                    //     "<td>"+res[i].hargaBuku+"</td>" +
+                    //     "</tr>"
                 }
 
                 $('#total-quantity-badge').text(totalQuantity);
@@ -275,3 +287,10 @@ function saveCart() {
         }
     });
 }
+
+// document.getElementById('cart-table').innerHTML += '<tr>' +
+//     '<td>'+'<input type="checkbox"/>'+'</td>'+
+//     '<td>'+res[i].gambar+'</td>' +
+//     '<td>'+res[i].judulBuku+'</td>' +
+//     '<td>'+res[i].hargaBuku+'</td>' +
+//     '</tr>'
