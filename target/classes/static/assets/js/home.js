@@ -12,7 +12,7 @@ $.ajax({
             for (i = 0; i < 8; i++) {
                 document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" style="border-color: saddlebrown; border-width: 4px">' +
                     "<div class='col-m'>" +
-                    "<img class='img-responsive' src='"+res[i].gambar+"' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +
+                    "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
                     "<h6>" + res[i].judulBuku + "</h6>" +
@@ -49,7 +49,7 @@ $.ajax({
             for (i = 0; i < 4; i++) {
                 document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
                     "<div class='col-m'>" +
-                    "<img class='img-responsive' src='"+res[i].gambar+"' alt style='height: 200px' onclick=bookDescription('" + res[i].id + "');>" +
+                    "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px' onclick=bookDescription('" + res[i].id + "');>" +
                     "<div class='mid-1'>" +
                     "<div class='women'>" +
                     "<h6>" + res[i].judulBuku + "</h6>" +
@@ -61,7 +61,7 @@ $.ajax({
                     "</div>" +
                     "<div class='clearfix'></div>" +
                     "</div>" +
-                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+                    '<div class="add add-2"><button type="button" class="btn btn-add-to-car" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
                     "</div>" +
                     "</div>" +
                     "</div>" +
@@ -130,16 +130,16 @@ function addToCart(id) {
 function bookDescription(id) {
     $('#modal-book-description').modal('show');
     $.ajax({
-        url: '/api/book/'+ id,
+        url: '/api/book/' + id,
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
             if (xhr.status == 200 || xhr.status == 201) {
-                $('#modal-description-image').html("<img class='img-responsive' src='"+res.gambar+"' alt style='height: 100px; width: 90px'>");
+                $('#modal-description-image').html("<img class='img-responsive' src='" + res.gambar + "' alt style='height: 100px; width: 90px'>");
                 $("#modal-book-title").text(res.judulBuku);
                 $("#modal-book-author").text(res.author.namaPengarang);
                 $("#modal-book-publisher").text(res.publisher.namaPenerbit);
-                $("#modal-book-price").text("Rp "+ res.hargaBuku);
+                $("#modal-book-price").text("Rp " + res.hargaBuku);
                 console.log(res.publisher.namaPenerbit, res.author.namaPengarang, res.category.namaKategori)
             } else {
             }
@@ -193,25 +193,29 @@ function showTableCart() {
             var i;
             var totalQuantity = 0;
             if (xhr.status == 200 || xhr.status == 201) {
+                var bookMap = new Map();
                 for (i = 0; i < res.length; i++) {
                     totalQuantity += res[i].kuantitasBuku;
-                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid brown; border-radius: 20px">' +
+                    var idSubPrice = "price-" + res[i].id.toString();
+                    bookMap.set(res[i].id, res[i].hargaBuku);
+                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
                         '<div class="row">' +
-                        '<div class="col-sm-1" style="padding: 40px 10px">' +
+                        '<div class="col-sm-1" style="padding: 20px 10px">' +
                         '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
                         '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
                         '</div>' +
                         "<div class='col-sm-2' style='padding: 10px 0px; align-content: center'>" +
-                        "<img src='"+res[i].gambar+"' alt style='height: 60px; width: 50px'>" +
+                        "<img src='" + res[i].gambar + "' alt style='height: 40px; width: 50px'>" +
                         "</div>" +
-                        '<div class="col-sm-3" style="padding: 40px 0px; text-align: center">' +
+                        '<div class="col-sm-3" style="padding: 20px 0px; text-align: center ">' +
                         res[i].judulBuku +
                         '</div>' +
-                        '<div class="col-sm-3" style="padding: 40px 0px">' +
-                        '<input class="book-quantity" type="number" style="width: 50px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
+                        '<div class="col-sm-3" style="padding: 20px 0px">' +
+                        '<input class="book-quantity" type="number" min="1" step="any" id="' + res[i].id + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
                         '</div>' +
-                        '<div class="col-sm-1" style="padding: 40px 0px">' +
-                        res[i].subTotalHargaBuku +
+                        '<div class="col-sm-1" style="padding: 20px 0px">' +
+                        '<p id="' + idSubPrice + '">' + res[i].hargaBuku +
+                        '</p>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -225,7 +229,21 @@ function showTableCart() {
                     //     "<td>"+res[i].hargaBuku+"</td>" +
                     //     "</tr>"
                 }
-
+                $('input').mouseup(function () {
+                    var idQ = $(this).attr('id');
+                    var idP = "#price-" + idQ;
+                    var values = bookMap.get(parseInt(idQ)) * $(this).val();
+                    $(idP).text(values)
+                    bookMap.get(parseInt(idQ)).push(values);
+                });
+                var sum = 0;
+                var x;
+                for (var i = 0; i < res.length; i++) {
+                    x = bookMap.get(res[i].id);
+                    sum += x;
+                    console.log(x);
+                }
+                console.log(parseFloat(sum))
                 $('#total-quantity-badge').text(totalQuantity);
             } else {
             }
@@ -273,7 +291,7 @@ function saveCart() {
         success: function (data, status, xhr) {
             var quantity = 0;
             if (xhr.status == 200 || xhr.status == 201) {
-                for(var i=0; i<data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     quantity += data[i].kuantitasBuku;
                 }
                 $('#total-quantity-badge').text(quantity);
