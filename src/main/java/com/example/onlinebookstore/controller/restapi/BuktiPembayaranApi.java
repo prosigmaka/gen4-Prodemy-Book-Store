@@ -97,16 +97,16 @@ public class BuktiPembayaranApi {
         CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
 
 //        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
-        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
-        for (int i = 0; i<checkoutItemList.size(); i++){
-            CheckoutItem checkoutItem = checkoutItemList.get(i);
-            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItem.getIdKeranjang());
-            Keranjang k = keranjang.get();
-            k.setStatusKeranjang(ItemStatus.PAID);
-            Keranjang keranjangNewStatus = keranjangRepository.save(k);
-            checkoutItem.setKeranjang(keranjangNewStatus);
-            checkoutItemRepository.save(checkoutItem);
-        }
+//        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
+//        for (int i = 0; i<checkoutItemList.size(); i++){
+//            CheckoutItem checkoutItem = checkoutItemList.get(i);
+//            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItem.getIdKeranjang());
+//            Keranjang k = keranjang.get();
+//            k.setStatusKeranjang(ItemStatus.PAID);
+//            Keranjang keranjangNewStatus = keranjangRepository.save(k);
+//            checkoutItem.setKeranjang(keranjangNewStatus);
+//            checkoutItemRepository.save(checkoutItem);
+//        }
         return checkoutOrderChangeStatus;
     }
 

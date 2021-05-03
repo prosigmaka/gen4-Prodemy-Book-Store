@@ -23,6 +23,7 @@ com\example\onlinebookstore\controller\restapi\RequestOrder.class
 com\example\onlinebookstore\model\entity\Book.class
 com\example\onlinebookstore\model\dto\CheckoutOrderDto.class
 com\example\onlinebookstore\repository\RekomendasiBukuRepository.class
+com\example\onlinebookstore\service\CheckoutService.class
 com\example\onlinebookstore\controller\restapi\ApiJSon.class
 com\example\onlinebookstore\service\CheckoutOrderServiceImp.class
 com\example\onlinebookstore\service\BuktiPembayaranService.class
@@ -36,6 +37,7 @@ com\example\onlinebookstore\controller\mvc\BaseMvcControllerManda.class
 com\example\onlinebookstore\controller\restapi\CheckoutOrderApi.class
 com\example\onlinebookstore\controller\restapi\PublisherApi.class
 com\example\onlinebookstore\controller\restapi\KeranjangApi.class
+com\example\onlinebookstore\controller\restapi\CheckoutApi.class
 com\example\onlinebookstore\controller\restapi\CheckoutItemApi.class
 com\example\onlinebookstore\model\entity\RekomendasiBuku.class
 com\example\onlinebookstore\repository\CategoryRepository.class
@@ -51,6 +53,7 @@ com\example\onlinebookstore\OnlinebookstoreApplication.class
 com\example\onlinebookstore\model\entity\Publisher.class
 com\example\onlinebookstore\model\entity\CheckoutOrder.class
 com\example\onlinebookstore\model\dto\IdKeranjangDTO.class
+com\example\onlinebookstore\service\CheckoutServiceImp.class
 com\example\onlinebookstore\service\BuktiPembayaranImp.class
 com\example\onlinebookstore\model\entity\Author.class
 com\example\onlinebookstore\repository\PublisherRepository.class

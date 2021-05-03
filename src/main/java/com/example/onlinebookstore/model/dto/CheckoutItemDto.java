@@ -12,9 +12,6 @@ public class CheckoutItemDto {
     private String id;
     private Date tanggalCi;
 
-    private String tipePembayaran;
-    private String bankPilihan;
-
     private String NamaCustomer;
     private String judulBuku;
     private Integer kuantitasBuku;
@@ -22,6 +19,14 @@ public class CheckoutItemDto {
     private Long hargaBuku;
     private Long subTotalHargaBuku;
 
+    private Date tanggalCo;
+    private String tipePembayaran;
+    private String bankPilihan;
+    private Long totalHargalCi;
+    private Date batasTanggalPembayaran;
+    private Enum statusPesanan;
+
     private Integer idKeranjang;
+    private Integer idOrder;
 
 }

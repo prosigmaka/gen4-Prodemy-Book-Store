@@ -20,7 +20,7 @@ public interface CheckoutItemRepository extends JpaRepository<CheckoutItem, Inte
 
     List<CheckoutItem> findAll();
 
-    @Query(value = "SELECT ci.id FROM checkout_item ci order by ci.tanggal_ci Desc LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM checkout_item ci order by ci.tanggal_ci Desc LIMIT 1", nativeQuery = true)
     List<CheckoutItem> findAllIdOrderByTanggalCi();
 
     @Query(value = "SELECT * FROM checkout_item ci where ci.id_keranjang = ?1", nativeQuery = true)

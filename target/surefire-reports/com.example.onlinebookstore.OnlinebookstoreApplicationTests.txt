@@ -1,27 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: com.example.onlinebookstore.OnlinebookstoreApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 31.336 s <<< FAILURE! - in com.example.onlinebookstore.OnlinebookstoreApplicationTests
-contextLoads  Time elapsed: 0.003 s  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 20.956 s <<< FAILURE! - in com.example.onlinebookstore.OnlinebookstoreApplicationTests
+contextLoads  Time elapsed: 0.005 s  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: 
-Error creating bean with name 'documentationPluginsBootstrapper' defined in URL [jar:file:/C:/Users/HP/.m2/repository/io/springfox/springfox-spring-web/2.9.2/springfox-spring-web-2.9.2.jar!/springfox/documentation/spring/web/plugins/DocumentationPluginsBootstrapper.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webMvcRequestHandlerProvider' defined in URL [jar:file:/C:/Users/HP/.m2/repository/io/springfox/springfox-spring-web/2.9.2/springfox-spring-web-2.9.2.jar!/springfox/documentation/spring/web/plugins/WebMvcRequestHandlerProvider.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buktiPembayaranApi' method 
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#validateCheckoutOrder(Integer)
-to {GET [/api/co/{idAja}]}: There is already 'buktiPembayaranApi' bean method
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#getCheckoutOrder(Integer) mapped.
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: 
-Error creating bean with name 'webMvcRequestHandlerProvider' defined in URL [jar:file:/C:/Users/HP/.m2/repository/io/springfox/springfox-spring-web/2.9.2/springfox-spring-web-2.9.2.jar!/springfox/documentation/spring/web/plugins/WebMvcRequestHandlerProvider.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buktiPembayaranApi' method 
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#validateCheckoutOrder(Integer)
-to {GET [/api/co/{idAja}]}: There is already 'buktiPembayaranApi' bean method
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#getCheckoutOrder(Integer) mapped.
-Caused by: org.springframework.beans.factory.BeanCreationException: 
-Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buktiPembayaranApi' method 
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#validateCheckoutOrder(Integer)
-to {GET [/api/co/{idAja}]}: There is already 'buktiPembayaranApi' bean method
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#getCheckoutOrder(Integer) mapped.
-Caused by: java.lang.IllegalStateException: 
-Ambiguous mapping. Cannot map 'buktiPembayaranApi' method 
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#validateCheckoutOrder(Integer)
-to {GET [/api/co/{idAja}]}: There is already 'buktiPembayaranApi' bean method
-com.example.onlinebookstore.controller.restapi.BuktiPembayaranApi#getCheckoutOrder(Integer) mapped.
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+Caused by: org.postgresql.util.PSQLException: FATAL: database "db_prodemy_book_store_coba" does not exist
 

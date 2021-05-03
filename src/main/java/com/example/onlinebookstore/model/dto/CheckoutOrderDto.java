@@ -17,5 +17,4 @@ public class CheckoutOrderDto {
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;
 
-    private List<CheckoutItemDto> items;
 }

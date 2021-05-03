@@ -85,7 +85,8 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
 //            checkoutItem.setId(checkoutItem.getId());
 //            checkoutItem.setIdKeranjang(checkoutItem.getKeranjang().getId());
 //            checkoutItem.setTanggalCi(checkoutItem.getTanggalCi());
-            checkoutOrder.getItems().add(checkoutItemId);
+
+//            checkoutOrder.getItems().add(checkoutItemId);
 
 
             total += checkoutItemId.getKeranjang().getSubTotalHargaBuku();

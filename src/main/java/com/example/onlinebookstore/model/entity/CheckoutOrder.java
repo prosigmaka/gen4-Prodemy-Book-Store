@@ -21,11 +21,11 @@ public class CheckoutOrder {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 //    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="tanggal_co", nullable = false)
+    @Column(name="tanggal_co")
     private Date tanggalCo;
-    @Column(name="total_harga_ci", nullable = false)
+    @Column(name="total_harga_ci")
     private Long totalHargalCi;
-    @Column(name="tipe_pembayaran", nullable = false)
+    @Column(name="tipe_pembayaran")
     private String tipePembayaran;
     @Column(name="bank_pilihan")
     private String bankPilihan;
@@ -34,7 +34,7 @@ public class CheckoutOrder {
     private PesananStatus statusPesanan;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 //    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="batas_tanggal_pembayaran", nullable = false)
+    @Column(name="batas_tanggal_pembayaran")
     private Date batasTanggalPembayaran;
 
 //    @ManyToOne
@@ -43,9 +43,9 @@ public class CheckoutOrder {
 //    @Column(name="id_user", nullable = false)
 //    private Integer idUser;
 
-    @OneToMany(mappedBy = "checkoutOrder", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "checkoutOrder", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_user", updatable = false, insertable = false)
-    private List<CheckoutItem> items = new ArrayList<CheckoutItem>();
+//    private List<CheckoutItem> items = new ArrayList<CheckoutItem>();
 //    @Column(name="id_user", nullable = false)
 //    private Integer idUser;
 

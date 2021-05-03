@@ -9,16 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface CheckoutOrderService {
+public interface CheckoutService {
 
-    Iterable <CheckoutOrder> getAllOrders();
+//    Iterable <CheckoutOrder> getAllOrders();
 
 //    CheckoutOrder insertOrder(RequestListOrderDTO requestListOrderDTO);
 
 
-    CheckoutOrder insertOrder(CheckoutItem checkoutItem);
+//    CheckoutOrder insertOrder(CheckoutItem checkoutItem);
 
-    List<CheckoutItemDto> checkoutItem(RequestListOrderDTO requestListOrderDTO);
+    List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
 
-//    List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
 }

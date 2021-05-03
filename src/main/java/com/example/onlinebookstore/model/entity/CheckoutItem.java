@@ -30,8 +30,10 @@ public class CheckoutItem {
     private Integer idKeranjang;
 
     @ManyToOne
-    @JoinColumn(name = "tanggalCo")
+    @JoinColumn(name = "id_order", updatable = false, insertable = false)
     private CheckoutOrder checkoutOrder;
+    @Column(name="id_order", nullable = false)
+    private Integer idOrder;
 
 //    @ManyToOne
 //    @JoinColumn(name = "id_user", updatable = false, insertable = false)
