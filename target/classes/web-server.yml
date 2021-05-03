@@ -10,9 +10,9 @@ spring:
     # Template location for this application only
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/db_prodemy_book_store
+    url: jdbc:postgresql://localhost:5432/db_prodemy_book_store_coba
     username: postgres
-    password: hima1234
+    password: shafira009598
   jpa:
     hibernate:
       ddl-auto: update
