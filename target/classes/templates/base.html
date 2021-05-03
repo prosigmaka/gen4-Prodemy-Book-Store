@@ -240,7 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
 
-        <form class="cart" th:action="@{/logout}" method="post"
+        <form class="cart" th:action="@{/perform_logout}" method="post"
               sec:authorize="isAuthenticated()" style="color: #997b60">
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
