@@ -18,6 +18,12 @@ public class Keranjang {
     private Integer kuantitasBuku;
     @Column(name="subtotal_harga_buku", nullable = false)
     private Long subTotalHargaBuku;
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private ItemStatus statusKeranjang;
+
+//    @Column(name = "status", nullable = false)
+//    private String status;
 
 
 

@@ -61,7 +61,7 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
         Date batasTanggalPembayaran = cal.getTime();
 
         checkoutOrder.setTanggalCo(tanggalCo);
-        checkoutOrder.setTipePembayaran("Transfer Bank");
+//        checkoutOrder.setTipePembayaran("Transfer Bank");
         checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
 //        CheckoutOrder checkoutOrderFinal= checkoutOrderRepository.save(checkoutOrder);
@@ -72,6 +72,12 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
 //            System.out.println(idKeranjangDTO.getId());
 
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.PAID);
+            Keranjang keranjangNewStatus = keranjangRepository.save(k);
+            checkoutItemId.setKeranjang(keranjangNewStatus);
+            checkoutItemRepository.save(checkoutItemId);
 
 //            CheckoutItem checkoutItemId = checkoutItemRepository.findById(checkoutItemList.get(i));
 //            CheckoutItem checkoutItem = checkoutItemRepository.findByIdKeranjang(idKeranjangDTO.getId());
@@ -94,7 +100,7 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
 //            checkoutItemRepository.save(checkoutItem);
         }
         checkoutOrder.setTotalHargalCi(total);
-        return checkoutOrderRepository.save(checkoutOrder);
+        return checkoutOrder;
 
 
 //        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllIdOrderByTanggalCi();
@@ -147,9 +153,11 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
         for (IdKeranjangDTO idKeranjangDTO : requestListOrderDTO.getIdKeranjangDTOList()) {
 //            System.out.println(idKeranjangDTO.getId());
             Keranjang keranjang = keranjangRepository.findById(idKeranjangDTO.getId()).get();
+            keranjang.setStatusKeranjang(ItemStatus.CHECKOUT);
+            Keranjang keranjangSB = keranjangRepository.save(keranjang);
 //            Keranjang k = keranjang.get();
             CheckoutItem checkoutItem = new CheckoutItem();
-            checkoutItem.setKeranjang(keranjang);
+            checkoutItem.setKeranjang(keranjangSB);
             checkoutItem.setIdKeranjang(checkoutItem.getKeranjang().getId());
             checkoutItem.setTanggalCi(tanggalCi);
             checkoutItemList.add(checkoutItem);
@@ -215,6 +223,7 @@ public class CheckoutOrderServiceImp implements CheckoutOrderService {
 //
 //        return checkoutItemDto;
     }
+
 
     private CheckoutItemDto mapToDto(CheckoutItem checkoutItem) {
         CheckoutItemDto checkoutItemDto = modelMapper.map(checkoutItem, CheckoutItemDto.class);

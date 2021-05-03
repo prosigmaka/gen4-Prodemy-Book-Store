@@ -3,10 +3,9 @@ package com.example.onlinebookstore.controller.restapi;
 import com.example.onlinebookstore.model.dto.BookDto;
 import com.example.onlinebookstore.model.dto.BuktiPembayaranDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
-import com.example.onlinebookstore.model.entity.Book;
-import com.example.onlinebookstore.model.entity.BuktiPembayaran;
-import com.example.onlinebookstore.model.entity.CheckoutOrder;
+import com.example.onlinebookstore.model.entity.*;
 import com.example.onlinebookstore.repository.BuktiPembayaranRepository;
+import com.example.onlinebookstore.repository.CheckoutItemRepository;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.BuktiPembayaranService;
@@ -16,13 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/co")
+@RequestMapping("/api/bp")
 public class BuktiPembayaranApi {
     @Autowired
+    public KeranjangRepository keranjangRepository;
+    @Autowired
     public CheckoutOrderRepository checkoutOrderRepository;
+    @Autowired
+    public CheckoutItemRepository checkoutItemRepository;
     @Autowired
     public BuktiPembayaranRepository buktiPembayaranRepository;
     @Autowired
@@ -76,6 +80,34 @@ public class BuktiPembayaranApi {
         buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());
 
         return buktiPembayaranDto;
+    }
+
+    @GetMapping("/{idCO}")
+    public CheckoutOrderDto validateCheckoutOrder(@PathVariable Integer idCO) {
+        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findByIdCo(idCO);
+        Optional<CheckoutOrder> checkoutOrder = checkoutOrderRepository.findById(buktiPembayaran.getIdCo());
+        CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrder,CheckoutOrderDto.class);
+        return checkoutOrderDto;
+    }
+
+    @PostMapping("/change-status")
+    public CheckoutOrder changeStatus(@RequestBody CheckoutOrderDto checkoutOrderDto){
+        CheckoutOrder checkoutOrder = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
+        checkoutOrder.setStatusPesanan(PesananStatus.DIPROSES);
+        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
+
+//        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
+        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
+        for (int i = 0; i<checkoutItemList.size(); i++){
+            CheckoutItem checkoutItem = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItem.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.PAID);
+            Keranjang keranjangNewStatus = keranjangRepository.save(k);
+            checkoutItem.setKeranjang(keranjangNewStatus);
+            checkoutItemRepository.save(checkoutItem);
+        }
+        return checkoutOrderChangeStatus;
     }
 
     @DeleteMapping("/{id}")

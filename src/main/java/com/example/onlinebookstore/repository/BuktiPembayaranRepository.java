@@ -22,6 +22,9 @@ public interface BuktiPembayaranRepository extends JpaRepository<BuktiPembayaran
     @Query(value = "SELECT * FROM BuktiPembayaran buktiPembayaran order by id", nativeQuery = true)
     List<BuktiPembayaran> findAllOrderById();
 
+    @Query(value = "SELECT * FROM bukti_pembayaran bp where bp.id_co = ?1", nativeQuery = true)
+    BuktiPembayaran findByIdCo(Integer idCo);
+
 
     /* CARA PERTAMA
      * berdasarkan nama method*/

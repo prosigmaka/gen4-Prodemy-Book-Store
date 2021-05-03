@@ -22,8 +22,11 @@ public interface CheckoutOrderRepository extends JpaRepository<CheckoutOrder, In
 
     Optional<CheckoutOrder> findById(Integer id);
 
-    @Query(value = "SELECT * FROM CheckoutOrder checkoutOrder order by id", nativeQuery = true)
+    @Query(value = "SELECT * FROM checkout_order co order by co.id", nativeQuery = true)
     List<CheckoutOrder> findAllOrderById();
+
+    @Query(value = "SELECT * FROM checkout_order co where co.status_pesanan =?1", nativeQuery = true)
+    List<CheckoutOrder> findAllByStatusPesanan(Enum statusPesanan);
 
 
     /* CARA PERTAMA

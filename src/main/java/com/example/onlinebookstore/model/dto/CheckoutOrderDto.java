@@ -12,6 +12,7 @@ public class CheckoutOrderDto {
     private Integer id;
     private Date tanggalCo;
     private String tipePembayaran;
+    private String bankPilihan;
     private Long totalHargalCi;
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;

@@ -1,10 +1,12 @@
 package com.example.onlinebookstore.controller.restapi;
 
+import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
 import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
 import com.example.onlinebookstore.model.entity.BuktiPembayaran;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
+import com.example.onlinebookstore.model.entity.PesananStatus;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.CheckoutOrderService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,7 +30,7 @@ public class CheckoutOrderApi {
     @Autowired
     public ModelMapper modelMapper;
 
-    @GetMapping
+    @GetMapping("/all-order")
     public List<CheckoutOrderDto> getCheckoutOrderList() {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
         List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllOrderById();
@@ -36,6 +39,49 @@ public class CheckoutOrderApi {
                         .map(checkoutOrder -> mapToDto(checkoutOrder))
                         .collect(Collectors.toList());
         return checkoutOrderDtos;
+    }
+
+    @GetMapping("/order/belum-bayar")
+    public List<CheckoutOrderDto> getOrderListBelumBayar() {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByStatusPesanan(PesananStatus.BELUM_BAYAR);
+        List<CheckoutOrderDto> checkoutOrderDtos =
+                listCheckoutOrder.stream()
+                        .map(checkoutOrder -> mapToDto(checkoutOrder))
+                        .collect(Collectors.toList());
+        return checkoutOrderDtos;
+    }
+
+    @GetMapping("/order/diproses")
+    public List<CheckoutOrderDto> getOrderListDiproses() {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByStatusPesanan(PesananStatus.DIPROSES);
+        List<CheckoutOrderDto> checkoutOrderDtos =
+                listCheckoutOrder.stream()
+                        .map(checkoutOrder -> mapToDto(checkoutOrder))
+                        .collect(Collectors.toList());
+        return checkoutOrderDtos;
+    }
+
+    @GetMapping("/order/berhasil")
+    public List<CheckoutOrderDto> getOrderListBerhasil() {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByStatusPesanan(PesananStatus.BERHASIL);
+        List<CheckoutOrderDto> checkoutOrderDtos =
+                listCheckoutOrder.stream()
+                        .map(checkoutOrder -> mapToDto(checkoutOrder))
+                        .collect(Collectors.toList());
+        return checkoutOrderDtos;
+    }
+
+    @GetMapping("/detail-order/{idCO}")
+    public CheckoutOrderDto getDetailCheckoutOrder(@PathVariable Integer idCO) {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        Optional<CheckoutOrder> checkoutOrder= checkoutOrderRepository.findById(idCO);
+        CheckoutOrder checkoutOrderDetail = checkoutOrder.get();
+        CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrderDetail, CheckoutOrderDto.class);
+
+        return checkoutOrderDto;
     }
 
     private CheckoutOrderDto mapToDto(CheckoutOrder checkoutOrder) {
@@ -63,8 +109,12 @@ public class CheckoutOrderApi {
     @PostMapping(path = "/insert")
     public @ResponseBody
     CheckoutOrder insertOrder(@RequestBody CheckoutItem checkoutItem) {
+        CheckoutOrder checkoutOrderNew = checkoutOrderService.insertOrder(checkoutItem);
+        CheckoutItemDto checkoutItemDto = new CheckoutItemDto();
+        checkoutOrderNew.setTipePembayaran(checkoutItemDto.getTipePembayaran());
+        checkoutOrderNew.setBankPilihan(checkoutItemDto.getBankPilihan());
 //    CheckoutOrder insertOrder(@RequestBody RequestListOrderDTO requestListOrderDTO) {
-        return checkoutOrderService.insertOrder(checkoutItem);
+        return checkoutOrderRepository.save(checkoutOrderNew);
 
     }
 

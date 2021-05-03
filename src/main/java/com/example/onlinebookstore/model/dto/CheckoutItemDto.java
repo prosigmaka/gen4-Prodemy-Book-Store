@@ -12,6 +12,9 @@ public class CheckoutItemDto {
     private String id;
     private Date tanggalCi;
 
+    private String tipePembayaran;
+    private String bankPilihan;
+
     private String NamaCustomer;
     private String judulBuku;
     private Integer kuantitasBuku;

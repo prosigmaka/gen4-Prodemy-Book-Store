@@ -27,6 +27,8 @@ public class CheckoutOrder {
     private Long totalHargalCi;
     @Column(name="tipe_pembayaran", nullable = false)
     private String tipePembayaran;
+    @Column(name="bank_pilihan")
+    private String bankPilihan;
     @Enumerated(EnumType.STRING)
     @Column(name="status_pesanan", nullable = false)
     private PesananStatus statusPesanan;
