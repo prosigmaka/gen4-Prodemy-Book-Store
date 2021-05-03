@@ -55,7 +55,7 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <label for ="lastName"> Username : </label>
                             <a th:field="*{username}"></a>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="username" required="required">
+                            <input type="text" class="form-control" name="username" id="username" placeholder="username" required="required", minlength="5">
                             <div class="clearfix"></div>
                         </div>
 
@@ -91,7 +91,8 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             <label for ="password"> Password : </label>
                             <a th:field="*{password}"></a>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required="required">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required="required"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters">
                             <div class="clearfix"></div>
                         </div>
 
@@ -100,7 +101,7 @@
                     </form>
                 </div>
                 <div class="forg">
-						<a href="/" class="forg-right" th:href="@{/login}">Login</a>
+						<a class="forg-right" th:href="@{/login}">Login</a>
                 </div>
             </div>
         </div>

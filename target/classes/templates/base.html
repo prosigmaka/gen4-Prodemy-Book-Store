@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav ">
                     <li class=" active">
-                        <a href="/" class="hyper "><span>HOME</span></a>
+                        <a href="/home" class="hyper "><span>HOME</span></a>
                     </li>
 
                     <li class="dropdown ">
@@ -105,8 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <ul class="multi-column-dropdown">
                                         <li><a href="/academic"><i class="fa fa-angle-right" aria-hidden="true"></i>Academic</a>
                                         </li>
-                                        <li><a href="/comic"><i class="fa fa-angle-right"
-                                                                aria-hidden="true"></i>Comic</a>
+                                        <li><a href="/comic"><i class="fa fa-angle-right" aria-hidden="true"></i>Comic</a>
                                         </li>
                                         <li><a href="/family"> <i class="fa fa-angle-right" aria-hidden="true"></i>Family</a>
                                         </li>
@@ -241,7 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
 
-        <form class="cart" th:action="@{/logout}" method="post"
+        <form class="cart" th:action="@{/perform_logout}" method="post"
               sec:authorize="isAuthenticated()" style="color: #997b60">
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
@@ -319,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 <div class="modal fade" id="modal-cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
+     aria-hidden="true" >
     <div class="modal-dialog modal-dialog-cart" role="document">
         <div class="modal-content-cart">
             <div class="modal-header">

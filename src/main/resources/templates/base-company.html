@@ -74,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav ">
                     <li>
-                        <a href="/home-company" class="hyper "><span>HOME</span></a>
+                        <a href="/hc" class="hyper "><span>HOME</span></a>
                     </li>
 
                     <li>
@@ -103,7 +103,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </ul>
                     </li>
 
-                    <li><a href="/login" class="hyper "><span>LOGOUT</span></a></li>
+                    <form class="cart" th:action="@{/perform_logout}" method="post"
+                          style="color: #997b60">
+                        <button type="submit" class="fa fa-user"> Logout</button>
+                    </form>
+
+<!--                    <li><a th:action="@{/perform_logout}" method="post" class="hyper " type="submit"><span>LOGOUT</span></a></li>-->
                 </ul>
             </div>
         </nav>

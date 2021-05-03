@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.mvc;
 
 import com.example.onlinebookstore.service.UserService;
 import com.example.onlinebookstore.model.dto.UserRegistrationDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ public class UserRegistrationController {
 	private UserService userService;
 
 	//constructor
-	public UserRegistrationController(UserService userService) {
-		this.userService = userService;
-	}
+//	public UserRegistrationController(UserService userService) {
+//		this.userService = userService;
+//	}
 
 	//user object used in registration.html
 	@ModelAttribute("user")
