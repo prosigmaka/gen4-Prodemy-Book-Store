@@ -1,0 +1,15 @@
+# Created at 2021-05-02T22:27:22.634
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2021-05-02T22:27:22.704
+WARNING: Illegal reflective access by org.codehaus.groovy.reflection.CachedClass (file:/C:/Users/HP/.m2/repository/org/codehaus/groovy/groovy/2.5.14/groovy-2.5.14.jar) to method java.lang.Object.clone()
+
+# Created at 2021-05-02T22:27:22.754
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.reflection.CachedClass
+
+# Created at 2021-05-02T22:27:22.794
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2021-05-02T22:27:22.814
+WARNING: All illegal access operations will be denied in a future release
+
