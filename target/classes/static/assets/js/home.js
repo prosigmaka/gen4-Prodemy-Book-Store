@@ -2,6 +2,7 @@ var totalQuantity = 0;
 var delQuantity = 0;
 
 
+
 $.ajax({
     url: '/api/book',
     method: 'get',
@@ -184,68 +185,69 @@ function deleteCart() {
     })
 }
 
-function showTableCart() {
-    $('#cartTable').empty();
-    $.ajax({
-        url: '/api/cart',
-        method: 'get',
-        contentType: 'application/json',
-        success: function (res, status, xhr) {
-            var i;
-            var totalQuantity = 0;
-            var totalPrice = 0;
-            var priceArray = [];
-            var subTotalPriceAarray = [];
-            if (xhr.status == 200 || xhr.status == 201) {
-                for (i = 0; i < res.length; i++) {
-                    totalQuantity += res[i].kuantitasBuku;
-                    var idSubPrice = "price-" + i.toString();
-                    priceArray[i] = res[i].hargaBuku;
-                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
-                        '<div class="row">' +
-                        '<div class="col-sm-1" style="padding: 20px 10px">' +
-                        '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
-                        '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
-                        '</div>' +
-                        "<div class='col-sm-2' style='padding: 10px 0px; align-content: center'>" +
-                        "<img src='" + res[i].gambar + "' alt style='height: 40px; width: 50px'>" +
-                        "</div>" +
-                        '<div class="col-sm-3" style="padding: 20px 0px; text-align: center ">' +
-                        res[i].judulBuku +
-                        '</div>' +
-                        '<div class="col-sm-3" style="padding: 20px 0px">' +
-                        '<input class="book-quantity" type="number" min="1" step="any" id="' + i + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
-                        '</div>' +
-                        '<div class="col-sm-1" style="padding: 20px 0px">' +
-                        '<p id="' + idSubPrice + '">' + res[i].hargaBuku +
-                        '</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '<hr>'
-
-                }
-                var values = 0;
-                var idQ = "";
-                $('#cartTable > input').on('mouseup',function () {
-                    idQ = $(this).attr('id');
-                    var idP = "#price-" + idQ;
-                    values = priceArray[parseInt(idQ)] * $(this).val();
-                    $(idP).text(values);
-                });
-
-                $('#total-quantity-badge').text(totalQuantity);
-            } else {
-            }
-        },
-        error: function (err) {
-            console.log(err);
-        }
-
-    })
-}
-
-
+// function showTableCart() {
+//     $('#cartTable').empty();
+//     $.ajax({
+//         url: '/api/cart',
+//         method: 'get',
+//         contentType: 'application/json',
+//         success: function (res, status, xhr) {
+//             var i;
+//             var totalQuantity = 0;
+//             var totalPrice = 0;
+//             var priceArray = [];
+//             var subTotalPriceAarray = [];
+//             if (xhr.status == 200 || xhr.status == 201) {
+//                 for (i = 0; i < res.length; i++) {
+//                     totalQuantity += res[i].kuantitasBuku;
+//                     var idSubPrice = "price-" + i.toString();
+//                     priceArray[i] = res[i].hargaBuku;
+//                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
+//                         '<div class="row">' +
+//                         '<div class="col-sm-1" style="padding: 20px 10px">' +
+//                         '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
+//                         '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
+//                         '</div>' +
+//                         "<div class='col-sm-2' style='padding: 10px 0px; align-content: center'>" +
+//                         "<img src='" + res[i].gambar + "' alt style='height: 40px; width: 50px'>" +
+//                         "</div>" +
+//                         '<div class="col-sm-3" style="padding: 20px 0px; text-align: center ">' +
+//                         res[i].judulBuku +
+//                         '</div>' +
+//                         '<div class="col-sm-3" style="padding: 20px 0px">' +
+//                         '<input class="book-quantity" type="number" min="1" step="any" id="' + i + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
+//                         '</div>' +
+//                         '<div class="col-sm-1" style="padding: 20px 0px">' +
+//                         '<p id="' + idSubPrice + '">' + res[i].hargaBuku +
+//                         '</p>' +
+//                         '</div>' +
+//                         '</div>' +
+//                         '</div>' +
+//                         '<hr>'
+//
+//                 }
+//                 var values = 0;
+//                 var idQ = "";
+//                 $('input').on('mouseup', function () {
+//                     idQ = $(this).attr('id');
+//                     var idP = "#price-" + idQ;
+//                     values = priceArray[parseInt(idQ)] * $(this).val();
+//                     $(idP).text(values);
+//                 });
+//                 $('#total-quantity-badge').text(totalQuantity);
+//             } else {
+//             }
+//         },
+//         error: function (err) {
+//             console.log(err);
+//         }
+//
+//     })
+//     // while (true) {
+//     //     console.log('whlie true loop')
+//     // }
+//
+// }
 
 function saveCart() {
     var jsonCart = {};
@@ -295,3 +297,79 @@ function saveCart() {
         }
     });
 }
+
+function showTableCart() {
+    $('#cartTable').empty();
+    $.ajax({
+        url: '/api/cart',
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            var i;
+            var totalQuantity = 0;
+            var totalPrice = 0;
+            var priceArray = [];
+            var subTotalPriceAarray = [];
+            if (xhr.status == 200 || xhr.status == 201) {
+                for (i = 0; i < res.length; i++) {
+                    totalQuantity += res[i].kuantitasBuku;
+                    var idSubPrice = "price-" + i.toString();
+                    priceArray[i] = res[i].hargaBuku;
+                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
+                        '<div class="row">' +
+                        '<div class="col-sm-1" style="padding: 20px 10px">' +
+                        '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
+                        '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
+                        '</div>' +
+                        "<div class='col-sm-2' style='padding: 10px 0px; align-content: center'>" +
+                        "<img src='" + res[i].gambar + "' alt style='height: 40px; width: 50px'>" +
+                        "</div>" +
+                        '<div class="col-sm-3" style="padding: 20px 0px; text-align: center ">' +
+                        res[i].judulBuku +
+                        '</div>' +
+                        '<div class="col-sm-3" style="padding: 20px 0px">' +
+                        '<input class="book-quantity" onkeypress="return false" type="number" min="1" step="any" id="' + i + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
+                        '</div>' +
+                        '<div class="col-sm-1" style="padding: 20px 0px">' +
+                        '<p id="' + idSubPrice + '">' + res[i].subTotalHargaBuku +
+                        '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<hr>'
+
+                }
+                var sum = 0;
+                $('input[type=number]').each(function (i) {
+                    sum += priceArray[i] * $(this).val();
+                })
+                $('#total-price-cart').text(sum);
+
+                
+                var values = 0;
+                var idQ = "";
+                $('input').mouseup(function () {
+                    idQ = $(this).attr('id');
+                    var idP = "#price-" + idQ;
+                    values = priceArray[parseInt(idQ)] * $(this).val();
+                    $(idP).text(values);
+                    var sum = 0;
+                    $('input[type=number]').each(function (i) {
+                        sum += priceArray[i] * $(this).val();
+                    })
+                    $('#total-price-cart').text(sum);
+                });
+
+                $('#total-quantity-badge').text(totalQuantity);
+            } else {
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+
+    })
+
+}
+
+
