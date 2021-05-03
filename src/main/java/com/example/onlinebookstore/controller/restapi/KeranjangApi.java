@@ -79,6 +79,7 @@ public class KeranjangApi {
         keranjangDto.setJudulBuku(keranjang.getBook().getJudulBuku());
         keranjangDto.setHargaBuku(keranjang.getBook().getHargaBuku());
         keranjangDto.setGambar(keranjang.getBook().getGambar());
+        keranjangDto.setSubTotalHargaBuku(keranjang.getSubTotalHargaBuku());
         return keranjangDto;
     }
 

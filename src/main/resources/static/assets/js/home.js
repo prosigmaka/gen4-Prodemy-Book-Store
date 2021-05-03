@@ -1,4 +1,5 @@
 var totalQuantity = 0;
+var delQuantity = 0;
 
 
 $.ajax({
@@ -194,27 +195,24 @@ function showTableCart() {
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
                     totalQuantity += res[i].kuantitasBuku;
-                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid">' +
+                    document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid brown; border-radius: 20px">' +
                         '<div class="row">' +
-                        '<div class="col-sm-1">' +
+                        '<div class="col-sm-1" style="padding: 40px 10px">' +
                         '<input class="cart-id" type="checkbox" value="' + res[i].id + '">' +
                         '<input class="book-id" name="id" value="' + res[i].idBuku + '" type="hidden"/>' +
                         '</div>' +
-                        "<div class='col-sm-3'>" +
+                        "<div class='col-sm-2' style='padding: 10px 0px; align-content: center'>" +
                         "<img src='"+res[i].gambar+"' alt style='height: 60px; width: 50px'>" +
                         "</div>" +
-                        '<div class="col-sm-3">' +
+                        '<div class="col-sm-3" style="padding: 40px 0px; text-align: center">' +
                         res[i].judulBuku +
                         '</div>' +
-                        '<div class="col-sm-1">' +
+                        '<div class="col-sm-3" style="padding: 40px 0px">' +
                         '<input class="book-quantity" type="number" style="width: 50px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
                         '</div>' +
-                        '<div class="col-sm-1">' +
-                        res[i].hargaBuku +
+                        '<div class="col-sm-1" style="padding: 40px 0px">' +
+                        res[i].subTotalHargaBuku +
                         '</div>' +
-                        // '<div class="col-sm-1">' +
-                        //     res[i].hargaBuku * $('input[type=number]').val() +
-                        // '</div>' +
                         '</div>' +
                         '</div>' +
                         '<hr>'
@@ -287,10 +285,3 @@ function saveCart() {
         }
     });
 }
-
-// document.getElementById('cart-table').innerHTML += '<tr>' +
-//     '<td>'+'<input type="checkbox"/>'+'</td>'+
-//     '<td>'+res[i].gambar+'</td>' +
-//     '<td>'+res[i].judulBuku+'</td>' +
-//     '<td>'+res[i].hargaBuku+'</td>' +
-//     '</tr>'
