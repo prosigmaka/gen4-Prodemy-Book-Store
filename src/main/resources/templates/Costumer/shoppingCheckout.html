@@ -17,104 +17,236 @@
 <!--</div>-->
 
 <div class="product " layout:fragment="main-content">
+    <div class="form-w3agile">
+        <h3 id="heading-1" style="text-indent:6px;color:white;-webkit-text-stroke: 2px saddlebrown; font-weight: bold">Checkout Transaction</h3>
+    </div>
 
     <div class="main-agileits">
-        <div class="form-w3agile">
-            <h3>Checkout Transaction</h3>
-        </div>
         <!-- Checkout Form -->
         <div class="outer-w3-agile mt-3">
 
-            <div class="row validform">
-                <div class="col-md-4 order-md-2 mb-4 validform1">
+            <div class="row validform" id="co-form">
+                <div className="col-md-4 order-md-2 mb-4 validform1">
 
-                    <h3 class="mb-3">Payment</h3>
+                    <h3 className="mb-3">Payment</h3>
 
-                    <div class="d-block my-3">
+                    <div className="d-block my-3">
+                        <div className="form-group" id="tipePembayaran">
 
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                            <label class="custom-control-label" for="credit">COD</label>
+                            <div className="custom-control custom-radio tipePembayaran">
+                                <input className="custom-control-input input-tipePembayaran" type="radio" id="cod" name="tipePembayaran" value="COD">
+                                <label htmlFor="cod" className="custom-control-label">COD</label>
+                            </div>
+
+                            <div className="custom-control custom-radio tipePembayaran">
+                                <input className="custom-control-input input-tipePembayaran" type="radio" id="transfer" name="tipePembayaran" value="NET BANKING">
+                                <label htmlFor="transfer" className="custom-control-label">NET BANKING</label>
+                            </div>
                         </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                            <label class="custom-control-label" for="debit">NET BANKING</label>
-                        </div>
-                        <div class="tab3">
 
-                            <hr class="mb-md-2">
+                        <div className="tab3">
 
-                            <div class="pay_info">
-                                <div class="vertical_post">
+                            <hr className="mb-md-2">
+
+                            <div className="pay_info">
+                                <div className="vertical_post">
                                     <form action="#" method="post">
-                                        <h4 class="mb-3">Select From Popular Banks</h4>
-                                        <div class="swit-radio">
-                                            <div class="check_box_one">
-                                                <div class="radio_one"> <label><input type="radio" name="radio" checked=""><i></i>Syndicate Bank</label> </div>
+                                        <h4 className="mb-3">Select From Popular Banks</h4>
+                                        <div className="swit-radio">
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="mandiri" name="bankPilihan" value="Bank Mandiri">
+                                                    <label htmlFor="mandiri" className="custom-control-label">Bank Mandiri</label>
+                                                </div>
                                             </div>
-                                            <div class="check_box_one">
-                                                <div class="radio_one"> <label><input type="radio" name="radio"><i></i>Bank of Baroda</label> </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sMandiri" name="bankPilihan" value="Bank Syariah Mandiri">
+                                                    <label htmlFor="sMandiri" className="custom-control-label">Bank Syariah Mandiri</label>
+                                                </div>
                                             </div>
-                                            <div class="check_box_one">
-                                                <div class="radio_one"> <label><input type="radio" name="radio"><i></i>Canara Bank</label> </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="BNI" name="bankPilihan" value="Bank BNI">
+                                                    <label htmlFor="BNI" className="custom-control-label">Bank BNI</label>
+                                                </div>
                                             </div>
-                                            <div class="check_box_one">
-                                                <div class="radio_one"> <label><input type="radio" name="radio"><i></i>ICICI Bank</label> </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sBNI" name="bankPilihan" value="Bank BNI Syariah">
+                                                    <label htmlFor="sBNI" className="custom-control-label">Bank BNI Syariah</label>
+                                                </div>
                                             </div>
-                                            <div class="check_box_one">
-                                                <div class="radio_one"> <label><input type="radio" name="radio"><i></i>State Bank Of India</label> </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="BRI" name="bankPilihan" value="Bank BRI">
+                                                    <label htmlFor="BRI" className="custom-control-label">Bank BRI</label>
+                                                </div>
                                             </div>
-                                            <div class="clearfix"></div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sBRI" name="bankPilihan" value="Bank BRI Syariah">
+                                                    <label htmlFor="sBRI" className="custom-control-label">Bank BRI Syariah</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="bca" name="bankPilihan" value="Bank BCA">
+                                                    <label htmlFor="bca" className="custom-control-label">Bank BCA</label>
+                                                </div>
+                                            </div>
+                                            <div className="clearfix"></div>
                                         </div>
-                                        <hr class="mb-0">
+                                        <hr className="mb-0">
                                         <h5>Or SELECT OTHER BANK</h5>
-                                        <div class="section_room_pay">
-                                            <select class="year"><option value="">=== Other Banks ===</option><option value="ALB-NA">Allahabad Bank NetBanking</option><option value="ADB-NA">Andhra Bank</option><option value="BBK-NA">Bank of Bahrain and Kuwait NetBanking</option><option value="BBC-NA">Bank of Baroda Corporate NetBanking</option><option value="BBR-NA">Bank of Baroda Retail NetBanking</option><option value="BOI-NA">Bank of India NetBanking</option><option value="BOM-NA">Bank of Maharashtra NetBanking</option><option value="CSB-NA">Catholic Syrian Bank NetBanking</option><option value="CBI-NA">Central Bank of India</option><option value="CUB-NA">City Union Bank NetBanking</option><option value="CRP-NA">Corporation Bank</option><option value="DBK-NA">Deutsche Bank NetBanking</option><option value="DCB-NA">Development Credit Bank</option><option value="DC2-NA">Development Credit Bank - Corporate</option><option value="DLB-NA">Dhanlaxmi Bank NetBanking</option><option value="FBK-NA">Federal Bank NetBanking</option><option value="IDS-NA">Indusind Bank NetBanking</option><option value="IOB-NA">Indian Overseas Bank</option><option value="ING-NA">ING Vysya Bank (now Kotak)</option><option value="JKB-NA">Jammu and Kashmir NetBanking</option><option value="JSB-NA">Janata Sahakari Bank Limited</option><option value="KBL-NA">Karnataka Bank NetBanking</option><option value="KVB-NA">Karur Vysya Bank NetBanking</option><option value="LVR-NA">Lakshmi Vilas Bank NetBanking</option><option value="OBC-NA">Oriental Bank of Commerce NetBanking</option><option value="CPN-NA">PNB Corporate NetBanking</option><option value="PNB-NA">PNB NetBanking</option><option value="RSD-DIRECT">Rajasthan State Co-operative Bank-Debit Card</option><option value="RBS-NA">RBS (The Royal Bank of Scotland)</option><option value="SWB-NA">Saraswat Bank NetBanking</option><option value="SBJ-NA">SB Bikaner and Jaipur NetBanking</option><option value="SBH-NA">SB Hyderabad NetBanking</option><option value="SBM-NA">SB Mysore NetBanking</option><option value="SBT-NA">SB Travancore NetBanking</option><option value="SVC-NA">Shamrao Vitthal Co-operative Bank</option><option value="SIB-NA">South Indian Bank NetBanking</option><option value="SBP-NA">State Bank of Patiala NetBanking</option><option value="SYD-NA">Syndicate Bank NetBanking</option><option value="TNC-NA">Tamil Nadu State Co-operative Bank NetBanking</option><option value="UCO-NA">UCO Bank NetBanking</option><option value="UBI-NA">Union Bank NetBanking</option><option value="UNI-NA">United Bank of India NetBanking</option><option value="VJB-NA">Vijaya Bank NetBanking</option></select>
+                                        <div className="section_room_pay">
+                                            <select className="year">
+                                                <option value="">=== Other Banks ===</option>
+                                                <option value="ALB-NA">Allahabad Bank NetBanking
+                                                </option>
+                                                <option value="ADB-NA">Andhra Bank</option>
+                                                <option value="BBK-NA">Bank of Bahrain and Kuwait
+                                                    NetBanking
+                                                </option>
+                                                <option value="BBC-NA">Bank of Baroda Corporate
+                                                    NetBanking
+                                                </option>
+                                                <option value="BBR-NA">Bank of Baroda Retail
+                                                    NetBanking
+                                                </option>
+                                                <option value="BOI-NA">Bank of India NetBanking
+                                                </option>
+                                                <option value="BOM-NA">Bank of Maharashtra
+                                                    NetBanking
+                                                </option>
+                                                <option value="CSB-NA">Catholic Syrian Bank
+                                                    NetBanking
+                                                </option>
+                                                <option value="CBI-NA">Central Bank of India
+                                                </option>
+                                                <option value="CUB-NA">City Union Bank NetBanking
+                                                </option>
+                                                <option value="CRP-NA">Corporation Bank</option>
+                                                <option value="DBK-NA">Deutsche Bank NetBanking
+                                                </option>
+                                                <option value="DCB-NA">Development Credit Bank
+                                                </option>
+                                                <option value="DC2-NA">Development Credit Bank -
+                                                    Corporate
+                                                </option>
+                                                <option value="DLB-NA">Dhanlaxmi Bank NetBanking
+                                                </option>
+                                                <option value="FBK-NA">Federal Bank NetBanking
+                                                </option>
+                                                <option value="IDS-NA">Indusind Bank NetBanking
+                                                </option>
+                                                <option value="IOB-NA">Indian Overseas Bank</option>
+                                                <option value="ING-NA">ING Vysya Bank (now Kotak)
+                                                </option>
+                                                <option value="JKB-NA">Jammu and Kashmir
+                                                    NetBanking
+                                                </option>
+                                                <option value="JSB-NA">Janata Sahakari Bank
+                                                    Limited
+                                                </option>
+                                                <option value="KBL-NA">Karnataka Bank NetBanking
+                                                </option>
+                                                <option value="KVB-NA">Karur Vysya Bank NetBanking
+                                                </option>
+                                                <option value="LVR-NA">Lakshmi Vilas Bank
+                                                    NetBanking
+                                                </option>
+                                                <option value="OBC-NA">Oriental Bank of Commerce
+                                                    NetBanking
+                                                </option>
+                                                <option value="CPN-NA">PNB Corporate NetBanking
+                                                </option>
+                                                <option value="PNB-NA">PNB NetBanking</option>
+                                                <option value="RSD-DIRECT">Rajasthan State
+                                                    Co-operative Bank-Debit Card
+                                                </option>
+                                                <option value="RBS-NA">RBS (The Royal Bank of
+                                                    Scotland)
+                                                </option>
+                                                <option value="SWB-NA">Saraswat Bank NetBanking
+                                                </option>
+                                                <option value="SBJ-NA">SB Bikaner and Jaipur
+                                                    NetBanking
+                                                </option>
+                                                <option value="SBH-NA">SB Hyderabad NetBanking
+                                                </option>
+                                                <option value="SBM-NA">SB Mysore NetBanking</option>
+                                                <option value="SBT-NA">SB Travancore NetBanking
+                                                </option>
+                                                <option value="SVC-NA">Shamrao Vitthal Co-operative
+                                                    Bank
+                                                </option>
+                                                <option value="SIB-NA">South Indian Bank
+                                                    NetBanking
+                                                </option>
+                                                <option value="SBP-NA">State Bank of Patiala
+                                                    NetBanking
+                                                </option>
+                                                <option value="SYD-NA">Syndicate Bank NetBanking
+                                                </option>
+                                                <option value="TNC-NA">Tamil Nadu State Co-operative
+                                                    Bank NetBanking
+                                                </option>
+                                                <option value="UCO-NA">UCO Bank NetBanking</option>
+                                                <option value="UBI-NA">Union Bank NetBanking
+                                                </option>
+                                                <option value="UNI-NA">United Bank of India
+                                                    NetBanking
+                                                </option>
+                                                <option value="VJB-NA">Vijaya Bank NetBanking
+                                                </option>
+                                            </select>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-<!--                    <hr class="mb-4">-->
-<!--                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn" type="submit">Continue to checkout</button>-->
+                    <!--                    <hr class="mb-4">-->
+                    <!--                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn" type="submit">Continue to checkout</button>-->
 
                 </div>
-                <div class="col-md-8 order-md-1 validform2">
 
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
-                        <span class="text-right">3</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted" >$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
+<!--                <div class="col-md-8 order-md-1 validform2">-->
 
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
-                        </li>
-                    </ul>
-                </div>
+<!--                    <h4 class="d-flex justify-content-between align-items-center mb-3">-->
+<!--                        <span class="text-muted">Your cart</span>-->
+<!--                        <span class="text-right">3</span>-->
+<!--                    </h4>-->
+<!--                    <ul class="list-group mb-3">-->
+<!--                        <li class="list-group-item d-flex justify-content-between lh-condensed">-->
+<!--                            <div>-->
+<!--                                <h6 class="my-0">Product name</h6>-->
+<!--                                <small class="text-muted">Brief description</small>-->
+<!--                            </div>-->
+<!--                            <span class="text-muted" >$12</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between lh-condensed">-->
+<!--                            <div>-->
+<!--                                <h6 class="my-0">Second product</h6>-->
+<!--                                <small class="text-muted">Brief description</small>-->
+<!--                            </div>-->
+<!--                            <span class="text-muted">$8</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between lh-condensed">-->
+<!--                            <div>-->
+<!--                                <h6 class="my-0">Third item</h6>-->
+<!--                                <small class="text-muted">Brief description</small>-->
+<!--                            </div>-->
+<!--                            <span class="text-muted">$5</span>-->
+<!--                        </li>-->
+
+<!--                        <li class="list-group-item d-flex justify-content-between">-->
+<!--                            <span>Total (USD)</span>-->
+<!--                            <strong>$20</strong>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
             </div>
         </div>
         <!--// Checkout Form -->
@@ -122,7 +254,7 @@
 
         		<div class="forg">
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn align-content-center" type="submit">Continue to checkout</button>
+                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn align-content-center" type="submit" onclick="shoppingCO.insertOrder()">Continue to checkout</button>
         		</div>
 
     </div>
