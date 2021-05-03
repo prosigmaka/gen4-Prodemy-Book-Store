@@ -48,7 +48,7 @@ public class CustomAuthenticationSuccessHandler
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
 
-        User user = userRepository.findByUsername(userDetail.getUsername());
+        User user = userRepository.findByEmailUser(userDetail.getUsername());
 
         session.setAttribute("user", user);
 
