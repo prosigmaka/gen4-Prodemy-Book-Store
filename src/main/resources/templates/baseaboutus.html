@@ -248,10 +248,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
 
-        <div class="notif">
+        <div class="notif" sec:authorize="isAuthenticated()">
             <span class="fa fa-bell" style="color:#997b60"></span>
         </div>
-        <div class="cart">
+
+        <div class="cart" sec:authorize="isAuthenticated()">
 				<span class="fa fa-shopping-cart my-cart-icon" style="color:#997b60">
 					<span class="badge badge-notify my-cart-badge" style="color:#997b60">
 					</span>

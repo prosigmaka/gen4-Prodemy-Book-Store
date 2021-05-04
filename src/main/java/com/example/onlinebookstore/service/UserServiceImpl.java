@@ -75,9 +75,12 @@ public class UserServiceImpl implements UserService {
         //if the user null, throw the message below
         //if not null, we just create a User object, that is provided by spring security
         //then we pass the email, password and roles to User object
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmailUser(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password!");
+        } else {
+            LoginDto loginDto = new LoginDto();
+            loginDto.setIdUserLogin(user.getId());
         }
 
 //        LoginDto loginDto = new LoginDto();
