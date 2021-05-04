@@ -305,15 +305,16 @@ function showTableCart() {
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
+            var i;
             var totalQuantity = 0;
+            var totalPrice = 0;
             var priceArray = [];
+            var subTotalPriceAarray = [];
             if (xhr.status == 200 || xhr.status == 201) {
-                for (var i = 0; i < res.length; i++) {
-
+                for (i = 0; i < res.length; i++) {
                     totalQuantity += res[i].kuantitasBuku;
                     var idSubPrice = "price-" + i.toString();
                     priceArray[i] = res[i].hargaBuku;
-
                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
                         '<div class="row">' +
                         '<div class="col-sm-1" style="padding: 20px 10px">' +
@@ -338,14 +339,13 @@ function showTableCart() {
                         '<hr>'
 
                 }
-                // initial of total price
                 var sum = 0;
                 $('input[type=number]').each(function (i) {
                     sum += priceArray[i] * $(this).val();
                 })
                 $('#total-price-cart').text(sum);
 
-                // determine subtotal price and total price realtime
+                
                 var values = 0;
                 var idQ = "";
                 $('input').mouseup(function () {
@@ -359,6 +359,7 @@ function showTableCart() {
                     })
                     $('#total-price-cart').text(sum);
                 });
+
                 $('#total-quantity-badge').text(totalQuantity);
             } else {
             }
@@ -368,55 +369,7 @@ function showTableCart() {
         }
 
     })
-}
 
-function saveCart() {
-    var jsonCart = {};
-    var arrayList = [];
-    var idBuku = [];
-    var kuantitasBuku = [];
-    var idKeranjang = [];
-    $.each($('.book-id'), function (i) {
-        idBuku[i] = $(this).val()
-    })
-    $.each($('.book-quantity'), function (i) {
-        kuantitasBuku[i] = $(this).val()
-    })
-    $.each($('.cart-id'), function (i) {
-        idKeranjang[i] = null
-
-    })
-    for (var i = 0; i < idKeranjang.length; i++) {
-        var fillArray = {};
-        fillArray.id = idKeranjang[i]
-        fillArray.idBuku = idBuku[i]
-        fillArray.kuantitasBuku = kuantitasBuku[i]
-
-        console.log(fillArray)
-        arrayList.push(fillArray)
-    }
-    jsonCart.addToCart = arrayList
-    $('#modal-cart').modal('hide')
-    $.ajax({
-        url: '/api/cart',
-        method: 'post',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(jsonCart),
-        success: function (data, status, xhr) {
-            var quantity = 0;
-            if (xhr.status == 200 || xhr.status == 201) {
-                for (var i = 0; i < data.length; i++) {
-                    quantity += data[i].kuantitasBuku;
-                }
-                $('#total-quantity-badge').text(quantity);
-            } else {
-            }
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
 }
 
 
