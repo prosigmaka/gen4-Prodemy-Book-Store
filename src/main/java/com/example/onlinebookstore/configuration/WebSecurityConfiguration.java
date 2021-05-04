@@ -82,8 +82,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.csrf().disable()
+		http.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/registration**", "/login**", "/assets/**",
 						"/home*", "/aboutus*", "/academic*", "/comic*", "/family*", "/novel*").permitAll()
@@ -92,7 +91,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/controller/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/controller/**").permitAll()
 //				.antMatchers("/home**").hasAuthority("ROLE_USER")
-				.anyRequest().authenticated()
+				.anyRequest().permitAll()//.authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")

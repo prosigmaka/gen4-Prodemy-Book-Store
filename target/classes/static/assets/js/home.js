@@ -345,7 +345,7 @@ function showTableCart() {
                 })
                 $('#total-price-cart').text(sum);
 
-                
+
                 var values = 0;
                 var idQ = "";
                 $('input').mouseup(function () {
