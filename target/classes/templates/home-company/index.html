@@ -1,25 +1,65 @@
 <!DOCTYPE html>
 <html layout:decorate="~{base-company}"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 
+<link th:href="@{/assets/css/style.css}" rel='stylesheet' type='text/css'/>
+
+<body>
 <div class="content-top " layout:fragment="product-top">
+    <div class="main-container">
+        <main>
+            <div class="cards">
+                <div class="card-single">
+                    <div>
+                        <h3> 54 </h3>
+                        <span>Customers</span>
+                    </div>
+                    <div>
+                        <span class="fa fa-user"></span>
+                    </div>
+                </div>
 
-			<div class="clearfix"></div>
+                <div class="card-single">
+                    <div>
+                        <h3> 124 </h3>
+                        <span>Sales</span>
+                    </div>
+                    <div>
+                        <span class="fa fa-book"></span>
+                    </div>
+                </div>
 
+                <div class="card-single">
+                    <div>
+                        <h3> Rp 5.000.000 </h3>
+                        <span>Revenue</span>
+                    </div>
+                    <div>
+                        <span class="fa fa-money"></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <br>
 </div>
+</body>
 
 <!-- /.row -->
 <th:block layout:fragment="add-scripts">
-	<script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
-	<script th:src="@{/assets/dist/js/demo.js}"></script>
-	<script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
-	<script th:src="@{/assets/dist/js/home.js}"></script>
-	<script>
-		$("#add-to-cart").click(function () {
-			$("#modal-cart").modal('show')})
-	</script>
+    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/assets/dist/js/demo.js}"></script>
+    <script th:src="@{/assets/dist/js/pages/dashboard3.js}"></script>
+    <script th:src="@{/assets/dist/js/home.js}"></script>
+    <script>
+        $("#add-to-cart").click(function () {
+            $("#modal-cart").modal('show')
+        })
+    </script>
 </th:block>
 
 </html>

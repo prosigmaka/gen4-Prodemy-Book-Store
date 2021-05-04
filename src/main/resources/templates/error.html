@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Error | The Prodemy Book Store</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta property="og:title" content="Vide"/>
+    <meta name="keywords" content="Big store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <!-- //for-mobile-apps -->
+    <link th:href="@{/assets/css/bootstrap.css}" rel='stylesheet' type='text/css'/>
+
+
+    <link th:href="@{/assets/css/style.css}" rel='stylesheet' type='text/css'/>
+    <!-- js -->
+    <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+
+
+    <script type="text/javascript" th:src="@{/assets/js/move-top.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/easing.js}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+    </script>
+
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <script th:src="@{/assets/js/jstarbox.js}"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/jstarbox.css}" type="text/css" media="screen" charset="utf-8"/>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery('.starbox').each(function () {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function (event, value) {
+                    if (starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' ' + val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!---//End-rate---->
+</head>
+
+<body>
+<div class="content-top " layout:fragment="product-top">
+    <!--content top-->
+    <div class="container">
+        <div class="spec ">
+            <h3 style="text-align: center; color: black; font-weight: bold">ACCESS DENIED</h3>
+
+        </div>
+        <div class=" con-w3l" id="family-category">
+<br>
+            <h1 style="text-align: center; color: black; font-weight: bold">You're Forbidden to Access This Page!</h1>
+            <br>
+            <h2 style="text-align: center; color: black; font-weight: bold">Please contact our Admin if you reach this page!</h2>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>
+<!--footer-->
+<div class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <h2><a href="index.html"><b>T<br>H<br>E</b>
+                <p style="text-indent:6px">Prodemy Book Store</p><span>The Best Book Store Ever</span></a></h2>
+            <!--            <p class="fo-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>-->
+            <!--            <ul class="social-fo">-->
+            <!--                <li><a href="#" class=" face"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+            <!--                <li><a href="#" class=" twi"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+            <!--                <li><a href="#" class=" pin"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>-->
+            <!--                <li><a href="#" class=" dri"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>-->
+            <!--            </ul>-->
+            <div class=" address">
+                <div class="col-md-4 fo-grid1">
+                    <p><i class="fa fa-home" aria-hidden="true"></i>Medan Merdeka Street 08, Central Jakarta</p>
+                </div>
+                <div class="col-md-4 fo-grid1">
+                    <p><i class="fa fa-phone" aria-hidden="true"></i>021 - 123456789</p>
+                </div>
+                <div class="col-md-4 fo-grid1">
+                    <p><a href="mailto:info@example.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>theprodemybook@store.com</a>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+        <div class="copy-right">
+            <p> &copy; 2021 Prodemy Book Store</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
