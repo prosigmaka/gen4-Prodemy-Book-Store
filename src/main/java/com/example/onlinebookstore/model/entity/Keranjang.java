@@ -30,11 +30,7 @@ public class Keranjang extends DirectAddToCartDto {
     @Column(name="id_buku", nullable = false)
     private Integer idBuku;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_customer", updatable = false, insertable = false)
-//    private Customer customer;
-
     @Column(name="id_customer")
-    private Integer idCustomer;
+    private Long idCustomer;
 
 }

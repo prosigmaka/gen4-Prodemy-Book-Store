@@ -1,5 +1,4 @@
 package com.example.onlinebookstore.model.entity;
-
 import lombok.Data;
 
 import javax.persistence.*;

@@ -2,18 +2,18 @@ package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.CartUpdateDto;
 import com.example.onlinebookstore.model.dto.DirectAddToCartDto;
-import com.example.onlinebookstore.model.entity.Book;
+import com.example.onlinebookstore.model.dto.LoginDto;
 import com.example.onlinebookstore.model.entity.Keranjang;
-import com.example.onlinebookstore.repository.BookRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
+import com.example.onlinebookstore.repository.UserRepository;
 import com.example.onlinebookstore.service.KeranjangService;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.dto.KeranjangDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,26 +27,30 @@ public class KeranjangApi {
     private KeranjangRepository keranjangRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private ModelMapper modelMapper;
 
+    private Long currentIdCustomer(){
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long idCustomer = userRepository.findIdByUserName(userName);
+        return idCustomer;
+    }
+
     @GetMapping
     public List<KeranjangDto> getAll() {
-        List<Keranjang> keranjangList = keranjangRepository.findAll();
+        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(),"BELUM_BAYAR");
         List<KeranjangDto> keranjangDtoList = keranjangList
                 .stream()
                 .map(cart -> mappingToKeranjangDto(cart))
                 .collect(Collectors.toList());
         return keranjangDtoList;
     }
-
-//    @PostMapping()
-//    public Keranjang simpanKeranjang(@RequestBody KeranjangDto keranjangDto){
-//        Keranjang keranjang = modelMapper.map(keranjangDto, Keranjang.class);
-//       return keranjang;
-//    }
+    @GetMapping("/idUser")
+    public Long getIdUser(LoginDto loginDto){
+        return loginDto.getIdUserLogin();
+    }
 
     @PostMapping()
     public List<DirectAddToCartDto> simpanKeranjang(@RequestBody CartUpdateDto cartUpdateDto){
@@ -59,6 +63,7 @@ public class KeranjangApi {
     private DirectAddToCartDto mapToCartDto(DirectAddToCartDto dto){
         DirectAddToCartDto directAddToCartDto = modelMapper.map(dto, DirectAddToCartDto.class);
         Keranjang keranjang = modelMapper.map(directAddToCartDto, Keranjang.class);
+        keranjang.setIdCustomer(currentIdCustomer());
         keranjangService.saveToCartDirect(keranjang, directAddToCartDto);
         return keranjang;
     }

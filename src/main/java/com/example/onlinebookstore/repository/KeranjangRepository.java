@@ -16,4 +16,6 @@ public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
         Boolean findIdKeranjang(Integer id);
 
         Keranjang findByIdBuku(Integer id);
+
+        List<Keranjang> findAllByIdCustomerAndStatus(Long id, String status);
 }

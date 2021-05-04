@@ -81,6 +81,8 @@ public class UserServiceImpl implements UserService {
         } else {
             LoginDto loginDto = new LoginDto();
             loginDto.setIdUserLogin(user.getId());
+            loginDto.setUsernameLogin(user.getUsername());
+
         }
 
 //        LoginDto loginDto = new LoginDto();
