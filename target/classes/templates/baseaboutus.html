@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 <ul class="nav navbar-nav ">
                     <li class=" active">
-                        <a href="/" class="hyper "><span>HOME</span></a>
+                        <a href="/home" class="hyper "><span>HOME</span></a>
                     </li>
 
                     <li class="dropdown ">
@@ -104,13 +104,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
 
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Academic</a>
+                                        <li><a href="/academic"><i class="fa fa-angle-right" aria-hidden="true"></i>Academic</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Comic</a>
+                                        <li><a href="/comic"><i class="fa fa-angle-right" aria-hidden="true"></i>Comic</a>
                                         </li>
-                                        <li><a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>Family</a>
+                                        <li><a href="/family"> <i class="fa fa-angle-right" aria-hidden="true"></i>Family</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Novel</a>
+                                        <li><a href="/novel"><i class="fa fa-angle-right" aria-hidden="true"></i>Novel</a>
                                         </li>
 
                                     </ul>
@@ -243,15 +243,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
 
-        <form class="cart" th:action="@{/logout}" method="post"
+        <form class="cart" th:action="@{/perform_logout}" method="post"
               sec:authorize="isAuthenticated()" style="color: #997b60">
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
 
-        <div class="notif">
+        <div class="notif" sec:authorize="isAuthenticated()">
             <span class="fa fa-bell" style="color:#997b60"></span>
         </div>
-        <div class="cart">
+
+        <div class="cart" sec:authorize="isAuthenticated()">
 				<span class="fa fa-shopping-cart my-cart-icon" style="color:#997b60">
 					<span class="badge badge-notify my-cart-badge" style="color:#997b60">
 					</span>

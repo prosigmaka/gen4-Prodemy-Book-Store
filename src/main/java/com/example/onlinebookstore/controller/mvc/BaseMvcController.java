@@ -1,5 +1,7 @@
 package com.example.onlinebookstore.controller.mvc;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/")
 public class BaseMvcController {
     //    dashboard
-    @GetMapping("")
+    @GetMapping("home")
     public String home() {
         return "home/index";
     }
@@ -18,7 +20,7 @@ public class BaseMvcController {
         return "aboutus/index";
     }
 
-    @GetMapping("home-company")
+    @GetMapping("hc")
     public String hc() {
         return "home-company/index";
     }
@@ -48,6 +50,23 @@ public class BaseMvcController {
         return "comic/index";
     }
 
-    @GetMapping("login")
-    public String login() { return "login"; }
+    @GetMapping( "login")
+    public String login() {
+
+        //authenticate the role of someone who logged in
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String check = authentication.getAuthorities().toString();
+
+        if(check.equals("[ROLE_USER]")){
+            return "home/index";
+        } else if(check.equals("[ROLE_ADMIN]")){
+            return "home-company/index";
+        }
+        else {
+            return "login";
+        }
+    }
+
+//    @GetMapping("login")
+//    public String login() { return "login"; }
 }

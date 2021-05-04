@@ -246,19 +246,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
 
-        <form class="cart" th:action="@{/logout}" method="post"
+        <form class="cart" th:action="@{/perform_logout}" method="post"
               sec:authorize="isAuthenticated()" style="color: #997b60">
             <button type="submit" class="fa fa-user"> Logout</button>
         </form>
 
-        <!--        <div class="profile">-->
-        <!--            <span class="material-icons" style="color:#997b60">face</span>-->
-        <!--        </div>-->
-        <div class="notif">
+<!--        <div class="profile">-->
+<!--            <span class="material-icons" style="color:#997b60">face</span>-->
+<!--        </div>-->
+        <div class="notif" sec:authorize="isAuthenticated()">
             <span class="fa fa-bell" style="color:#997b60" data-toggle="popover" data-placement="top"
                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></span>
         </div>
-        <div class="cart" id="show-cart">
+        <div class="cart" id="show-cart" onclick="showTableCart()" sec:authorize="isAuthenticated()">
             <span class="fa fa-shopping-cart" style="color:#997b60"></span>
             <span id="total-quantity-badge" class="badge badge-secondary" style="color:#997b60">
                 </span>

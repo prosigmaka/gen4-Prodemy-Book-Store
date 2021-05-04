@@ -1,5 +1,6 @@
 package com.example.onlinebookstore.service;
 
+import com.example.onlinebookstore.model.dto.LoginDto;
 import com.example.onlinebookstore.model.entity.Role;
 
 import com.example.onlinebookstore.model.entity.User;
@@ -12,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 //    //constructor
 //    public UserServiceImpl(UserRepository userRepository) {
@@ -56,6 +58,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+//    @Override
+//    public void saveLoginDto(User user) {
+//
+//    }
+
+//    @Override
+//    public void saveLoginDto(User user) {
+//
+//    }
+
     //this is provided because UserService extends UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,13 +75,31 @@ public class UserServiceImpl implements UserService {
         //if the user null, throw the message below
         //if not null, we just create a User object, that is provided by spring security
         //then we pass the email, password and roles to User object
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmailUser(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password!");
+        } else {
+            LoginDto loginDto = new LoginDto();
+            loginDto.setIdUserLogin(user.getId());
         }
+
+//        LoginDto loginDto = new LoginDto();
         return new org.springframework.security.core.userdetails.User
                 (user.getUsername(), user.getPassword(), mapRolesToAuthorities(Arrays.asList(user.getRoles()))); //get the role from user object
     }
+
+//    public void saveLoginDto (User user) {
+//        LoginDto loginDto = new LoginDto();
+//        loginDto.setIdUserLogin(user.getId());
+//        return userRepository.saveLoginDto(user);
+//    }
+
+//    @Override
+//    public User save (LoginDto loginDto) {
+//        User user = new User();
+//        user.setId(loginDto.getIdUserLogin());
+//        return userRepository.save(user);
+//    }
 
     //convert role into authorities, because spring security expecting authorities
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

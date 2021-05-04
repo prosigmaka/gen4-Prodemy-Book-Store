@@ -17,7 +17,12 @@
                 <div class="form-w3agile">
 
                     <h3> Login </h3>
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/perform_login}" method="post">
+
+                        <!-- logout message -->
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-info">You have been logged out.</div>
+                        </div>
 
                         <!-- error message -->
                         <div th:if="${param.error}">
@@ -27,8 +32,8 @@
 
                         <div class="form-group">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <label for ="username"> Username : </label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                            <label for ="username"> Email : </label>
+                            <input type="email" class="form-control" id="username" name="username" placeholder="email">
                             <div class="clearfix"></div>
                         </div>
 
@@ -44,7 +49,7 @@
                     </form>
                 </div>
                 <div class="forg">
-						<a href="/" class="forg-right" th:href="@{/registration}">Registration</a>
+						<a class="forg-right" th:href="@{/registration}">Registration</a>
                 </div>
             </div>
         </div>
