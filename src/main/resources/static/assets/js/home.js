@@ -1,8 +1,6 @@
 var totalQuantity = 0;
 var delQuantity = 0;
 
-
-
 $.ajax({
     url: '/api/book',
     method: 'get',
