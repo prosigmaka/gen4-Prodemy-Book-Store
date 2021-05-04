@@ -33,9 +33,14 @@
 
 
 <th:block layout:fragment="add-scripts">
+    <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
     <script th:src="@{/assets/js/page-categories.js}"></script>
-    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
-
+<!--    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>-->
+    <script>
+        $('#academic-category').ready(function () {
+            pageCategories('Academic');
+        })
+    </script>
 
 </th:block>
 

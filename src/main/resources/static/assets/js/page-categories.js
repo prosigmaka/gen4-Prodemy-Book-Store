@@ -6,11 +6,11 @@ function pageCategories(categoryName) {
         success: function (res, status, xhr) {
             var i;
             var category = categoryName.toLowerCase() + '-category';
-            if (xhr.status == 200 || xhr.status == 201) {
+            if (xhr.status == 200 || xhr.status == 20) {
                 for (i = 0; i < 8; i++) {
                     document.getElementById(category).innerHTML += '<div class="col-md-3 pro-1" onclick=bookDescription("' + res[i].id + '");>' +
                         "<div class='col-m'>" +
-                        "<img class='img-responsive' src='"+res[i].gambar+"' alt style='height: 200px'>" +
+                        "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'>" +
                         "<div class='mid-1'>" +
                         "<div class='women'>" +
                         "<h6>" + res[i].judulBuku + "</h6>" +
@@ -31,6 +31,8 @@ function pageCategories(categoryName) {
 
             } else {
             }
+
+
         },
         error: function (err) {
             console.log(err);
