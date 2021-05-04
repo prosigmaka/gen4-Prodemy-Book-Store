@@ -35,11 +35,13 @@ com\example\onlinebookstore\repository\CheckoutItemRepository.class
 com\example\onlinebookstore\repository\BookRepository.class
 com\example\onlinebookstore\repository\UserRepository.class
 com\example\onlinebookstore\model\entity\PesananStatus.class
+com\example\onlinebookstore\configuration\constraint\FieldMatchValidator.class
 com\example\onlinebookstore\controller\restapi\CheckoutOrderApi.class
 com\example\onlinebookstore\controller\restapi\PublisherApi.class
 com\example\onlinebookstore\controller\restapi\KeranjangApi.class
 com\example\onlinebookstore\model\dto\RequestRecommendationBookDto.class
 com\example\onlinebookstore\model\entity\RekomendasiBuku.class
+com\example\onlinebookstore\configuration\constraint\FieldMatch.class
 com\example\onlinebookstore\repository\CategoryRepository.class
 com\example\onlinebookstore\controller\mvc\BaseMvcController.class
 com\example\onlinebookstore\model\entity\Role.class
@@ -47,6 +49,7 @@ com\example\onlinebookstore\service\UserService.class
 com\example\onlinebookstore\controller\restapi\AuthorApi.class
 com\example\onlinebookstore\controller\restapi\RekomendasiBukuApi.class
 com\example\onlinebookstore\model\dto\DirectAddToCartDto.class
+com\example\onlinebookstore\configuration\constraint\FieldMatch$List.class
 com\example\onlinebookstore\repository\RevenueRepository.class
 com\example\onlinebookstore\model\dto\AuthorDto.class
 com\example\onlinebookstore\configuration\WebSecurityConfiguration.class
