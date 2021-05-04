@@ -20,6 +20,7 @@ public class CheckoutItemDto {
     private Long subTotalHargaBuku;
 
     private Date tanggalCo;
+    private Date tanggalOrder;
     private String tipePembayaran;
     private String bankPilihan;
     private Long totalHargalCi;

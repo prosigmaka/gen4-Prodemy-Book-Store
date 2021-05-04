@@ -34,10 +34,10 @@ public class CheckoutServiceImp implements CheckoutService {
     public List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO) {
 
         CheckoutOrder checkoutOrder = new CheckoutOrder();
-        Date tanggalCi = new Date();
+        Date tanggalCheckout = new Date();
         long total = 0;
 
-//        checkoutOrder.setTanggalCo(tanggalCo);
+        checkoutOrder.setTanggalCo(tanggalCheckout);
 //        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
         CheckoutOrder checkoutOrderNC = checkoutOrderRepository.save(checkoutOrder);
@@ -54,7 +54,7 @@ public class CheckoutServiceImp implements CheckoutService {
             checkoutItem.setIdKeranjang(checkoutItem.getKeranjang().getId());
             checkoutItem.setCheckoutOrder(checkoutOrderNC);
             checkoutItem.setIdOrder(checkoutItem.getCheckoutOrder().getId());
-            checkoutItem.setTanggalCi(tanggalCi);
+            checkoutItem.setTanggalCi(tanggalCheckout);
             checkoutItemList.add(checkoutItem);
             total += keranjang.getSubTotalHargaBuku();
             checkoutItemRepository.save(checkoutItem);
@@ -72,6 +72,34 @@ public class CheckoutServiceImp implements CheckoutService {
 
     }
 
+    @Override
+    public CheckoutOrder placeOrder(CheckoutItem checkoutItem) {
+        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByTanggalCiOrderById();
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByTanggalCoOrderById();
+
+        Date tanggalOrder = new Date();
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(tanggalOrder);
+        cal.add(Calendar.DATE, 1);
+
+        Date batasTanggalPembayaran = cal.getTime();
+
+        checkoutOrder.setTanggalOrder(tanggalOrder);
+        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
+        checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
+
+        for (int i = 0; i<checkoutItemList.size(); i++){
+            CheckoutItem checkoutItemId = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.ORDERED);
+            keranjangRepository.save(k);
+        }
+        return checkoutOrder;
+    }
+
+
     private CheckoutItemDto mapToDto(CheckoutItem checkoutItem) {
         CheckoutItemDto checkoutItemDto = modelMapper.map(checkoutItem, CheckoutItemDto.class);
 
@@ -82,6 +110,9 @@ public class CheckoutServiceImp implements CheckoutService {
         checkoutItemDto.setSubTotalHargaBuku(checkoutItem.getKeranjang().getSubTotalHargaBuku());
 
         checkoutItemDto.setTanggalCo(checkoutItem.getCheckoutOrder().getTanggalCo());
+//        checkoutItemDto.setTanggalOrder(checkoutItem.getCheckoutOrder().getTanggalOrder());
+//        checkoutItemDto.setTipePembayaran(checkoutItem.getCheckoutOrder().getTipePembayaran());
+//        checkoutItemDto.setBankPilihan(checkoutItem.getCheckoutOrder().getBankPilihan());
         checkoutItemDto.setTotalHargalCi(checkoutItem.getCheckoutOrder().getTotalHargalCi());
         checkoutItemDto.setBatasTanggalPembayaran(checkoutItem.getCheckoutOrder().getBatasTanggalPembayaran());
         checkoutItemDto.setStatusPesanan(checkoutItem.getCheckoutOrder().getStatusPesanan());

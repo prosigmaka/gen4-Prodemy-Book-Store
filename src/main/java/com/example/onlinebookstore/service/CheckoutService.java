@@ -20,4 +20,6 @@ public interface CheckoutService {
 
     List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
 
+    CheckoutOrder placeOrder(CheckoutItem checkoutItem);
+
 }

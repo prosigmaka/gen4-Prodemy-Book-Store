@@ -1,7 +1,6 @@
 package com.example.onlinebookstore.repository;
 
 import com.example.onlinebookstore.model.entity.BuktiPembayaran;
-import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -24,6 +23,9 @@ public interface BuktiPembayaranRepository extends JpaRepository<BuktiPembayaran
 
     @Query(value = "SELECT * FROM bukti_pembayaran bp where bp.id_co = ?1", nativeQuery = true)
     BuktiPembayaran findByIdCo(Integer idCo);
+
+//    @Query(value = "SELECT * FROM bukti_pembayaran bp where bp.id = ?1", nativeQuery = true)
+//    Optional<BuktiPembayaran> findById(Integer idBP);
 
 
     /* CARA PERTAMA

@@ -3,9 +3,11 @@ package com.example.onlinebookstore.controller.restapi;
 import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
+import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import com.example.onlinebookstore.model.entity.ItemStatus;
 import com.example.onlinebookstore.model.entity.Keranjang;
 import com.example.onlinebookstore.repository.CheckoutItemRepository;
+import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.CheckoutOrderService;
 import com.example.onlinebookstore.service.CheckoutService;
@@ -27,6 +29,8 @@ public class CheckoutApi {
     @Autowired
     public CheckoutItemRepository checkoutItemRepository;
     @Autowired
+    public CheckoutOrderRepository checkoutOrderRepository;
+    @Autowired
     public ModelMapper modelMapper;
 
 
@@ -34,7 +38,22 @@ public class CheckoutApi {
     public @ResponseBody
     List<CheckoutItemDto> checkout(@RequestBody RequestListOrderDTO requestListOrderDTO) {
         return checkoutService.checkout(requestListOrderDTO);
+    }
 
+    @PostMapping(path = "/checkout-cancel")
+    public void checkoutCancel() {
+        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByTanggalCiOrderById();
+
+        for (int i = 0; i<checkoutItemList.size(); i++){
+            CheckoutItem checkoutItemId = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.ADD_TO_CART);
+            keranjangRepository.save(k);
+        }
+
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByTanggalCoOrderById();
+        checkoutOrderRepository.delete(getCheckoutOrder);
     }
 
 //    @PostMapping(path = "/checkout")
