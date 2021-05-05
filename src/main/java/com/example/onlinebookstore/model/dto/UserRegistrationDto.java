@@ -12,6 +12,7 @@ public class UserRegistrationDto {
 	private String address;
 	private String phone;
 	private String password;
+	private String matchingPassword;
 	private Long idRole;
 
 //	//constructor

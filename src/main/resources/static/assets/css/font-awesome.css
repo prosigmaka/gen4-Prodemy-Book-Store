@@ -501,6 +501,25 @@
 .fa-fire:before {
   content: "\f06d";
 }
+
+.faa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: medium;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.eye {
+  position: absolute;
+}
+#show {
+  display: none;
+}
+#show1 {
+  display: none;
+}
+
 .fa-eye:before {
   content: "\f06e";
 }
