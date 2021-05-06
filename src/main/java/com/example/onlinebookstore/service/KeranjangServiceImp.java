@@ -1,6 +1,7 @@
 package com.example.onlinebookstore.service;
 
 import com.example.onlinebookstore.model.dto.DirectAddToCartDto;
+import com.example.onlinebookstore.model.entity.ItemStatus;
 import com.example.onlinebookstore.model.entity.Keranjang;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.repository.BookRepository;
@@ -33,14 +34,14 @@ public class KeranjangServiceImp implements KeranjangService {
             } else {                        // kondisi jika id buku tidak ada dalam database maka buat data baru
                 keranjang.setKuantitasBuku(1);
                 keranjang.setSubTotalHargaBuku(harga);
-                keranjang.setStatus("BELUM_BAYAR");
+                keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART);
                 keranjangRepository.save(keranjang);
             }
         } else {                            // kondisi jika id user dan id buku tidak ada dalam database
             keranjang.setKuantitasBuku(1);
             keranjang.setSubTotalHargaBuku(harga);
             keranjang.setIdCustomer(keranjang.getIdCustomer());
-            keranjang.setStatus("BELUM_BAYAR");
+            keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART);
             keranjangRepository.save(keranjang);
         }
 

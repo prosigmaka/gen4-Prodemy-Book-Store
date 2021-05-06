@@ -3,6 +3,7 @@ package com.example.onlinebookstore.controller.restapi;
 import com.example.onlinebookstore.model.dto.CartUpdateDto;
 import com.example.onlinebookstore.model.dto.DirectAddToCartDto;
 import com.example.onlinebookstore.model.dto.LoginDto;
+import com.example.onlinebookstore.model.entity.ItemStatus;
 import com.example.onlinebookstore.model.entity.Keranjang;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.repository.UserRepository;
@@ -41,7 +42,7 @@ public class KeranjangApi {
 
     @GetMapping
     public List<KeranjangDto> getAll() {
-        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(), String.valueOf(PesananStatus.BELUM_BAYAR));
+        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(), String.valueOf(ItemStatus.ADD_TO_CART));
         List<KeranjangDto> keranjangDtoList = keranjangList
                 .stream()
                 .map(cart -> mappingToKeranjangDto(cart))

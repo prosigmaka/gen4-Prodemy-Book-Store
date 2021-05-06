@@ -1,5 +1,6 @@
 package com.example.onlinebookstore.model.entity;
 
+import com.example.onlinebookstore.model.dto.DirectAddToCartDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = Keranjang.CART)
 @Data
-public class Keranjang {
+public class Keranjang extends DirectAddToCartDto {
     public static final String CART = "keranjang";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CART)
@@ -38,6 +39,6 @@ public class Keranjang {
 //    private Customer customer;
 
     @Column(name="id_customer")
-    private Integer idCustomer;
+    private Long idCustomer;
 
 }

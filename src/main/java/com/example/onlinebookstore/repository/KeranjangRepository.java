@@ -6,12 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
 //
-        @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.status = 'BELUM_BAYAR'", nativeQuery = false)
+        @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
         List<Keranjang> findAllByIdKeranjang(Integer id);
+
+        Optional<Keranjang> findById(Integer id);
 
         List<Keranjang> findAllByIdCustomer(Long id);
 
