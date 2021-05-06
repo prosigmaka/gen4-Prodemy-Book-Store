@@ -9,13 +9,13 @@ import java.util.List;
 
 @Repository
 public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
-        @Query(value = "select exists(select * from keranjang where id_buku = ?1)", nativeQuery = true)
-        Boolean findIdBukuKeranjang(Integer id);
+//
+        @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.status = 'BELUM_BAYAR'", nativeQuery = false)
+        List<Keranjang> findAllByIdKeranjang(Integer id);
 
-        @Query(value = "select exists(select * from keranjang where id = ?1)", nativeQuery = true)
-        Boolean findIdKeranjang(Integer id);
+        List<Keranjang> findAllByIdCustomer(Long id);
 
-        Keranjang findByIdBuku(Integer id);
+        Keranjang findByIdBukuAndIdCustomer(Integer idBuku, Long idCustomer);
 
         List<Keranjang> findAllByIdCustomerAndStatus(Long id, String status);
 }

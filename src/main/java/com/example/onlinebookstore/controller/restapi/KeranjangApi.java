@@ -12,6 +12,7 @@ import com.example.onlinebookstore.model.dto.KeranjangDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import com.example.onlinebookstore.model.entity.PesananStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class KeranjangApi {
 
     @GetMapping
     public List<KeranjangDto> getAll() {
-        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(),"BELUM_BAYAR");
+        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(), String.valueOf(PesananStatus.BELUM_BAYAR));
         List<KeranjangDto> keranjangDtoList = keranjangList
                 .stream()
                 .map(cart -> mappingToKeranjangDto(cart))

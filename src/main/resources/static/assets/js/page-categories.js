@@ -38,10 +38,26 @@ function pageCategories(categoryName) {
     });
 }
 
-pageCategories('Academic')
-pageCategories('Comic')
-pageCategories('Family')
-pageCategories('Novel')
+
+$('#academic-category').ready(function () {
+    pageCategories('Academic');
+})
+$('#comic-category').ready(function () {
+    pageCategories('Comic');
+})
+$('#family-category').ready(function () {
+    pageCategories('Family');
+})
+$('#novel-category').ready(function () {
+    pageCategories('Novel');
+})
+
+
+//
+// pageCategories('Academic')
+// pageCategories('Comic')
+// pageCategories('Family')
+// pageCategories('Novel')
 
 
 

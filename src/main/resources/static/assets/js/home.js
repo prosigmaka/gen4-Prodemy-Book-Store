@@ -1,79 +1,154 @@
 var totalQuantity = 0;
 var delQuantity = 0;
+$('#best-seller').ready(function () {
+    $.ajax({
+        url: '/api/book',
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            var i;
+            if (xhr.status == 200 || xhr.status == 201) {
+                for (i = 0; i < 8; i++) {
+                    document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" style="border-color: saddlebrown; border-width: 4px">' +
+                        "<div class='col-m'>" +
+                        "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +
+                        "<div class='mid-1'>" +
+                        "<div class='women'>" +
+                        "<h6>" + res[i].judulBuku + "</h6>" +
+                        "</div>" +
+                        "<div class='mid-2'>" +
+                        "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
+                        "<div class='block'>" +
+                        "<div class='starbox small ghosting'></div>" +
+                        "</div>" +
+                        "<div class='clearfix'></div>" +
+                        "</div>" +
+                        '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>"
+                }
 
-$.ajax({
-    url: '/api/book',
-    method: 'get',
-    contentType: 'application/json',
-    success: function (res, status, xhr) {
-        var i;
-        if (xhr.status == 200 || xhr.status == 201) {
-            for (i = 0; i < 8; i++) {
-                document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" style="border-color: saddlebrown; border-width: 4px">' +
-                    "<div class='col-m'>" +
-                    "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +
-                    "<div class='mid-1'>" +
-                    "<div class='women'>" +
-                    "<h6>" + res[i].judulBuku + "</h6>" +
-                    "</div>" +
-                    "<div class='mid-2'>" +
-                    "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
-                    "<div class='block'>" +
-                    "<div class='starbox small ghosting'></div>" +
-                    "</div>" +
-                    "<div class='clearfix'></div>" +
-                    "</div>" +
-                    '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>"
+            } else {
             }
-
-        } else {
+        },
+        error: function (err) {
+            console.log(err);
         }
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
+    });
+})
+// $.ajax({
+//     url: '/api/book',
+//     method: 'get',
+//     contentType: 'application/json',
+//     success: function (res, status, xhr) {
+//         var i;
+//         if (xhr.status == 200 || xhr.status == 201) {
+//             for (i = 0; i < 8; i++) {
+//                 document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" style="border-color: saddlebrown; border-width: 4px">' +
+//                     "<div class='col-m'>" +
+//                     "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +
+//                     "<div class='mid-1'>" +
+//                     "<div class='women'>" +
+//                     "<h6>" + res[i].judulBuku + "</h6>" +
+//                     "</div>" +
+//                     "<div class='mid-2'>" +
+//                     "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
+//                     "<div class='block'>" +
+//                     "<div class='starbox small ghosting'></div>" +
+//                     "</div>" +
+//                     "<div class='clearfix'></div>" +
+//                     "</div>" +
+//                     '<div class="add add-2"><button type="button" class="btn btn-add-to-cart" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+//                     "</div>" +
+//                     "</div>" +
+//                     "</div>" +
+//                     "</div>"
+//             }
+//
+//         } else {
+//         }
+//     },
+//     error: function (err) {
+//         console.log(err);
+//     }
+// });
 
-$.ajax({
-    url: '/api/rekomendasi',
-    method: 'get',
-    contentType: 'application/json',
-    success: function (res, status, xhr) {
-        var i;
-        if (xhr.status == 200 || xhr.status == 201) {
-            for (i = 0; i < 4; i++) {
-                document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
-                    "<div class='col-m'>" +
-                    "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px' onclick=bookDescription('" + res[i].id + "');>" +
-                    "<div class='mid-1'>" +
-                    "<div class='women'>" +
-                    "<h6>" + res[i].judulBuku + "</h6>" +
-                    "</div>" +
-                    "<div class='mid-2'>" +
-                    "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
-                    "<div class='block'>" +
-                    "<div class='starbox small ghosting'></div>" +
-                    "</div>" +
-                    "<div class='clearfix'></div>" +
-                    "</div>" +
-                    '<div class="add add-2"><button type="button" class="btn btn-add-to-car" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>"
+$('#recommendation').ready(function () {
+    $.ajax({
+        url: '/api/rekomendasi',
+        method: 'get',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            var i;
+            if (xhr.status == 200 || xhr.status == 201) {
+                for (i = 0; i < 4; i++) {
+                    document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
+                        "<div class='col-m'>" +
+                        "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px' onclick=bookDescription('" + res[i].id + "');>" +
+                        "<div class='mid-1'>" +
+                        "<div class='women'>" +
+                        "<h6>" + res[i].judulBuku + "</h6>" +
+                        "</div>" +
+                        "<div class='mid-2'>" +
+                        "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
+                        "<div class='block'>" +
+                        "<div class='starbox small ghosting'></div>" +
+                        "</div>" +
+                        "<div class='clearfix'></div>" +
+                        "</div>" +
+                        '<div class="add add-2"><button type="button" class="btn btn-add-to-car" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>"
+                }
+
+            } else {
             }
-
-        } else {
+        },
+        error: function (err) {
+            console.log(err);
         }
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
+    });
+})
+// $.ajax({
+//     url: '/api/rekomendasi',
+//     method: 'get',
+//     contentType: 'application/json',
+//     success: function (res, status, xhr) {
+//         var i;
+//         if (xhr.status == 200 || xhr.status == 201) {
+//             for (i = 0; i < 4; i++) {
+//                 document.getElementById('recommendation').innerHTML += '<div class="col-md-3 pro-1">' +
+//                     "<div class='col-m'>" +
+//                     "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px' onclick=bookDescription('" + res[i].id + "');>" +
+//                     "<div class='mid-1'>" +
+//                     "<div class='women'>" +
+//                     "<h6>" + res[i].judulBuku + "</h6>" +
+//                     "</div>" +
+//                     "<div class='mid-2'>" +
+//                     "<p><em class='item_price'>" + "Rp " + res[i].hargaBuku + "</em></p>" +
+//                     "<div class='block'>" +
+//                     "<div class='starbox small ghosting'></div>" +
+//                     "</div>" +
+//                     "<div class='clearfix'></div>" +
+//                     "</div>" +
+//                     '<div class="add add-2"><button type="button" class="btn btn-add-to-car" id="add-to-cart" onclick=addToCart("' + res[i].id + '");>' + 'Add to Cart</button>' +
+//                     "</div>" +
+//                     "</div>" +
+//                     "</div>" +
+//                     "</div>"
+//             }
+//
+//         } else {
+//         }
+//     },
+//     error: function (err) {
+//         console.log(err);
+//     }
+// });
 
 function getCart() {
     $.ajax({
@@ -172,15 +247,27 @@ function bookDescription(id) {
 function deleteCart() {
     $(':checkbox:checked').each(function (id) {
         var idChecked = $(this).val();
+        // $.ajax({
+        //     url: '/api/cart/' + idChecked,
+        //     method : 'get',
+        //     contentType: 'application/json',
+        //     success: function (data) {
+        //         delQuantity += data.kuantitasBuku;
+        //     }
+        // })
         $.ajax({
             url: '/api/cart/' + idChecked,
             method: 'delete',
-            success: function (data, status, xhr) {
-                getCart()
+            success: function () {
+                // getCart()
                 $('#modal-cart').modal('hide');
+                totalQuantity = totalQuantity - delQuantity;
+                $('#total-quantity-badge').text(totalQuantity);
             },
         })
     })
+    // totalQuantity = totalQuantity - deleteQuantity;
+    // $('#total-quantity-badge').text(totalQuantity);
 }
 
 
@@ -248,7 +335,8 @@ function showTableCart() {
             if (xhr.status == 200 || xhr.status == 201) {
                 for (i = 0; i < res.length; i++) {
                     totalQuantity += res[i].kuantitasBuku;
-                    var idSubPrice = "price-" + i.toString();
+                    var idSubPrice = "price-" + res[i].id.toString();
+                    var idInputQuantity =  res[i].id.toString();
                     priceArray[i] = res[i].hargaBuku;
                     document.getElementById('cartTable').innerHTML += '<div class="container-fluid" style="border: 2px solid #BD9354; border-radius: 10px">' +
                         '<div class="row">' +
@@ -263,7 +351,7 @@ function showTableCart() {
                         res[i].judulBuku +
                         '</div>' +
                         '<div class="col-sm-3" style="padding: 20px 0px">' +
-                        '<input class="book-quantity" onkeypress="return false" type="number" min="1" step="any" id="' + i + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
+                        '<input class="book-quantity" onkeypress="return false" type="number" min="1" step="any" id="' + idInputQuantity + '" style="width: 50px; border-radius: 10px" value="' + res[i].kuantitasBuku + '" aria-valuemin=1>' +
                         '</div>' +
                         '<div class="col-sm-1" style="padding: 20px 0px">' +
                         '<p id="' + idSubPrice + '">' + res[i].subTotalHargaBuku +

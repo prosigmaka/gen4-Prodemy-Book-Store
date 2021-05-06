@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Service
@@ -18,31 +19,30 @@ public class KeranjangServiceImp implements KeranjangService {
     private BookRepository bookRepository;
 
 
-
     @Override
     public void saveToCartDirect(Keranjang keranjang, DirectAddToCartDto dto) {
+        List<Keranjang> cart = keranjangRepository.findAllByIdCustomer(keranjang.getIdCustomer());
         Long harga = bookRepository.getHargaById(dto.getIdBuku());
-        if (dto.getId()==null) {   //kondisi jika buku sudah ada dan id di dto null maka tambah kuantitas
-            Keranjang keranjang1 = keranjangRepository.findByIdBuku(dto.getIdBuku());
-            keranjang1.setKuantitasBuku(dto.getKuantitasBuku());
-            Long kuantitas1 = Long.valueOf(keranjang1.getKuantitasBuku());
-            keranjang1.setSubTotalHargaBuku(harga * kuantitas1);
-            keranjang1.setIdCustomer(keranjang.getIdCustomer());
-            keranjangRepository.save(keranjang1);
-        }
-        else if (keranjangRepository.findIdBukuKeranjang(dto.getIdBuku())) {   //kondisi jika buku sudah ada di keranjang maka tambah kuantitas
-            Keranjang keranjang2 = keranjangRepository.findByIdBuku(dto.getIdBuku());
-            keranjang2.setKuantitasBuku(keranjang2.getKuantitasBuku() + dto.getKuantitasBuku());
-            Long kuantitas2 = Long.valueOf(keranjang2.getKuantitasBuku());
-            keranjang2.setSubTotalHargaBuku(harga * kuantitas2);
-            keranjang2.setIdCustomer(keranjang.getIdCustomer());
-            keranjangRepository.save(keranjang2);
-        } else {                            //kondisi jika belum ada buku di keranjang / buat baru
+        if (cart != null) {                 // kondisi jika id user ada di database
+            Keranjang cart1 = keranjangRepository.findByIdBukuAndIdCustomer(dto.getIdBuku(), keranjang.getIdCustomer());
+            if (cart1 != null) {            // kondisi untuk modal cart maka update data
+                cart1.setKuantitasBuku(dto.getKuantitasBuku());
+                Long kuantitas1 = Long.valueOf(cart1.getKuantitasBuku());
+                cart1.setSubTotalHargaBuku(harga * kuantitas1);
+                keranjangRepository.save(cart1);
+            } else {                        // kondisi jika id buku tidak ada dalam database maka buat data baru
+                keranjang.setKuantitasBuku(1);
+                keranjang.setSubTotalHargaBuku(harga);
+                keranjang.setStatus("BELUM_BAYAR");
+                keranjangRepository.save(keranjang);
+            }
+        } else {                            // kondisi jika id user dan id buku tidak ada dalam database
             keranjang.setKuantitasBuku(1);
             keranjang.setSubTotalHargaBuku(harga);
             keranjang.setIdCustomer(keranjang.getIdCustomer());
             keranjang.setStatus("BELUM_BAYAR");
             keranjangRepository.save(keranjang);
         }
+
     }
 }
