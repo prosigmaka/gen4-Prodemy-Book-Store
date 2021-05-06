@@ -1,5 +1,7 @@
 package com.example.onlinebookstore.repository;
 
+import com.example.onlinebookstore.model.entity.Book;
+import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +22,15 @@ public interface CheckoutOrderRepository extends JpaRepository<CheckoutOrder, In
 
 
     Optional<CheckoutOrder> findById(Integer id);
+
+    @Query(value = "SELECT * FROM checkout_order co order by co.id", nativeQuery = true)
+    List<CheckoutOrder> findAllOrderById();
+
+    @Query(value = "SELECT * FROM checkout_order co where co.tanggal_co = (select max (tanggal_co) from checkout_order) order by co.id", nativeQuery = true)
+    CheckoutOrder findAllByTanggalCoOrderById();
+
+    @Query(value = "SELECT * FROM checkout_order co where co.status_pesanan =?1", nativeQuery = true)
+    List<CheckoutOrder> findAllByStatusPesanan(Enum statusPesanan);
 
 
     /* CARA PERTAMA

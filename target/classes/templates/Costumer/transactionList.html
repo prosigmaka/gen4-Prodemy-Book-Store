@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html layout:decorate="~{baseUserListTransaction}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--<div class="content-top " layout:fragment="content-top">-->
+<!--	&lt;!&ndash; main-heading &ndash;&gt;-->
+<!--	<h2 class="main-title-w3layouts mb-2 text-center">Responsive Table</h2>-->
+<!--	&lt;!&ndash;// main-heading &ndash;&gt;-->
+<!--&lt;!&ndash;	<div class="panel-heading-table text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;		Responsive Table&ndash;&gt;-->
+<!--&lt;!&ndash;	</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;	<section class="wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;	</section>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="product " layout:fragment="main-content">
+
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <h3>Checkout Transaction</h3>
+        </div>
+
+        <div>
+
+            <span class="w3-line black"></span>
+            <div class="row about-info-grids mt-md-5 pt-5" style="text-align: center">
+                <div class="col-md-4 about-info about-info1" >
+                    <i class="fa fa-graduation-cap"></i>
+                    <h4>Undergraduate Study</h4>
+                    <div class="h4-underline"></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                </div>
+                <div class="col-md-4 about-info about-info2" style="border-left: 1px solid #8a6d3b; border-right: 1px solid #8a6d3b">
+                    <i class="fa fa-book"></i>
+                    <h4>Professional Study</h4>
+                    <div class="h4-underline"></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                </div>
+                <div class="col-md-4 about-info about-info3">
+                    <i class="fas fa-tasks"></i>
+                    <h4>Programs</h4>
+                    <div class="h4-underline"></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                </div>
+            </div>
+            <!--            <div class="bord"></div>-->
+            <hr>
+            <div><h2 class="heading-agileinfo">Our  <span>Services</span></h2></div>
+
+
+            <div class="forg">
+                <hr class="mb-4">
+                <button class="btn btn-dark btn-lg btn-block error-w3l-btn align-content-center" type="submit">Continue to checkout</button>
+            </div>
+
+        </div>
+
+
+        <!--	<section class="tables-section">-->
+        <!--	</section>-->
+
+        <!--// Tables content -->
+    </div>
+
+
+    <!--	<section class="tables-section">-->
+    <!--	</section>-->
+
+    <!--// Tables content -->
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+    <!-- Required common Js -->
+    <script th:src='@{/assets2/js/jquery-2.2.3.min.js}'></script>
+    <!-- //Required common Js -->
+
+    <!-- Js for bootstrap working-->
+    <script th:src="@{/assets2/js/bootstrap.min.js}"></script>
+    <!-- //Js for bootstrap working -->
+</th:block>
+
+</html>

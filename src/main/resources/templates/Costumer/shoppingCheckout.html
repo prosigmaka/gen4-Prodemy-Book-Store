@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html layout:decorate="~{baseUserCheckout}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--<div class="content-top " layout:fragment="content-top">-->
+<!--	&lt;!&ndash; main-heading &ndash;&gt;-->
+<!--	<h2 class="main-title-w3layouts mb-2 text-center">Responsive Table</h2>-->
+<!--	&lt;!&ndash;// main-heading &ndash;&gt;-->
+<!--&lt;!&ndash;	<div class="panel-heading-table text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;		Responsive Table&ndash;&gt;-->
+<!--&lt;!&ndash;	</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;	<section class="wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;	</section>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="product " layout:fragment="main-content">
+    <div class="form-w3agile">
+        <h3 id="heading-1" style="text-indent:6px;color:white;-webkit-text-stroke: 2px saddlebrown; font-weight: bold">Checkout Transaction</h3>
+    </div>
+
+    <div class="main-agileits">
+        <!-- Checkout Form -->
+        <div class="outer-w3-agile mt-3">
+
+            <div class="row validform" id="co-form">
+                <div class="col-md-4 order-md-2 mb-4 validform1">
+
+                    <h3 className="mb-3">Payment</h3>
+
+                    <div className="d-block my-3">
+                        <div className="form-group" id="tipePembayaran">
+
+                            <div className="custom-control custom-radio tipePembayaran">
+                                <input className="custom-control-input input-tipePembayaran" type="radio" id="cod" name="tipePembayaran" value="COD">
+                                <label htmlFor="cod" className="custom-control-label">COD</label>
+                            </div>
+
+                            <div className="custom-control custom-radio tipePembayaran">
+                                <input className="custom-control-input input-tipePembayaran" type="radio" id="transfer" name="tipePembayaran" value="NET BANKING">
+                                <label htmlFor="transfer" className="custom-control-label">NET BANKING</label>
+                            </div>
+                        </div>
+
+                        <div className="tab3">
+
+                            <hr className="mb-md-2">
+
+                            <div className="pay_info">
+                                <div className="vertical_post">
+                                    <form>
+                                        <h4 className="mb-3">Select From Popular Banks</h4>
+                                        <div className="swit-radio" id="bankPilihan">
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="mandiri" name="bankPilihan" value="Bank Mandiri">
+                                                    <label htmlFor="mandiri" className="custom-control-label">Bank Mandiri</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sMandiri" name="bankPilihan" value="Bank Syariah Mandiri">
+                                                    <label htmlFor="sMandiri" className="custom-control-label">Bank Syariah Mandiri</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="BNI" name="bankPilihan" value="Bank BNI">
+                                                    <label htmlFor="BNI" className="custom-control-label">Bank BNI</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sBNI" name="bankPilihan" value="Bank BNI Syariah">
+                                                    <label htmlFor="sBNI" className="custom-control-label">Bank BNI Syariah</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="BRI" name="bankPilihan" value="Bank BRI">
+                                                    <label htmlFor="BRI" className="custom-control-label">Bank BRI</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="sBRI" name="bankPilihan" value="Bank BRI Syariah">
+                                                    <label htmlFor="sBRI" className="custom-control-label">Bank BRI Syariah</label>
+                                                </div>
+                                            </div>
+                                            <div className="check_box_one">
+                                                <div className="custom-control custom-radio tipePembayaran">
+                                                    <input className="custom-control-input input-tipePembayaran" type="radio" id="bca" name="bankPilihan" value="Bank BCA">
+                                                    <label htmlFor="bca" className="custom-control-label">Bank BCA</label>
+                                                </div>
+                                            </div>
+                                            <div className="clearfix"></div>
+                                        </div>
+                                        <hr className="mb-0">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    <hr class="mb-4">-->
+                    <!--                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn" type="submit">Continue to checkout</button>-->
+
+                </div>
+
+                <div class="col-md-8 order-md-1 validform2">
+
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Your cart</span>
+                        <span class="text-right">3</span>
+                    </h4>
+                    <ul class="list-group mb-3" id="list-item">
+                    </ul>
+
+                    <ul class="list-group mb-3" id="total-price-items">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--// Checkout Form -->
+
+
+        		<div class="forg">
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block error-w3l-btn align-content-center" type="submit" onclick="shoppingCO.insertOrder()">Continue to checkout</button>
+        		</div>
+
+    </div>
+
+
+    <!--	<section class="tables-section">-->
+    <!--	</section>-->
+
+    <!--// Tables content -->
+</div>
+
+<!-- /.row -->
+<th:block layout:fragment="add-scripts">
+    <!-- Js for Shopping Checkout-->
+    <script th:src="@{/assets/js/shoppingCheckout.js}"></script>
+    <!-- //Js for Shopping Checkout -->
+
+</th:block>
+
+</html>

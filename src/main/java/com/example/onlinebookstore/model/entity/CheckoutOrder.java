@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,19 +20,23 @@ public class CheckoutOrder {
     private Integer id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-//    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="tanggal_ci", nullable = false)
-    private Date tanggalCi;
-    @Column(name="total_harga_ci", nullable = false)
-    private Double totalHargalCi;
-    @Column(name="tipe_pembayaran", nullable = false)
+    @Column(name="tanggal_co", nullable = false)
+    private Date tanggalCo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name="tanggal_order")
+    private Date tanggalOrder;
+    @Column(name="total_harga_ci")
+    private Long totalHargalCi;
+    @Column(name="tipe_pembayaran")
     private String tipePembayaran;
+    @Column(name="bank_pilihan")
+    private String bankPilihan;
     @Enumerated(EnumType.STRING)
     @Column(name="status_pesanan", nullable = false)
     private PesananStatus statusPesanan;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 //    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="batas_tanggal_pembayaran", nullable = false)
+    @Column(name="batas_tanggal_pembayaran")
     private Date batasTanggalPembayaran;
 
 //    @ManyToOne
@@ -40,9 +45,9 @@ public class CheckoutOrder {
 //    @Column(name="id_user", nullable = false)
 //    private Integer idUser;
 
-    @OneToMany(cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "checkoutOrder", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_user", updatable = false, insertable = false)
-    private List<CheckoutItem> items;
+//    private List<CheckoutItem> items = new ArrayList<CheckoutItem>();
 //    @Column(name="id_user", nullable = false)
 //    private Integer idUser;
 

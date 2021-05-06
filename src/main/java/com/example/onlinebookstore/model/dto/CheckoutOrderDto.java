@@ -10,11 +10,12 @@ import java.util.List;
 @Data
 public class CheckoutOrderDto {
     private Integer id;
-    private Date tanggalCi;
-    private Integer tipePembayaran;
-    private Double totalHargalCi;
+    private Date tanggalCo;
+    private Date tanggalOrder;
+    private String tipePembayaran;
+    private String bankPilihan;
+    private Long totalHargalCi;
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;
 
-    private List<CheckoutItemDto> items;
 }
