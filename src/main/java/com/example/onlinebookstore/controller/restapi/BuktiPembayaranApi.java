@@ -1,6 +1,5 @@
 package com.example.onlinebookstore.controller.restapi;
 
-import com.example.onlinebookstore.model.dto.BookDto;
 import com.example.onlinebookstore.model.dto.BuktiPembayaranDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
 import com.example.onlinebookstore.model.entity.*;
@@ -9,7 +8,6 @@ import com.example.onlinebookstore.repository.CheckoutItemRepository;
 import com.example.onlinebookstore.repository.CheckoutOrderRepository;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.BuktiPembayaranService;
-import com.example.onlinebookstore.service.CheckoutOrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +32,53 @@ public class BuktiPembayaranApi {
     @Autowired
     public ModelMapper modelMapper;
 
+//    @GetMapping("/{idPembayaran}")
+//    public BuktiPembayaranDto getById(@PathVariable Integer id) {
+//        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(id).get();
+//        BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran,BuktiPembayaranDto.class);
+//        return buktiPembayaranDto;
+//    }
 
-    @GetMapping("/{idPembayaran}")
-    public BuktiPembayaranDto getById(@PathVariable Integer id) {
-        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(id).get();
-        BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran,BuktiPembayaranDto.class);
+//    @GetMapping("/{idAja}")
+//    public BuktiPembayaranDto getCheckoutOrder(@PathVariable Integer idCO) {
+//        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
+//        BuktiPembayaran buktiPembayaran = new BuktiPembayaran();
+//        buktiPembayaran.setIdCo(checkoutOrder.getId());
+//        BuktiPembayaranDto buktiPembayaranDto = new BuktiPembayaranDto();
+//        // jika tidak pakai model mapper maka perlu setter getter satu satu
+//        buktiPembayaranDto.setIdCo(checkoutOrder.getId());
+//        buktiPembayaranDto.setTanggalOrder(checkoutOrder.getTanggalOrder());
+//        buktiPembayaranDto.setBatasTanggalPembayaran(checkoutOrder.getBatasTanggalPembayaran());
+//        buktiPembayaranDto.setTipePembayaran(checkoutOrder.getTipePembayaran());
+//        buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());
+//
+//        return buktiPembayaranDto;
+//    }
+
+    @GetMapping("/{idAja}")
+    public BuktiPembayaranDto paymentCheckoutOrder(@PathVariable Integer idCO) {
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
+        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findByIdCo(idCO);
+        BuktiPembayaranDto buktiPembayaranDto = new BuktiPembayaranDto();
+
+        if (buktiPembayaran == null){
+//            buktiPembayaran.setIdCo(checkoutOrder.getId());
+            // jika tidak pakai model mapper maka perlu setter getter satu satu
+            buktiPembayaranDto.setIdCo(checkoutOrder.getId());
+            buktiPembayaranDto.setTanggalOrder(checkoutOrder.getTanggalOrder());
+            buktiPembayaranDto.setBatasTanggalPembayaran(checkoutOrder.getBatasTanggalPembayaran());
+            buktiPembayaranDto.setTipePembayaran(checkoutOrder.getTipePembayaran());
+            buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());
+        }else {
+            modelMapper.map(buktiPembayaran,BuktiPembayaranDto.class);
+            buktiPembayaranDto.setIdCo(buktiPembayaran.getIdCo());
+            buktiPembayaranDto.setTanggalOrder(buktiPembayaran.getCheckoutOrder().getTanggalOrder());
+            buktiPembayaranDto.setBatasTanggalPembayaran(buktiPembayaran.getCheckoutOrder().getBatasTanggalPembayaran());
+            buktiPembayaranDto.setTipePembayaran(buktiPembayaran.getCheckoutOrder().getTipePembayaran());
+            buktiPembayaranDto.setTotalHargalCi(buktiPembayaran.getCheckoutOrder().getTotalHargalCi());
+        }
+
+
         return buktiPembayaranDto;
     }
 
@@ -47,16 +87,16 @@ public class BuktiPembayaranApi {
         BuktiPembayaran buktiPembayaran = modelMapper.map(buktiPembayaranDto, BuktiPembayaran.class);
         buktiPembayaran.setIdCo(buktiPembayaranDto.getIdCo());
         buktiPembayaran = buktiPembayaranService.saveBuktiPembayaranService(buktiPembayaran);
-        BuktiPembayaranDto buktiPembayaranDtoNew = mapToDto(buktiPembayaran);
+        BuktiPembayaranDto buktiPembayaranDtoNew = mapToDtoBP(buktiPembayaran);
 
         return buktiPembayaranDtoNew;
     }
 
-    private BuktiPembayaranDto mapToDto(BuktiPembayaran buktiPembayaran) {
+    private BuktiPembayaranDto mapToDtoBP(BuktiPembayaran buktiPembayaran) {
         BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran, BuktiPembayaranDto.class);
 
         buktiPembayaranDto.setIdCo(buktiPembayaran.getCheckoutOrder().getId());
-        buktiPembayaranDto.setTanggalCo(buktiPembayaran.getCheckoutOrder().getTanggalCo());
+        buktiPembayaranDto.setTanggalOrder(buktiPembayaran.getCheckoutOrder().getTanggalOrder());
         buktiPembayaranDto.setTotalHargalCi(buktiPembayaran.getCheckoutOrder().getTotalHargalCi());
         buktiPembayaranDto.setBatasTanggalPembayaran(buktiPembayaran.getCheckoutOrder().getBatasTanggalPembayaran());
         buktiPembayaranDto.setTipePembayaran(buktiPembayaran.getCheckoutOrder().getTipePembayaran());
@@ -66,20 +106,15 @@ public class BuktiPembayaranApi {
         return buktiPembayaranDto;
     }
 
-    @GetMapping("/{idAja}")
-    public BuktiPembayaranDto getCheckoutOrder(@PathVariable Integer idCO) {
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
-        BuktiPembayaran buktiPembayaran = new BuktiPembayaran();
-        buktiPembayaran.setIdCo(checkoutOrder.getId());
-        BuktiPembayaranDto buktiPembayaranDto = new BuktiPembayaranDto();
-        // jika tidak pakai model mapper maka perlu setter getter satu satu
-        buktiPembayaranDto.setIdCo(checkoutOrder.getId());
-        buktiPembayaranDto.setTanggalCo(checkoutOrder.getTanggalCo());
-        buktiPembayaranDto.setBatasTanggalPembayaran(checkoutOrder.getBatasTanggalPembayaran());
-        buktiPembayaranDto.setTipePembayaran(checkoutOrder.getTipePembayaran());
-        buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());
-
-        return buktiPembayaranDto;
+    @GetMapping("/all-buktipembayaran")
+    public List<BuktiPembayaranDto> getBuktiPembayaranList() {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        List<BuktiPembayaran> buktiPembayaranList = buktiPembayaranRepository.findAll();
+        List<BuktiPembayaranDto> buktiPembayaranDtos =
+                buktiPembayaranList.stream()
+                        .map(bp -> mapToDtoBP(bp))
+                        .collect(Collectors.toList());
+        return buktiPembayaranDtos;
     }
 
     @GetMapping("/{idBP}")
@@ -87,6 +122,8 @@ public class BuktiPembayaranApi {
         BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(idBP).get();
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(buktiPembayaran.getIdCo()).get();
         CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrder,CheckoutOrderDto.class);
+        checkoutOrderDto.setIdCostumer(checkoutOrder.getIdCostumer());
+        checkoutOrderDto.setId(checkoutOrder.getId());
         return checkoutOrderDto;
     }
 
@@ -94,7 +131,20 @@ public class BuktiPembayaranApi {
     public CheckoutOrder changeStatusBerhasil(@RequestBody CheckoutOrderDto checkoutOrderDto){
         CheckoutOrder checkoutOrder = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
         checkoutOrder.setStatusPesanan(PesananStatus.DIPROSES);
-        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
+        checkoutOrder.setIdCostumer(checkoutOrderDto.getIdCostumer());
+        checkoutOrder.setId(checkoutOrderDto.getId());
+
+        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrder.getId());
+        for (int i = 0; i<checkoutItemList.size(); i++){
+            CheckoutItem checkoutItemId = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.PAID);
+            keranjangRepository.save(k);
+        }
+
+
+//        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
 
 //        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
 //        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
@@ -107,14 +157,26 @@ public class BuktiPembayaranApi {
 //            checkoutItem.setKeranjang(keranjangNewStatus);
 //            checkoutItemRepository.save(checkoutItem);
 //        }
-        return checkoutOrderChangeStatus;
+        return checkoutOrderRepository.save(checkoutOrder);
     }
 
     @PostMapping("/change-status-gagal")
     public CheckoutOrder changeStatusGagal(@RequestBody CheckoutOrderDto checkoutOrderDto){
         CheckoutOrder checkoutOrder = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
         checkoutOrder.setStatusPesanan(PesananStatus.DIBATALKAN);
-        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
+        checkoutOrder.setIdCostumer(checkoutOrderDto.getIdCostumer());
+        checkoutOrder.setId(checkoutOrderDto.getId());
+
+        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrder.getId());
+        for (int i = 0; i<checkoutItemList.size(); i++){
+            CheckoutItem checkoutItemId = checkoutItemList.get(i);
+            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
+            Keranjang k = keranjang.get();
+            k.setStatusKeranjang(ItemStatus.CANCELED);
+            keranjangRepository.save(k);
+        }
+
+//        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
 
 //        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
 //        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
@@ -127,7 +189,7 @@ public class BuktiPembayaranApi {
 //            checkoutItem.setKeranjang(keranjangNewStatus);
 //            checkoutItemRepository.save(checkoutItem);
 //        }
-        return checkoutOrderChangeStatus;
+        return checkoutOrderRepository.save(checkoutOrder);
     }
 
     @DeleteMapping("/{id}")

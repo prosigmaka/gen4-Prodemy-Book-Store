@@ -12,7 +12,7 @@ public class BuktiPembayaranDto {
     private LocalDateTime tanggalPembayaran;
     private String gambarBuktiPembayaran;
 
-    private Date tanggalCo;
+    private Date tanggalOrder;
     private String tipePembayaran;
     private Long totalHargalCi;
     private Date batasTanggalPembayaran;

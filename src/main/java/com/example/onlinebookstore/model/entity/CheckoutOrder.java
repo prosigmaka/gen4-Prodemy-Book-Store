@@ -39,11 +39,11 @@ public class CheckoutOrder {
     @Column(name="batas_tanggal_pembayaran")
     private Date batasTanggalPembayaran;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_user", updatable = false, insertable = false)
-//    private User user;
-//    @Column(name="id_user", nullable = false)
-//    private Integer idUser;
+    @ManyToOne
+    @JoinColumn(name = "id_costumer", updatable = false, insertable = false)
+    private User user;
+    @Column(name="id_costumer", nullable = false)
+    private Long idCostumer;
 
 //    @OneToMany(mappedBy = "checkoutOrder", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_user", updatable = false, insertable = false)

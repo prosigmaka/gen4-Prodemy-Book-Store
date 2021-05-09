@@ -18,4 +18,6 @@ public class CheckoutOrderDto {
     private Date batasTanggalPembayaran;
     private Enum statusPesanan;
 
+    private Long idCostumer;
+
 }

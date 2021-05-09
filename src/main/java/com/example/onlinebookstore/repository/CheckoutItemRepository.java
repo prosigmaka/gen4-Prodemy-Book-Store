@@ -26,6 +26,9 @@ public interface CheckoutItemRepository extends JpaRepository<CheckoutItem, Inte
     @Query(value = "SELECT * FROM checkout_item ci where ci.tanggal_ci = (select max (tanggal_ci) from checkout_item) order by ci.id", nativeQuery = true)
     List<CheckoutItem> findAllByTanggalCiOrderById();
 
+    @Query(value = "SELECT checkoutItem FROM CheckoutItem checkoutItem where checkoutItem.idOrder = ?1 and checkoutItem.tanggalCi = (select max (checkoutItem.tanggalCi) from checkoutItem) order by checkoutItem.id", nativeQuery = false)
+    List<CheckoutItem> findAllByIdOrderAndTanggalCiOrderById(Integer idOrder);
+
     @Query(value = "SELECT * FROM checkout_item ci where ci.id_keranjang = ?1", nativeQuery = true)
     CheckoutItem findByIdKeranjang(Integer idKeranjang);
 

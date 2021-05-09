@@ -26,11 +26,26 @@ public interface CheckoutOrderRepository extends JpaRepository<CheckoutOrder, In
     @Query(value = "SELECT * FROM checkout_order co order by co.id", nativeQuery = true)
     List<CheckoutOrder> findAllOrderById();
 
+    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.id = ?2", nativeQuery = false)
+    CheckoutOrder findAllByIdAndIdCostumer(Long idCustomer, Integer idCo);
+
     @Query(value = "SELECT * FROM checkout_order co where co.tanggal_co = (select max (tanggal_co) from checkout_order) order by co.id", nativeQuery = true)
     CheckoutOrder findAllByTanggalCoOrderById();
 
+    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalCo = (select max (checkoutOrder.tanggalCo) from checkoutOrder) order by checkoutOrder.id", nativeQuery = false)
+    CheckoutOrder findAllByIdCostumerAndTanggalCoOrderById(Long idCustomer);
+
+    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalOrder = (select max (checkoutOrder.tanggalOrder) from checkoutOrder) order by checkoutOrder.id", nativeQuery = false)
+    CheckoutOrder findAllByIdCostumerAndTanggalOrderById(Long idCustomer);
+
     @Query(value = "SELECT * FROM checkout_order co where co.status_pesanan =?1", nativeQuery = true)
     List<CheckoutOrder> findAllByStatusPesanan(Enum statusPesanan);
+
+    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.statusPesanan =?2", nativeQuery = false)
+    List<CheckoutOrder> findAllByIdCostumerAndStatusPesanan(Long idCustomer,Enum statusPesanan);
+
+    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.statusPesanan <> ?2", nativeQuery = false)
+    List<CheckoutOrder> findAllByStatusPesananAndIdCostumer(Long idCustomer,Enum statusPesanan);
 
 
     /* CARA PERTAMA

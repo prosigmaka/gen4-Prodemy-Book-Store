@@ -10,6 +10,7 @@ import com.example.onlinebookstore.model.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -56,6 +57,13 @@ public class UserServiceImpl implements UserService {
 //        user.setRole(role);
         user.setRoleId(2L);
         return userRepository.save(user);
+    }
+
+    @Override
+    public Long idCustomerLogIn() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long idCustomer = userRepository.findIdByUserName(userName);
+        return idCustomer;
     }
 
 //    @Override

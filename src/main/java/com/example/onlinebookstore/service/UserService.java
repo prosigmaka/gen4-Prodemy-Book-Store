@@ -8,5 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService{
 	User save(UserRegistrationDto registrationDto);
 
+	Long idCustomerLogIn();
+
 //	void saveLoginDto(User user);
 }

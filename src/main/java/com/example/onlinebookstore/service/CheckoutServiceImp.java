@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 public class CheckoutServiceImp implements CheckoutService {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     CheckoutOrderRepository checkoutOrderRepository;
 
     @Autowired
@@ -31,8 +34,7 @@ public class CheckoutServiceImp implements CheckoutService {
 
 
     @Override
-    public List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO) {
-
+    public CheckoutOrder checkoutOrder(RequestListOrderDTO requestListOrderDTO) {
         CheckoutOrder checkoutOrder = new CheckoutOrder();
         Date tanggalCheckout = new Date();
         long total = 0;
@@ -40,6 +42,7 @@ public class CheckoutServiceImp implements CheckoutService {
         checkoutOrder.setTanggalCo(tanggalCheckout);
 //        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
+        checkoutOrder.setIdCostumer(userService.idCustomerLogIn());
         CheckoutOrder checkoutOrderNC = checkoutOrderRepository.save(checkoutOrder);
 
         List<CheckoutItem> checkoutItemList = new ArrayList<CheckoutItem>();
@@ -61,21 +64,57 @@ public class CheckoutServiceImp implements CheckoutService {
         }
 
         checkoutOrderNC.setTotalHargalCi(total);
-        checkoutOrderRepository.save(checkoutOrderNC);
 
-//        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllIdOrderByTanggalCi();
-        List<CheckoutItemDto> checkoutItemDtoList =
-                checkoutItemList.stream()
-                        .map(cI -> mapToDto(cI))
-                        .collect(Collectors.toList());
-        return checkoutItemDtoList;
-
+        return checkoutOrderRepository.save(checkoutOrderNC);
     }
+
+//    @Override
+//    public List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO) {
+//
+//        CheckoutOrder checkoutOrder = new CheckoutOrder();
+//        Date tanggalCheckout = new Date();
+//        long total = 0;
+//
+//        checkoutOrder.setTanggalCo(tanggalCheckout);
+////        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
+//        checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
+//        CheckoutOrder checkoutOrderNC = checkoutOrderRepository.save(checkoutOrder);
+//
+//        List<CheckoutItem> checkoutItemList = new ArrayList<CheckoutItem>();
+//
+//        for (IdKeranjangDTO idKeranjangDTO : requestListOrderDTO.getIdKeranjangDTOList()) {
+//            Keranjang keranjang = keranjangRepository.findById(idKeranjangDTO.getId()).get();
+//            keranjang.setStatusKeranjang(ItemStatus.CHECKOUT);
+//            Keranjang keranjangSB = keranjangRepository.save(keranjang);
+////            Keranjang k = keranjang.get();
+//            CheckoutItem checkoutItem = new CheckoutItem();
+//            checkoutItem.setKeranjang(keranjangSB);
+//            checkoutItem.setIdKeranjang(checkoutItem.getKeranjang().getId());
+//            checkoutItem.setCheckoutOrder(checkoutOrderNC);
+//            checkoutItem.setIdOrder(checkoutItem.getCheckoutOrder().getId());
+//            checkoutItem.setTanggalCi(tanggalCheckout);
+//            checkoutItemList.add(checkoutItem);
+//            total += keranjang.getSubTotalHargaBuku();
+//            checkoutItemRepository.save(checkoutItem);
+//        }
+//
+//        checkoutOrderNC.setTotalHargalCi(total);
+//        checkoutOrderRepository.save(checkoutOrderNC);
+//
+////        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllIdOrderByTanggalCi();
+//        List<CheckoutItemDto> checkoutItemDtoList =
+//                checkoutItemList.stream()
+//                        .map(cI -> mapToDto(cI))
+//                        .collect(Collectors.toList());
+//        return checkoutItemDtoList;
+//
+//    }
 
     @Override
     public CheckoutOrder placeOrder(CheckoutItem checkoutItem) {
-        List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByTanggalCiOrderById();
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByTanggalCoOrderById();
+
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrderAndTanggalCiOrderById(checkoutOrder.getId());
 
         Date tanggalOrder = new Date();
 
@@ -99,30 +138,5 @@ public class CheckoutServiceImp implements CheckoutService {
         return checkoutOrder;
     }
 
-
-    private CheckoutItemDto mapToDto(CheckoutItem checkoutItem) {
-        CheckoutItemDto checkoutItemDto = modelMapper.map(checkoutItem, CheckoutItemDto.class);
-
-        checkoutItemDto.setJudulBuku(checkoutItem.getKeranjang().getBook().getJudulBuku());
-        checkoutItemDto.setKuantitasBuku(checkoutItem.getKeranjang().getKuantitasBuku());
-        checkoutItemDto.setKategoriBuku(checkoutItem.getKeranjang().getBook().getCategory().getNamaKategori());
-        checkoutItemDto.setHargaBuku(checkoutItem.getKeranjang().getBook().getHargaBuku());
-        checkoutItemDto.setSubTotalHargaBuku(checkoutItem.getKeranjang().getSubTotalHargaBuku());
-
-        checkoutItemDto.setTanggalCo(checkoutItem.getCheckoutOrder().getTanggalCo());
-//        checkoutItemDto.setTanggalOrder(checkoutItem.getCheckoutOrder().getTanggalOrder());
-//        checkoutItemDto.setTipePembayaran(checkoutItem.getCheckoutOrder().getTipePembayaran());
-//        checkoutItemDto.setBankPilihan(checkoutItem.getCheckoutOrder().getBankPilihan());
-        checkoutItemDto.setTotalHargalCi(checkoutItem.getCheckoutOrder().getTotalHargalCi());
-        checkoutItemDto.setBatasTanggalPembayaran(checkoutItem.getCheckoutOrder().getBatasTanggalPembayaran());
-        checkoutItemDto.setStatusPesanan(checkoutItem.getCheckoutOrder().getStatusPesanan());
-
-
-        checkoutItemDto.setId(checkoutItemDto.getId());
-        checkoutItemDto.setIdOrder(checkoutItem.getIdOrder());
-        checkoutItemDto.setIdKeranjang(checkoutItem.getIdKeranjang());
-
-        return checkoutItemDto;
-    }
 
 }

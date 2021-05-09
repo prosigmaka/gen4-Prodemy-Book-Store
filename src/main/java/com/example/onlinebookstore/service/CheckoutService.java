@@ -18,7 +18,9 @@ public interface CheckoutService {
 
 //    CheckoutOrder insertOrder(CheckoutItem checkoutItem);
 
-    List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
+    CheckoutOrder checkoutOrder (RequestListOrderDTO requestListOrderDTO);
+
+//    List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
 
     CheckoutOrder placeOrder(CheckoutItem checkoutItem);
 
