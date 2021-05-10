@@ -5,6 +5,7 @@ import com.example.onlinebookstore.model.dto.BookDto;
 import com.example.onlinebookstore.model.entity.*;
 import com.example.onlinebookstore.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,10 +25,18 @@ public class BookServiceImp implements BookService {
     private PublisherRepository publisherRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private RekomendasiBukuRepository rekomendasiBukuRepository;
     @Autowired
     private AuthorService authorService;
 
+    private Long currentIdCustomer(){
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long idCustomer = userRepository.findIdByUserName(userName);
+        return idCustomer;
+    }
 
     @Override
     public Book saveBookService(Book book) {
@@ -75,7 +84,8 @@ public class BookServiceImp implements BookService {
         Integer catMaxCount = 0;
         Integer idCategory = null;
         for(Category cat : categories){
-            Integer cnt = rekomendasiBukuRepository.countRekomendasiBukuByKategori(cat.getNamaKategori());
+            Integer cnt = rekomendasiBukuRepository
+                    .countRekomendasiBukuByKategoriAndIdUser(cat.getNamaKategori(), currentIdCustomer());
             if(catMaxCount <= cnt){
                 catMaxCount = cnt;
                 idCategory = cat.getId();

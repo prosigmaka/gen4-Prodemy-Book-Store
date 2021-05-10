@@ -17,6 +17,6 @@ public interface RekomendasiBukuRepository extends JpaRepository<RekomendasiBuku
 
     List<RekomendasiBuku> findRekomendasiBukuByKategori(String str);
 
-    Integer countRekomendasiBukuByKategori(String category);
+    Integer countRekomendasiBukuByKategoriAndIdUser(String category, Long id);
 
 }

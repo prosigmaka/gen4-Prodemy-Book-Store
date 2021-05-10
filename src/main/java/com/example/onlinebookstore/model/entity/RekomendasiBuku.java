@@ -15,7 +15,7 @@ public class RekomendasiBuku {
 
     private Integer id;
     @Column(name = "id_user", nullable = false)
-    private Integer idUser;
+    private Long idUser;
     @Column(name="kategori")
     private String kategori;
 

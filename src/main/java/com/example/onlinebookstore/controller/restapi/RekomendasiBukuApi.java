@@ -5,12 +5,14 @@ import com.example.onlinebookstore.model.dto.ResponseRecommendationBookDto;
 import com.example.onlinebookstore.model.entity.Book;
 import com.example.onlinebookstore.model.entity.Category;
 import com.example.onlinebookstore.repository.BookRepository;
+import com.example.onlinebookstore.repository.UserRepository;
 import com.example.onlinebookstore.service.BookService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.entity.RekomendasiBuku;
 import com.example.onlinebookstore.repository.RekomendasiBukuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -28,10 +30,19 @@ public class RekomendasiBukuApi {
     private BookRepository bookRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     private BookService bookService;
+
+    private Long currentIdCustomer(){
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long idCustomer = userRepository.findIdByUserName(userName);
+        return idCustomer;
+    }
 
     @GetMapping
     public List<ResponseRecommendationBookDto> getAll(Book book) {
@@ -54,7 +65,7 @@ public class RekomendasiBukuApi {
         Book book = bookRepository.findById(requestRecommendationBookDto.getIdBuku()).get();
         RekomendasiBuku rekomendasiBuku = new RekomendasiBuku();
         rekomendasiBuku.setKategori(book.getCategory().getNamaKategori());
-        rekomendasiBuku.setIdUser(1); // sementara 1
+        rekomendasiBuku.setIdUser(currentIdCustomer());
         rekomendasiBukuRepository.save(rekomendasiBuku);
     }
 }
