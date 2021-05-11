@@ -34,14 +34,14 @@ public class KeranjangServiceImp implements KeranjangService {
             } else {                        // kondisi jika id buku tidak ada dalam database maka buat data baru
                 keranjang.setKuantitasBuku(1);
                 keranjang.setSubTotalHargaBuku(harga);
-                keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART);
+                keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART.toString());
                 keranjangRepository.save(keranjang);
             }
         } else {                            // kondisi jika id user dan id buku tidak ada dalam database
             keranjang.setKuantitasBuku(1);
             keranjang.setSubTotalHargaBuku(harga);
             keranjang.setIdCustomer(keranjang.getIdCustomer());
-            keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART);
+            keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART.toString());
             keranjangRepository.save(keranjang);
         }
 

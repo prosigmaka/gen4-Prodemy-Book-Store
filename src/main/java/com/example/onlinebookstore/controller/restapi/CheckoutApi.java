@@ -53,7 +53,7 @@ public class CheckoutApi {
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
             Keranjang k = keranjang.get();
-            k.setStatusKeranjang(ItemStatus.ADD_TO_CART);
+            k.setStatusKeranjang(ItemStatus.ADD_TO_CART.toString());
             keranjangRepository.save(k);
             checkoutItemRepository.delete(checkoutItemId);
         }

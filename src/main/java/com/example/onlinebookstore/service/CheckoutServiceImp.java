@@ -49,7 +49,7 @@ public class CheckoutServiceImp implements CheckoutService {
 
         for (IdKeranjangDTO idKeranjangDTO : requestListOrderDTO.getIdKeranjangDTOList()) {
             Keranjang keranjang = keranjangRepository.findById(idKeranjangDTO.getId()).get();
-            keranjang.setStatusKeranjang(ItemStatus.CHECKOUT);
+            keranjang.setStatusKeranjang(ItemStatus.CHECKOUT.toString());
             Keranjang keranjangSB = keranjangRepository.save(keranjang);
 //            Keranjang k = keranjang.get();
             CheckoutItem checkoutItem = new CheckoutItem();
@@ -132,7 +132,7 @@ public class CheckoutServiceImp implements CheckoutService {
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
             Keranjang k = keranjang.get();
-            k.setStatusKeranjang(ItemStatus.ORDERED);
+            k.setStatusKeranjang(ItemStatus.ORDERED.toString());
             keranjangRepository.save(k);
         }
         return checkoutOrder;

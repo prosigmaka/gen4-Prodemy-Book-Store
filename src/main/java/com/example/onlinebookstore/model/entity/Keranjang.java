@@ -19,9 +19,10 @@ public class Keranjang extends DirectAddToCartDto {
     private Integer kuantitasBuku;
     @Column(name="subtotal_harga_buku", nullable = false)
     private Long subTotalHargaBuku;
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name="status")
-    private ItemStatus statusKeranjang;
+    //private ItemStatus statusKeranjang;
+    private String statusKeranjang;
 
 //    @Column(name = "status", nullable = false)
 //    private String status;

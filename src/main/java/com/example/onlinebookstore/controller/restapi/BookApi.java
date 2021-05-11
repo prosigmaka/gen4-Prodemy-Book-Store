@@ -1,7 +1,6 @@
 package com.example.onlinebookstore.controller.restapi;
 
-import com.example.onlinebookstore.repository.CategoryRepository;
-import com.example.onlinebookstore.repository.PublisherRepository;
+import com.example.onlinebookstore.repository.*;
 import com.example.onlinebookstore.service.BookService;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.entity.Book;
@@ -9,14 +8,13 @@ import com.example.onlinebookstore.model.entity.Publisher;
 import com.example.onlinebookstore.model.entity.Category;
 import com.example.onlinebookstore.model.entity.Author;
 import com.example.onlinebookstore.model.dto.BookDto;
-import com.example.onlinebookstore.repository.BookRepository;
-import com.example.onlinebookstore.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +29,9 @@ public class BookApi {
     private PublisherRepository publisherRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private KeranjangRepository keranjangRepository;
     @Autowired
     private BookService bookService;
     @Autowired
@@ -60,19 +61,19 @@ public class BookApi {
 
         book = bookService.manageDetailBookService(book, bookDto);
 
-        if(bookDto.getIdPengarang()==null) {
+        if (bookDto.getIdPengarang() == null) {
             author.setNamaPengarang(bookDto.getNamaPengarang());
             author = authorRepository.save(author);
             book.setIdPengarang(author.getId());
         }
 
-        if(bookDto.getIdKategori()==null) {
+        if (bookDto.getIdKategori() == null) {
             category.setNamaKategori(bookDto.getNamaKategori());
             category = categoryRepository.save(category);
             book.setIdKategori(category.getId());
         }
 
-        if(bookDto.getIdPenerbit()==null) {
+        if (bookDto.getIdPenerbit() == null) {
             publisher.setNamaPenerbit(bookDto.getNamaPenerbit());
             publisher = publisherRepository.save(publisher);
             book.setIdPenerbit(publisher.getId());
@@ -110,7 +111,7 @@ public class BookApi {
 
     @GetMapping("/search/{keyword}") //search
     public List<BookDto> listBookSearch(@PathVariable String keyword) {
-        String key = "\\y"+keyword+"\\y"; //regex
+        String key = "\\y" + keyword + "\\y"; //regex
         List<Book> list = bookRepository.searchBook(key);
         List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
         return bookDto;
@@ -122,6 +123,18 @@ public class BookApi {
         List<Book> list = bookRepository.findAllByIdKategori(idCategory);
         List<BookDto> bookDto = list.stream().map(book -> mapToDto(book)).collect(Collectors.toList());
         return bookDto;
+    }
+
+    @GetMapping("/best-seller")
+    public List<BookDto> listBestSeller() {
+        List<Integer> listBookId = keranjangRepository.findBestSeller();
+        List<BookDto> listBestSellerBook = new ArrayList<>();
+        for (Integer id : listBookId) {
+            Book book = bookRepository.findById(id).get();
+            BookDto bestSellerBookDto = modelMapper.map(book, BookDto.class);
+            listBestSellerBook.add(bestSellerBookDto);
+        }
+        return listBestSellerBook;
     }
 
 

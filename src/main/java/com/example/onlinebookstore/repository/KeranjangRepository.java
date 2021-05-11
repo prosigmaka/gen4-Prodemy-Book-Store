@@ -9,16 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
-//
-        @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
-        List<Keranjang> findAllByIdKeranjang(Integer id);
+public interface KeranjangRepository extends JpaRepository<Keranjang, Integer> {
+    //
+    @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
+    List<Keranjang> findAllByIdKeranjang(Integer id);
 
-        Optional<Keranjang> findById(Integer id);
+    Optional<Keranjang> findById(Integer id);
 
-        List<Keranjang> findAllByIdCustomer(Long id);
+    List<Keranjang> findAllByIdCustomer(Long id);
 
-        Keranjang findByIdBukuAndIdCustomer(Integer idBuku, Long idCustomer);
+    Keranjang findByIdBukuAndIdCustomer(Integer idBuku, Long idCustomer);
 
-        List<Keranjang> findAllByIdCustomerAndStatus(Long id, String status);
+    List<Keranjang> findAllByIdCustomerAndStatusKeranjang(Long id, String status);
+
+    @Query(value = "SELECT keranjang.idBuku FROM Keranjang keranjang WHERE keranjang.statusKeranjang = 'PAID' GROUP BY keranjang.idBuku ORDER BY SUM(keranjang.kuantitasBuku) DESC", nativeQuery = false)
+    List<Integer> findBestSeller();
 }

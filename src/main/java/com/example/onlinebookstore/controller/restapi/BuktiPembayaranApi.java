@@ -3,10 +3,7 @@ package com.example.onlinebookstore.controller.restapi;
 import com.example.onlinebookstore.model.dto.BuktiPembayaranDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
 import com.example.onlinebookstore.model.entity.*;
-import com.example.onlinebookstore.repository.BuktiPembayaranRepository;
-import com.example.onlinebookstore.repository.CheckoutItemRepository;
-import com.example.onlinebookstore.repository.CheckoutOrderRepository;
-import com.example.onlinebookstore.repository.KeranjangRepository;
+import com.example.onlinebookstore.repository.*;
 import com.example.onlinebookstore.service.BuktiPembayaranService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,8 @@ import java.util.stream.Collectors;
 public class BuktiPembayaranApi {
     @Autowired
     public KeranjangRepository keranjangRepository;
+    @Autowired
+    private BookRepository bookRepository;
     @Autowired
     public CheckoutOrderRepository checkoutOrderRepository;
     @Autowired
@@ -139,8 +138,14 @@ public class BuktiPembayaranApi {
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
             Keranjang k = keranjang.get();
-            k.setStatusKeranjang(ItemStatus.PAID);
+            k.setStatusKeranjang(ItemStatus.PAID.toString());
             keranjangRepository.save(k);
+
+            // pengurangan stok buku otomatis jika sudah terbayar
+
+            Book book = bookRepository.findById(k.getIdBuku()).get();
+            book.setStokBuku(book.getStokBuku() - k.getKuantitasBuku());
+            bookRepository.save(book);
         }
 
 
@@ -172,7 +177,7 @@ public class BuktiPembayaranApi {
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
             Keranjang k = keranjang.get();
-            k.setStatusKeranjang(ItemStatus.CANCELED);
+            k.setStatusKeranjang(ItemStatus.CANCELED.toString());
             keranjangRepository.save(k);
         }
 

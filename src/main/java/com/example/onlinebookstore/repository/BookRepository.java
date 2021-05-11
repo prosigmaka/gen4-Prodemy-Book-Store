@@ -23,5 +23,4 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query(value = "select harga_buku from book where id = ?1", nativeQuery = true)
     Long getHargaById(Integer id);
 
-
 }
