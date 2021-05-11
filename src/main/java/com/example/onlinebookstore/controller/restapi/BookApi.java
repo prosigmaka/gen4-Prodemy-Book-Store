@@ -136,7 +136,5 @@ public class BookApi {
         }
         return listBestSellerBook;
     }
-
-
 }
 

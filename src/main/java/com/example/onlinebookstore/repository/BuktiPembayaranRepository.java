@@ -16,13 +16,15 @@ import java.util.Optional;
 @Repository
 public interface BuktiPembayaranRepository extends JpaRepository<BuktiPembayaran, Integer> {
 
-    List<BuktiPembayaran> findAll();
+    //List<BuktiPembayaran> findAll();
 
-    @Query(value = "SELECT * FROM BuktiPembayaran buktiPembayaran order by id", nativeQuery = true)
+    @Query(value = "SELECT buktiPembayaran FROM BuktiPembayaran buktiPembayaran order by buktiPembayaran.id", nativeQuery = false)
     List<BuktiPembayaran> findAllOrderById();
 
-    @Query(value = "SELECT * FROM bukti_pembayaran bp where bp.id_co = ?1", nativeQuery = true)
+ //   @Query(value = "SELECT buktiPembayaran FROM BuktiPembayaran buktiPembayaran where buktiPembayaran.idCo = ?1", nativeQuery = false)
     BuktiPembayaran findByIdCo(Integer idCo);
+
+
 
 //    @Query(value = "SELECT * FROM bukti_pembayaran bp where bp.id = ?1", nativeQuery = true)
 //    Optional<BuktiPembayaran> findById(Integer idBP);

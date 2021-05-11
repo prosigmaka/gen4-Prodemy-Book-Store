@@ -25,14 +25,10 @@ public class KeranjangApi {
 
     @Autowired
     private KeranjangService keranjangService;
-
     @Autowired
     private KeranjangRepository keranjangRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
-
     @Autowired
     private ModelMapper modelMapper;
 

@@ -12,15 +12,15 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    @Query(value = "SELECT * FROM Book book order by id", nativeQuery = true)
+    @Query(value = "SELECT book FROM Book book order by book.id", nativeQuery = false)
     List<Book> findAllOrderById();
 
-    @Query(value = "SELECT * FROM Book book WHERE judul_buku ~* ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM book WHERE judul_buku ~* ?1", nativeQuery = true)
     List<Book> searchBook(String keyword);
 
     List<Book> findAllByIdKategori(Integer id);
 
-    @Query(value = "select harga_buku from book where id = ?1", nativeQuery = true)
+    @Query(value = "select book.hargaBuku from Book book where book.id = ?1", nativeQuery = false)
     Long getHargaById(Integer id);
 
 }

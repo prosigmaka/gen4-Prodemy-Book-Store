@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportRepository extends CrudRepository<CheckoutOrder, Integer> {
-    @Query (value = "SELECT SUM (totalHargalCi) FROM CheckoutOrder", nativeQuery = true)
+    @Query (value = "SELECT SUM (totalHargalCi) FROM CheckoutOrder", nativeQuery = false)
     Long sumQuantities();
 }
