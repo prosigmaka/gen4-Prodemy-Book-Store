@@ -42,7 +42,7 @@ public class KeranjangApi {
 
     @GetMapping
     public List<KeranjangDto> getAll() {
-        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatus(currentIdCustomer(), String.valueOf(ItemStatus.ADD_TO_CART));
+        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatusKeranjang(currentIdCustomer(), ItemStatus.ADD_TO_CART.toString());
         List<KeranjangDto> keranjangDtoList = keranjangList
                 .stream()
                 .map(cart -> mappingToKeranjangDto(cart))

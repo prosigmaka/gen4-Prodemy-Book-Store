@@ -20,5 +20,5 @@ public interface KeranjangRepository extends JpaRepository<Keranjang, Integer>{
 
         Keranjang findByIdBukuAndIdCustomer(Integer idBuku, Long idCustomer);
 
-        List<Keranjang> findAllByIdCustomerAndStatus(Long id, String status);
+        List<Keranjang> findAllByIdCustomerAndStatusKeranjang(Long id, String status);
 }
