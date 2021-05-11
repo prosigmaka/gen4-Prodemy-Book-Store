@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface KeranjangRepository extends JpaRepository<Keranjang, Integer> {
     //
-    @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
-    List<Keranjang> findAllByIdKeranjang(Integer id);
+//    @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
+//    List<Keranjang> findAllByIdKeranjang(Integer id);
 
     Optional<Keranjang> findById(Integer id);
 
