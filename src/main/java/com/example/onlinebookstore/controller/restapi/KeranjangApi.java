@@ -8,6 +8,7 @@ import com.example.onlinebookstore.model.entity.Keranjang;
 import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.repository.UserRepository;
 import com.example.onlinebookstore.service.KeranjangService;
+import com.example.onlinebookstore.service.UserService;
 import org.modelmapper.ModelMapper;
 import com.example.onlinebookstore.model.dto.KeranjangDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +28,23 @@ public class KeranjangApi {
 
     @Autowired
     private KeranjangRepository keranjangRepository;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    private Long currentIdCustomer(){
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Long idCustomer = userRepository.findIdByUserName(userName);
-        return idCustomer;
-    }
+//    private Long currentIdCustomer(){
+//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Long idCustomer = userRepository.findIdByUserName(userName);
+//        return idCustomer;
+//    }
 
     @GetMapping
     public List<KeranjangDto> getAll() {
-        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatusKeranjang(currentIdCustomer(), ItemStatus.ADD_TO_CART.toString());
+        List<Keranjang> keranjangList = keranjangRepository.findAllByIdCustomerAndStatusKeranjang(userService.idCustomerLogIn(), ItemStatus.ADD_TO_CART.toString());
         List<KeranjangDto> keranjangDtoList = keranjangList
                 .stream()
                 .map(cart -> mappingToKeranjangDto(cart))
@@ -65,7 +67,7 @@ public class KeranjangApi {
     private DirectAddToCartDto mapToCartDto(DirectAddToCartDto dto){
         DirectAddToCartDto directAddToCartDto = modelMapper.map(dto, DirectAddToCartDto.class);
         Keranjang keranjang = modelMapper.map(directAddToCartDto, Keranjang.class);
-        keranjang.setIdCustomer(currentIdCustomer());
+        keranjang.setIdCustomer(userService.idCustomerLogIn());
         keranjangService.saveToCartDirect(keranjang, directAddToCartDto);
         return keranjang;
     }
