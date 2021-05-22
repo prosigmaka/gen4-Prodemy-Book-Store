@@ -86,10 +86,10 @@ public class BuktiPembayaranApi {
     public BuktiPembayaranDto saveOrEditBuktiPembayaran(@RequestBody BuktiPembayaranDto buktiPembayaranDto) {
         BuktiPembayaran buktiPembayaran = modelMapper.map(buktiPembayaranDto, BuktiPembayaran.class);
         buktiPembayaran.setIdCo(buktiPembayaranDto.getIdCo());
-        buktiPembayaran = buktiPembayaranService.saveBuktiPembayaranService(buktiPembayaran);
-        BuktiPembayaranDto buktiPembayaranDtoNew = mapToDtoBP(buktiPembayaran);
+        BuktiPembayaran popNew = buktiPembayaranService.saveBuktiPembayaranService(buktiPembayaran);
+        BuktiPembayaranDto popDtoNew = mapToDtoBP(popNew);
 
-        return buktiPembayaranDtoNew;
+        return popDtoNew;
     }
 
     private BuktiPembayaranDto mapToDtoBP(BuktiPembayaran buktiPembayaran) {
