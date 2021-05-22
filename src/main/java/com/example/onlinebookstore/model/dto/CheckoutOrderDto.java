@@ -2,6 +2,7 @@ package com.example.onlinebookstore.model.dto;
 
 import io.swagger.models.auth.In;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;

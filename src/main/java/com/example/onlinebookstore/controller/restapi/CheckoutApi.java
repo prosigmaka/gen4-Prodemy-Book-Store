@@ -68,6 +68,7 @@ public class CheckoutApi {
         checkoutOrderDto.setIdCostumer(getCheckoutOrder.getIdCostumer());
         checkoutOrderDto.setId(getCheckoutOrder.getId());
 
+
         return checkoutOrderDto;
 
     }

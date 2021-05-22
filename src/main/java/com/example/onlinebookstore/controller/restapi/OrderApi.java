@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
+import com.example.onlinebookstore.model.dto.DateSearcherDto;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
 import com.example.onlinebookstore.model.entity.PesananStatus;
@@ -70,6 +71,17 @@ public class OrderApi {
     public List<CheckoutOrderDto> getOrderListBerhasil() {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
         List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(userService.idCustomerLogIn(), PesananStatus.BERHASIL);
+        List<CheckoutOrderDto> checkoutOrderDtos =
+                listCheckoutOrder.stream()
+                        .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
+                        .collect(Collectors.toList());
+        return checkoutOrderDtos;
+    }
+
+    @PostMapping("/find-order/between-date")
+    public List<CheckoutOrderDto> getOrderListByDate(@RequestBody DateSearcherDto dateSearcherDto) {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTglOrderBetweenOrderById(userService.idCustomerLogIn(), dateSearcherDto.getStartDate(),dateSearcherDto.getEndDate());
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
