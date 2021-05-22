@@ -10,29 +10,29 @@
         <input id="search-input" type="text" placeholder="Search.." style="padding: 5px; border-radius: 5px; border-color: #8a6d3b">
         <button class="btn btn-info" type="button" onclick="searchInTable()" style="border-radius: 5px; background-color: #8a6d3b; border-color: #8a6d3b">Search</button>
     </div>
-    <div id="tabel-coba">
+    <div>
 
-<!--        <table class="table table-hover table-responsive" id="authorTable" style="border-radius: 50px">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th scope="col">Book</th>-->
-<!--                <th scope="col">Picture</th>-->
-<!--                <th scope="col">Author</th>-->
-<!--                <th scope="col">Publisher</th>-->
-<!--                <th scope="col">Stock</th>-->
-<!--                <th scope="col">Price</th>-->
-<!--                <th scope="col">-->
-<!--                    <button type='button' class='btn btn-add-to-cart' onclick=bookCRUD.addBook()>-->
-<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#66512c" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">-->
-<!--                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z"/>-->
-<!--                        </svg>-->
-<!--                    </button>-->
-<!--                </th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody id="bookTable">-->
-<!--            </tbody>-->
-<!--        </table>-->
+        <table class="table table-hover table-responsive" id="authorTable" style="border-radius: 50px">
+            <thead>
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Author</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Price</th>
+                <th scope="col">
+                    <button type='button' class='btn btn-add-to-cart' onclick=bookCRUD.addBook()>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#66512c" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z"/>
+                        </svg>
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="bookTable">
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -120,12 +120,12 @@
 
 <!-- /.row -->
 <th:block layout:fragment="add-scripts">
-<!--    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>-->
-<!--    <script th:src="@{/assets/dist/js/demo.js}"></script>-->
-    <script src = "unpkg.com/@babel/standalone/babel.min.js" > </script >
-    <script type="text/babel" th:src="@{/assets/index2.js}"></script>
-<!--    <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>-->
-<!--    <script th:src="@{/assets/dist/js/product.js}"></script>-->
+    <script th:src="@{/assets/plugins/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/assets/dist/js/demo.js}"></script>
+    <script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/assets/dist/js/product.js}"></script>
+<!--    <script th:src="@{/assets/index.js}"></script>-->
+
 
 
 </th:block>

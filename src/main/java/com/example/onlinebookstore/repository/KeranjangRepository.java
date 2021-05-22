@@ -14,7 +14,8 @@ public interface KeranjangRepository extends JpaRepository<Keranjang, Integer> {
 //    @Query(value = "SELECT keranjang FROM Keranjang keranjang WHERE keranjang.id = ?1 AND keranjang.statusKeranjang = 'ADD_TO_CART'", nativeQuery = false)
 //    List<Keranjang> findAllByIdKeranjang(Integer id);
 
-   // Optional<Keranjang> findById(Integer id);
+    @Query(value = "SELECT k.id FROM Keranjang k WHERE k.idBuku = ?1", nativeQuery = false)
+    Integer getIdKeranjang(Integer idBuku);
 
     List<Keranjang> findAllByIdCustomer(Long id);
 

@@ -1,12 +1,9 @@
 package com.example.onlinebookstore.controller.restapi;
 
+import com.example.onlinebookstore.model.entity.*;
 import com.example.onlinebookstore.repository.*;
 import com.example.onlinebookstore.service.BookService;
 import org.modelmapper.ModelMapper;
-import com.example.onlinebookstore.model.entity.Book;
-import com.example.onlinebookstore.model.entity.Publisher;
-import com.example.onlinebookstore.model.entity.Category;
-import com.example.onlinebookstore.model.entity.Author;
 import com.example.onlinebookstore.model.dto.BookDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -87,6 +84,7 @@ public class BookApi {
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
+        keranjangRepository.deleteById(keranjangRepository.getIdKeranjang(id));
         bookRepository.deleteById(id);
     }
 
