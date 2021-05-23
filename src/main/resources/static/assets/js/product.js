@@ -1,4 +1,4 @@
-$.ajax({
+ $.ajax({
     url: '/api/book',
     method: 'get',
     contentType: 'application/json',
@@ -35,9 +35,12 @@ $.ajax({
     }
 });
 
+var addOrNot = null;
 
 var bookCRUD = {
     editBook: function (id) {
+        addOrNot = 'false';
+        console.log(id)
         $.ajax({
             url: '/api/book/' + id,
             method: 'get',
@@ -53,8 +56,9 @@ var bookCRUD = {
                     document.getElementById('tahunTerbit').value = res.tahunTerbit;
                     document.getElementById('stokBuku').value = res.stokBuku;
                     document.getElementById('hargaBuku').value = res.hargaBuku;
+                    document.getElementById('gambar').value = res.gambar;
                     $('#modal-book').modal('show')
-                    console.log('Success!')
+                    console.log(res)
                 } else {
 
                 }
@@ -65,9 +69,12 @@ var bookCRUD = {
         });
     },
 
-    saveBook: function () {
+    saveBook: function (add) {
         console.log("step1")
         var dataResult = getJsonForm($("#form-book").serializeArray(), true);
+        if(addOrNot == 'true'){
+            dataResult.id = null;
+        }
         console.log(dataResult)
         $.ajax({
             url: '/api/book',
@@ -129,6 +136,7 @@ var bookCRUD = {
         });
     },
 
+
     deleteBook: function (id) {
         $.ajax({
             url: '/api/book/' + id,
@@ -182,6 +190,7 @@ var bookCRUD = {
     },
 
     addBook: function () {
+        addOrNot = 'true';
         $('#form-book')[0].reset();
         $('#id').val = null;
         $('#modal-book').modal('show');
