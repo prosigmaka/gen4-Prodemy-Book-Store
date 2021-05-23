@@ -1,6 +1,7 @@
 package com.example.onlinebookstore.service;
 
 import com.example.onlinebookstore.model.dto.CheckoutItemDto;
+import com.example.onlinebookstore.model.dto.CostumerLoginDTO;
 import com.example.onlinebookstore.model.dto.IdKeranjangDTO;
 import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
 import com.example.onlinebookstore.model.entity.*;
@@ -34,7 +35,7 @@ public class CheckoutServiceImp implements CheckoutService {
 
 
     @Override
-    public CheckoutOrder checkoutOrder(RequestListOrderDTO requestListOrderDTO) {
+    public CheckoutOrder checkoutOrder(RequestListOrderDTO requestListOrderDTO, CostumerLoginDTO costumerLoginDTO) {
         CheckoutOrder checkoutOrder = new CheckoutOrder();
         Date tanggalCheckout = new Date();
         long total = 0;
@@ -42,7 +43,8 @@ public class CheckoutServiceImp implements CheckoutService {
         checkoutOrder.setTanggalCo(tanggalCheckout);
 //        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
-        checkoutOrder.setIdCostumer(userService.idCustomerLogIn());
+//        checkoutOrder.setIdCostumer(userService.idCustomerLogIn());
+        checkoutOrder.setIdCostumer(costumerLoginDTO.getId());
         CheckoutOrder checkoutOrderNC = checkoutOrderRepository.save(checkoutOrder);
 
         List<CheckoutItem> checkoutItemList = new ArrayList<CheckoutItem>();
@@ -111,9 +113,10 @@ public class CheckoutServiceImp implements CheckoutService {
 //    }
 
     @Override
-    public CheckoutOrder placeOrder(CheckoutItem checkoutItem) {
+    public CheckoutOrder placeOrder(CheckoutItem checkoutItem, CostumerLoginDTO costumerLoginDTO) {
 
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+//        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(costumerLoginDTO.getId());
         List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrderAndTanggalCiOrderById(checkoutOrder.getId());
 
         Date tanggalOrder = new Date();

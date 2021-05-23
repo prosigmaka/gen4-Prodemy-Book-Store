@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
+import com.example.onlinebookstore.model.dto.CostumerLoginDTO;
 import com.example.onlinebookstore.model.dto.RequestListOrderDTO;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
@@ -40,8 +41,8 @@ public class CheckoutApi {
 
     @PostMapping(path = "/checkout")
     public @ResponseBody
-    CheckoutOrder checkoutOrder(@RequestBody RequestListOrderDTO requestListOrderDTO) {
-        return checkoutService.checkoutOrder(requestListOrderDTO);
+    CheckoutOrder checkoutOrder(@RequestBody RequestListOrderDTO requestListOrderDTO, CostumerLoginDTO costumerLoginDTO) {
+        return checkoutService.checkoutOrder(requestListOrderDTO, costumerLoginDTO);
     }
 
     @PostMapping(path = "/checkout-cancel")

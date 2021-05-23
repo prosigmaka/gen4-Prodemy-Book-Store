@@ -2,6 +2,7 @@ package com.example.onlinebookstore.controller.restapi;
 
 import com.example.onlinebookstore.model.dto.CheckoutItemDto;
 import com.example.onlinebookstore.model.dto.CheckoutOrderDto;
+import com.example.onlinebookstore.model.dto.CostumerLoginDTO;
 import com.example.onlinebookstore.model.dto.DateSearcherDto;
 import com.example.onlinebookstore.model.entity.CheckoutItem;
 import com.example.onlinebookstore.model.entity.CheckoutOrder;
@@ -35,9 +36,9 @@ public class OrderApi {
     public ModelMapper modelMapper;
 
     @GetMapping("/all-order")
-    public List<CheckoutOrderDto> getCheckoutOrderList() {
+    public List<CheckoutOrderDto> getCheckoutOrderList(@RequestBody CostumerLoginDTO costumerLoginDTO) {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByStatusPesananAndIdCostumer(userService.idCustomerLogIn(), PesananStatus.BELUM_BAYAR);
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByStatusPesananAndIdCostumer(costumerLoginDTO.getId(), PesananStatus.BELUM_BAYAR);
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
@@ -46,9 +47,9 @@ public class OrderApi {
     }
 
     @GetMapping("/order/belum-bayar")
-    public List<CheckoutOrderDto> getOrderListBelumBayar() {
+    public List<CheckoutOrderDto> getOrderListBelumBayar(@RequestBody CostumerLoginDTO costumerLoginDTO) {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(userService.idCustomerLogIn(), PesananStatus.BELUM_BAYAR);
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(costumerLoginDTO.getId(), PesananStatus.BELUM_BAYAR);
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
@@ -57,9 +58,9 @@ public class OrderApi {
     }
 
     @GetMapping("/order/diproses")
-    public List<CheckoutOrderDto> getOrderListDiproses() {
+    public List<CheckoutOrderDto> getOrderListDiproses(@RequestBody CostumerLoginDTO costumerLoginDTO) {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(userService.idCustomerLogIn(), PesananStatus.DIPROSES);
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(costumerLoginDTO.getId(), PesananStatus.DIPROSES);
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
@@ -68,9 +69,9 @@ public class OrderApi {
     }
 
     @GetMapping("/order/berhasil")
-    public List<CheckoutOrderDto> getOrderListBerhasil() {
+    public List<CheckoutOrderDto> getOrderListBerhasil(@RequestBody CostumerLoginDTO costumerLoginDTO) {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(userService.idCustomerLogIn(), PesananStatus.BERHASIL);
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndStatusPesanan(costumerLoginDTO.getId(), PesananStatus.BERHASIL);
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
@@ -79,9 +80,9 @@ public class OrderApi {
     }
 
     @PostMapping("/find-order/between-date")
-    public List<CheckoutOrderDto> getOrderListByDate(@RequestBody DateSearcherDto dateSearcherDto) {
+    public List<CheckoutOrderDto> getOrderListByDate(@RequestBody DateSearcherDto dateSearcherDto, CostumerLoginDTO costumerLoginDTO) {
 //        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTglOrderBetweenOrderById(userService.idCustomerLogIn(), dateSearcherDto.getStartDate(),dateSearcherDto.getEndDate());
+        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTglOrderBetweenOrderById(costumerLoginDTO.getId(), dateSearcherDto.getStartDate(),dateSearcherDto.getEndDate());
         List<CheckoutOrderDto> checkoutOrderDtos =
                 listCheckoutOrder.stream()
                         .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
@@ -90,8 +91,8 @@ public class OrderApi {
     }
 
     @GetMapping("/co-popage")
-    public CheckoutOrderDto checkoutOrderDataForPOPage(){
-        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalOrderById(userService.idCustomerLogIn());
+    public CheckoutOrderDto checkoutOrderDataForPOPage(@RequestBody CostumerLoginDTO costumerLoginDTO){
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalOrderById(costumerLoginDTO.getId());
 
         CheckoutOrderDto checkoutOrderDto = modelMapper.map(getCheckoutOrder, CheckoutOrderDto.class);
         checkoutOrderDto.setId(getCheckoutOrder.getId());
@@ -101,8 +102,8 @@ public class OrderApi {
     }
 
     @GetMapping("/ci-popage")
-    public List<CheckoutItemDto> checkoutItemListForPOPage(){
-        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalOrderById(userService.idCustomerLogIn());
+    public List<CheckoutItemDto> checkoutItemListForPOPage(@RequestBody CostumerLoginDTO costumerLoginDTO){
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalOrderById(costumerLoginDTO.getId());
         List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByIdOrder(getCheckoutOrder.getId());
 
         List<CheckoutItemDto> checkoutItemDtoList =
@@ -114,8 +115,8 @@ public class OrderApi {
     }
 
     @GetMapping("/co-detailorderpage/{idCO}")
-    public CheckoutOrderDto getCheckoutOrderForODPage(@PathVariable Integer idCO) {
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdAndIdCostumer(userService.idCustomerLogIn(), idCO);
+    public CheckoutOrderDto getCheckoutOrderForODPage(@PathVariable Integer idCO, CostumerLoginDTO costumerLoginDTO) {
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdAndIdCostumer(costumerLoginDTO.getId(), idCO);
 
         CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrder, CheckoutOrderDto.class);
         checkoutOrderDto.setId(checkoutOrder.getId());
@@ -124,8 +125,8 @@ public class OrderApi {
     }
 
     @GetMapping("/ci-detailorderpage/{idCO}")
-    public List<CheckoutItemDto> getCheckoutItemListForODPage(@PathVariable Integer idCO) {
-        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdAndIdCostumer(userService.idCustomerLogIn(), idCO);
+    public List<CheckoutItemDto> getCheckoutItemListForODPage(@PathVariable Integer idCO, CostumerLoginDTO costumerLoginDTO) {
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdAndIdCostumer(costumerLoginDTO.getId(), idCO);
         List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByIdOrder(checkoutOrder.getId());
         List<CheckoutItemDto> checkoutItemDtos =
                 checkoutItemList.stream()
@@ -185,8 +186,8 @@ public class OrderApi {
 
     @PostMapping(path = "/place-order")
     public @ResponseBody
-    CheckoutOrder placeOrder(@RequestBody CheckoutItem checkoutItem) {
-        CheckoutOrder checkoutOrderNew = checkoutService.placeOrder(checkoutItem);
+    CheckoutOrder placeOrder(@RequestBody CheckoutItem checkoutItem, CostumerLoginDTO costumerLoginDTO) {
+        CheckoutOrder checkoutOrderNew = checkoutService.placeOrder(checkoutItem, costumerLoginDTO);
 //        DetailPembayaranOrderDto detailPembayaranOrderDto = new DetailPembayaranOrderDto();
         CheckoutOrderDto checkoutOrderDto = new CheckoutOrderDto();
         checkoutOrderNew.setTipePembayaran(checkoutOrderDto.getTipePembayaran());
