@@ -2,13 +2,13 @@ var totalQuantity = 0;
 var delQuantity = 0;
 $('#best-seller').ready(function () {
     $.ajax({
-        url: '/api/book',
+        url: '/api/book/best-seller',
         method: 'get',
         contentType: 'application/json',
         success: function (res, status, xhr) {
             var i;
             if (xhr.status == 200 || xhr.status == 201) {
-                for (i = 0; i < 8; i++) {
+                for (i = 0; i < 4; i++) {
                     document.getElementById('best-seller').innerHTML += '<div class="col-md-3 pro-1" style="border-color: saddlebrown; border-width: 4px">' +
                         "<div class='col-m'>" +
                         "<img class='img-responsive' src='" + res[i].gambar + "' alt style='height: 200px'  onclick=bookDescription(" + res[i].id + ");>" +

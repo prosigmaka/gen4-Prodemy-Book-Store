@@ -35,6 +35,7 @@ public class KeranjangServiceImp implements KeranjangService {
                 keranjang.setKuantitasBuku(1);
                 keranjang.setSubTotalHargaBuku(harga);
                 keranjang.setStatusKeranjang(ItemStatus.ADD_TO_CART.toString());
+//                keranjang.setStatusKeranjang(ItemStatus.PAID.toString());
                 keranjangRepository.save(keranjang);
             }
         } else {                            // kondisi jika id user dan id buku tidak ada dalam database
