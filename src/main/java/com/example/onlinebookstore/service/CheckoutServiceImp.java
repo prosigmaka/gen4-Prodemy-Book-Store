@@ -42,7 +42,7 @@ public class CheckoutServiceImp implements CheckoutService {
 
         checkoutOrder.setTanggalCo(tanggalCheckout);
 //        checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
-        checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
+        checkoutOrder.setStatusPesanan(PesananStatus.BELUM_ORDER);
 //        checkoutOrder.setIdCostumer(userService.idCustomerLogIn());
         checkoutOrder.setIdCostumer(costumerLoginDTO.getId());
         CheckoutOrder checkoutOrderNC = checkoutOrderRepository.save(checkoutOrder);
@@ -113,7 +113,7 @@ public class CheckoutServiceImp implements CheckoutService {
 //    }
 
     @Override
-    public CheckoutOrder placeOrder(CheckoutItem checkoutItem, CostumerLoginDTO costumerLoginDTO) {
+    public CheckoutOrder placeOrder(CostumerLoginDTO costumerLoginDTO) {
 
 //        CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(costumerLoginDTO.getId());

@@ -23,7 +23,7 @@ public interface CheckoutService {
 
 //    List<CheckoutItemDto> checkout(RequestListOrderDTO requestListOrderDTO);
 
-    CheckoutOrder placeOrder(CheckoutItem checkoutItem,CostumerLoginDTO costumerLoginDTO);
+    CheckoutOrder placeOrder(CostumerLoginDTO costumerLoginDTO);
 
 
 }

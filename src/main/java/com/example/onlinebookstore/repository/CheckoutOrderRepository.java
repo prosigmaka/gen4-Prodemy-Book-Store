@@ -34,8 +34,8 @@ public interface CheckoutOrderRepository extends JpaRepository<CheckoutOrder, In
     @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalCo = (select max (checkoutOrder.tanggalCo) from checkoutOrder) order by checkoutOrder.id", nativeQuery = false)
     CheckoutOrder findAllByIdCostumerAndTanggalCoOrderById(Long idCustomer);
 
-    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalOrder between :startDate and :endDate order by checkoutOrder.id", nativeQuery = false)
-    List<CheckoutOrder> findAllByIdCostumerAndTglOrderBetweenOrderById(Long idCustomer, Date startDate, Date endDate);
+//    @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalOrder between :startDate and :endDate", nativeQuery = false)
+//    List<CheckoutOrder> findAllByIdCostumerAndTglOrderBetween(Long idCustomer, Date startDate, Date endDate);
 
 
     @Query(value = "SELECT checkoutOrder FROM CheckoutOrder checkoutOrder where checkoutOrder.idCostumer = ?1 and checkoutOrder.tanggalOrder = (select max (checkoutOrder.tanggalOrder) from checkoutOrder) order by checkoutOrder.id", nativeQuery = false)

@@ -79,16 +79,15 @@ public class OrderApi {
         return checkoutOrderDtos;
     }
 
-    @PostMapping("/find-order/between-date")
-    public List<CheckoutOrderDto> getOrderListByDate(@RequestBody DateSearcherDto dateSearcherDto, CostumerLoginDTO costumerLoginDTO) {
-//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAll();
-        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTglOrderBetweenOrderById(costumerLoginDTO.getId(), dateSearcherDto.getStartDate(),dateSearcherDto.getEndDate());
-        List<CheckoutOrderDto> checkoutOrderDtos =
-                listCheckoutOrder.stream()
-                        .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
-                        .collect(Collectors.toList());
-        return checkoutOrderDtos;
-    }
+//    @PostMapping("/find-order/between-date")
+//    public List<CheckoutOrderDto> getOrderListByDate(@RequestBody DateSearcherDto dateSearcherDto, CostumerLoginDTO costumerLoginDTO) {
+//        List<CheckoutOrder> listCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTglOrderBetweenOrderById(costumerLoginDTO.getId(), dateSearcherDto.getStartDate(),dateSearcherDto.getEndDate());
+//        List<CheckoutOrderDto> checkoutOrderDtos =
+//                listCheckoutOrder.stream()
+//                        .map(checkoutOrder -> mapToDtoCO(checkoutOrder))
+//                        .collect(Collectors.toList());
+//        return checkoutOrderDtos;
+//    }
 
     @GetMapping("/co-popage")
     public CheckoutOrderDto checkoutOrderDataForPOPage(@RequestBody CostumerLoginDTO costumerLoginDTO){
@@ -186,8 +185,8 @@ public class OrderApi {
 
     @PostMapping(path = "/place-order")
     public @ResponseBody
-    CheckoutOrder placeOrder(@RequestBody CheckoutItem checkoutItem, CostumerLoginDTO costumerLoginDTO) {
-        CheckoutOrder checkoutOrderNew = checkoutService.placeOrder(checkoutItem, costumerLoginDTO);
+    CheckoutOrder placeOrder(CostumerLoginDTO costumerLoginDTO) {
+        CheckoutOrder checkoutOrderNew = checkoutService.placeOrder(costumerLoginDTO);
 //        DetailPembayaranOrderDto detailPembayaranOrderDto = new DetailPembayaranOrderDto();
         CheckoutOrderDto checkoutOrderDto = new CheckoutOrderDto();
         checkoutOrderNew.setTipePembayaran(checkoutOrderDto.getTipePembayaran());

@@ -1,5 +1,5 @@
 package com.example.onlinebookstore.model.entity;
 
 public enum PesananStatus {
-    BELUM_BAYAR, DIPROSES, BERHASIL, DIBATALKAN
+    BELUM_ORDER,BELUM_BAYAR, DIPROSES, BERHASIL, DIBATALKAN
 }
