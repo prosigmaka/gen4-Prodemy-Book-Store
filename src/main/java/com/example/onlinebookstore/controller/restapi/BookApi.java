@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/book")
+
 public class BookApi {
     @Autowired
     private BookRepository bookRepository;
