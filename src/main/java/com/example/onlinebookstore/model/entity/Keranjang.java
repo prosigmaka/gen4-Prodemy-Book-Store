@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = Keranjang.CART)
 @Data
-public class Keranjang extends DirectAddToCartDto {
+public class Keranjang {
     public static final String CART = "keranjang";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CART)

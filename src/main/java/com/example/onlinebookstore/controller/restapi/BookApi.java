@@ -9,14 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/book")
 
 public class BookApi {
@@ -47,17 +54,23 @@ public class BookApi {
     }
 
     @GetMapping("/{id}")
-    public Book getById(@PathVariable Integer id) {
-        return bookRepository.findById(id).get();
+    public BookDto getById(@PathVariable Integer id) {
+        Book book = bookRepository.findById(id).get();
+        BookDto bookData = mapToDto(book);
+        return bookData;
     }
 
-    @PostMapping
-    public BookDto saveOrEditBook(@RequestBody BookDto bookDto) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/save")
+    public BookDto saveOrEditBook(@RequestPart(value="data", required = true) BookDto bookDto, @RequestPart(value="file", required = true) MultipartFile file) throws Exception {
         Book book = modelMapper.map(bookDto, Book.class);
+        String userFolderPath = "C:/Users/Lenovo/STORE/";
+        Path path = Paths.get(userFolderPath);
+        Path filePath = path.resolve(file.getOriginalFilename());
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        book.setGambar(file.getOriginalFilename());
         Author author = new Author();
         Category category = new Category();
         Publisher publisher = new Publisher();
-
         book = bookService.manageDetailBookService(book, bookDto);
 
         if (bookDto.getIdPengarang() == null) {
@@ -84,11 +97,26 @@ public class BookApi {
         return bookDto1;
     }
 
+    @GetMapping("/getImage/{id}")
+    public String getImage(@PathVariable Integer id) throws IOException {
+        Book book = bookRepository.findById(id).get();
+        String userFolderPath = "C:/Users/Lenovo/STORE/";
+        String pathFile = userFolderPath + book.getGambar();
+        Path paths = Paths.get(pathFile);
+        byte[] filePhoto = Files.readAllBytes(paths);
+        String encodedFile = Base64.getEncoder().encodeToString(filePhoto);
+        return encodedFile;
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
-        keranjangRepository.deleteById(keranjangRepository.getIdKeranjang(id));
-        bookRepository.deleteById(id);
+        if(keranjangRepository.getIdKeranjang(id) == null) {
+            bookRepository.deleteById(id);
+        } else {
+            keranjangRepository.deleteById(keranjangRepository.getIdKeranjang(id));
+            bookRepository.deleteById(id);
+        }
     }
 
 
@@ -108,7 +136,6 @@ public class BookApi {
 
         return bookDto;
     }
-
 
     @GetMapping("/search/{keyword}") //search
     public List<BookDto> listBookSearch(@PathVariable String keyword) {

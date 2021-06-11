@@ -22,8 +22,8 @@ public class KeranjangServiceImp implements KeranjangService {
 
     @Override
     public void saveToCartDirect(Keranjang keranjang, DirectAddToCartDto dto) {
-
         List<Keranjang> cart = keranjangRepository.findAllByIdCustomer(keranjang.getIdCustomer());
+//        List<Keranjang> cart = keranjangRepository.findAllByIdCustomer(num);
 
         Long harga = bookRepository.getHargaById(dto.getIdBuku());
 
