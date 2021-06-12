@@ -10,8 +10,16 @@ import com.example.onlinebookstore.repository.KeranjangRepository;
 import com.example.onlinebookstore.service.BuktiPembayaranService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,7 +68,8 @@ public class BuktiPembayaranApi {
         return buktiPembayaranDto;
     }
 
-    @PostMapping
+
+    @PostMapping("/save-pop")
     public BuktiPembayaranDto saveOrEditBuktiPembayaran(@RequestBody BuktiPembayaranDto buktiPembayaranDto) {
         BuktiPembayaran buktiPembayaran = modelMapper.map(buktiPembayaranDto, BuktiPembayaran.class);
         buktiPembayaran.setIdCo(buktiPembayaranDto.getIdCo());
@@ -82,6 +91,34 @@ public class BuktiPembayaranApi {
         buktiPembayaranDto.setId(buktiPembayaran.getId());
 
         return buktiPembayaranDto;
+    }
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/save-bp")
+    public BuktiPembayaranDto saveOrEditBP(@RequestPart(value="data", required = true) BuktiPembayaranDto buktiPembayaranDto, @RequestPart(value="file", required = true) MultipartFile file) throws Exception {
+        BuktiPembayaran buktiPembayaran = modelMapper.map(buktiPembayaranDto, BuktiPembayaran.class);
+
+        String userFolderPath = "F:/JAVA/Mini Project/image-pop-prodemybookstore";
+        Path path = Paths.get(userFolderPath);
+        Path filePath = path.resolve(file.getOriginalFilename());
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        buktiPembayaran.setGambarBuktiPembayaran(file.getOriginalFilename());
+
+        buktiPembayaran.setIdCo(buktiPembayaranDto.getIdCo());
+        BuktiPembayaran popNew = buktiPembayaranService.saveBuktiPembayaranService(buktiPembayaran);
+        BuktiPembayaranDto popDtoNew = mapToDtoBP(popNew);
+
+        return popDtoNew;
+    }
+
+    @GetMapping("/getImage/{idBP}")
+    public String getImagePOP(@PathVariable Integer idBP) throws IOException {
+        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findByIdCo(idBP);
+        String userFolderPath = "F:/JAVA/Mini Project/image-pop-prodemybookstore";
+        String pathFile = userFolderPath + buktiPembayaran.getGambarBuktiPembayaran();
+        Path paths = Paths.get(pathFile);
+        byte[] filePhoto = Files.readAllBytes(paths);
+        String encodedFile = Base64.getEncoder().encodeToString(filePhoto);
+        return encodedFile;
     }
 
     @GetMapping("/all-buktipembayaran")

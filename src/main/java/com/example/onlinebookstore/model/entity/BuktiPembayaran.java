@@ -21,8 +21,8 @@ public class BuktiPembayaran {
 //    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="tanggal_pembayaran", nullable = false)
     private LocalDateTime tanggalPembayaran;
-//    @Column(name="gambar_bukti_pembayaran", nullable = false)
-//    private String gambarBuktiPembayaran;
+    @Column(name="gambar_bukti_pembayaran")
+    private String gambarBuktiPembayaran;
 
 
 //    @ManyToOne
