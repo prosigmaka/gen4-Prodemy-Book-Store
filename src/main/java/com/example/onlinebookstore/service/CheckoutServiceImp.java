@@ -130,6 +130,8 @@ public class CheckoutServiceImp implements CheckoutService {
         checkoutOrder.setTanggalOrder(tanggalOrder);
         checkoutOrder.setBatasTanggalPembayaran(batasTanggalPembayaran);
         checkoutOrder.setStatusPesanan(PesananStatus.BELUM_BAYAR);
+        checkoutOrder.setTipePembayaran("Bank Transfer");
+        checkoutOrder.setBankPilihan("Bank Syariah Indonesia");
 
         for (int i = 0; i<checkoutItemList.size(); i++){
             CheckoutItem checkoutItemId = checkoutItemList.get(i);

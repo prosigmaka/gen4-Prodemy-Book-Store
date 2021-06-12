@@ -46,8 +46,8 @@ public class CheckoutApi {
     }
 
     @PostMapping(path = "/checkout-cancel")
-    public void checkoutCancel() {
-        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+    public void checkoutCancel(CostumerLoginDTO costumerLoginDTO) {
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(costumerLoginDTO.getId());
         List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByIdOrderAndTanggalCiOrderById(getCheckoutOrder.getId());
 
         for (int i = 0; i<checkoutItemList.size(); i++){
@@ -62,8 +62,8 @@ public class CheckoutApi {
     }
 
     @GetMapping("/co-checkoutpage")
-    public CheckoutOrderDto checkoutOrderDataForCOPage(){
-        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+    public CheckoutOrderDto checkoutOrderDataForCOPage(CostumerLoginDTO costumerLoginDTO){
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(costumerLoginDTO.getId());
 
         CheckoutOrderDto checkoutOrderDto = modelMapper.map(getCheckoutOrder, CheckoutOrderDto.class);
         checkoutOrderDto.setIdCostumer(getCheckoutOrder.getIdCostumer());
@@ -75,8 +75,8 @@ public class CheckoutApi {
     }
 
     @GetMapping("/ci-checkoutpage")
-    public List<CheckoutItemDto> checkoutItemListForCOPage(){
-        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(userService.idCustomerLogIn());
+    public List<CheckoutItemDto> checkoutItemListForCOPage(CostumerLoginDTO costumerLoginDTO){
+        CheckoutOrder getCheckoutOrder = checkoutOrderRepository.findAllByIdCostumerAndTanggalCoOrderById(costumerLoginDTO.getId());
         List<CheckoutItem> checkoutItemList = checkoutItemRepository.findAllByIdOrderAndTanggalCiOrderById(getCheckoutOrder.getId());
 
         List<CheckoutItemDto> checkoutItemDtoList =

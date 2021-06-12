@@ -32,28 +32,6 @@ public class BuktiPembayaranApi {
     @Autowired
     public ModelMapper modelMapper;
 
-//    @GetMapping("/{idPembayaran}")
-//    public BuktiPembayaranDto getById(@PathVariable Integer id) {
-//        BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(id).get();
-//        BuktiPembayaranDto buktiPembayaranDto = modelMapper.map(buktiPembayaran,BuktiPembayaranDto.class);
-//        return buktiPembayaranDto;
-//    }
-
-//    @GetMapping("/{idAja}")
-//    public BuktiPembayaranDto getCheckoutOrder(@PathVariable Integer idCO) {
-//        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
-//        BuktiPembayaran buktiPembayaran = new BuktiPembayaran();
-//        buktiPembayaran.setIdCo(checkoutOrder.getId());
-//        BuktiPembayaranDto buktiPembayaranDto = new BuktiPembayaranDto();
-//        // jika tidak pakai model mapper maka perlu setter getter satu satu
-//        buktiPembayaranDto.setIdCo(checkoutOrder.getId());
-//        buktiPembayaranDto.setTanggalOrder(checkoutOrder.getTanggalOrder());
-//        buktiPembayaranDto.setBatasTanggalPembayaran(checkoutOrder.getBatasTanggalPembayaran());
-//        buktiPembayaranDto.setTipePembayaran(checkoutOrder.getTipePembayaran());
-//        buktiPembayaranDto.setTotalHargalCi(checkoutOrder.getTotalHargalCi());
-//
-//        return buktiPembayaranDto;
-//    }
 
     @GetMapping("/{idAja}")
     public BuktiPembayaranDto paymentCheckoutOrder(@PathVariable Integer idCO) {
@@ -128,13 +106,19 @@ public class BuktiPembayaranApi {
     }
 
     @PostMapping("/change-status-berhasil")
-    public CheckoutOrder changeStatusBerhasil(@RequestBody CheckoutOrderDto checkoutOrderDto){
-        CheckoutOrder checkoutOrder = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
-        checkoutOrder.setStatusPesanan(PesananStatus.DIPROSES);
-        checkoutOrder.setIdCostumer(checkoutOrderDto.getIdCostumer());
-        checkoutOrder.setId(checkoutOrderDto.getId());
+    public CheckoutOrder changeStatusBerhasil(@PathVariable Integer idBP/*@RequestBody CheckoutOrderDto checkoutOrderDto*/){
+        BuktiPembayaran bpConfirmed = buktiPembayaranRepository.findById(idBP).get();
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(bpConfirmed.getIdCo()).get();
+        CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrder,CheckoutOrderDto.class);
+        checkoutOrderDto.setIdCostumer(checkoutOrder.getIdCostumer());
+        checkoutOrderDto.setId(checkoutOrder.getId());
 
-        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrder.getId());
+        CheckoutOrder checkoutOrderNew = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
+        checkoutOrderNew.setStatusPesanan(PesananStatus.DIPROSES);
+        checkoutOrderNew.setIdCostumer(checkoutOrderDto.getIdCostumer());
+        checkoutOrderNew.setId(checkoutOrderDto.getId());
+
+        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrderNew.getId());
         for (int i = 0; i<checkoutItemList.size(); i++){
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
@@ -143,31 +127,23 @@ public class BuktiPembayaranApi {
             keranjangRepository.save(k);
         }
 
-
-//        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
-
-//        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
-//        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
-//        for (int i = 0; i<checkoutItemList.size(); i++){
-//            CheckoutItem checkoutItem = checkoutItemList.get(i);
-//            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItem.getIdKeranjang());
-//            Keranjang k = keranjang.get();
-//            k.setStatusKeranjang(ItemStatus.PAID);
-//            Keranjang keranjangNewStatus = keranjangRepository.save(k);
-//            checkoutItem.setKeranjang(keranjangNewStatus);
-//            checkoutItemRepository.save(checkoutItem);
-//        }
-        return checkoutOrderRepository.save(checkoutOrder);
+        return checkoutOrderRepository.save(checkoutOrderNew);
     }
 
     @PostMapping("/change-status-gagal")
-    public CheckoutOrder changeStatusGagal(@RequestBody CheckoutOrderDto checkoutOrderDto){
-        CheckoutOrder checkoutOrder = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
-        checkoutOrder.setStatusPesanan(PesananStatus.DIBATALKAN);
-        checkoutOrder.setIdCostumer(checkoutOrderDto.getIdCostumer());
-        checkoutOrder.setId(checkoutOrderDto.getId());
+    public CheckoutOrder changeStatusGagal(@PathVariable Integer idBP/*@RequestBody CheckoutOrderDto checkoutOrderDto*/){
+        BuktiPembayaran bpCanceled = buktiPembayaranRepository.findById(idBP).get();
+        CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(bpCanceled.getIdCo()).get();
+        CheckoutOrderDto checkoutOrderDto = modelMapper.map(checkoutOrder,CheckoutOrderDto.class);
+        checkoutOrderDto.setIdCostumer(checkoutOrder.getIdCostumer());
+        checkoutOrderDto.setId(checkoutOrder.getId());
 
-        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrder.getId());
+        CheckoutOrder checkoutOrderNew = modelMapper.map(checkoutOrderDto,CheckoutOrder.class);
+        checkoutOrderNew.setStatusPesanan(PesananStatus.DIBATALKAN);
+        checkoutOrderNew.setIdCostumer(checkoutOrderDto.getIdCostumer());
+        checkoutOrderNew.setId(checkoutOrderDto.getId());
+
+        List<CheckoutItem> checkoutItemList =checkoutItemRepository.findAllByIdOrder(checkoutOrderNew.getId());
         for (int i = 0; i<checkoutItemList.size(); i++){
             CheckoutItem checkoutItemId = checkoutItemList.get(i);
             Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItemId.getIdKeranjang());
@@ -176,20 +152,7 @@ public class BuktiPembayaranApi {
             keranjangRepository.save(k);
         }
 
-//        CheckoutOrder checkoutOrderChangeStatus = checkoutOrderRepository.save(checkoutOrder);
-
-//        CheckoutOrder checkoutOrderNewStatus = new CheckoutOrder();
-//        List<CheckoutItem> checkoutItemList = checkoutOrderChangeStatus.getItems();
-//        for (int i = 0; i<checkoutItemList.size(); i++){
-//            CheckoutItem checkoutItem = checkoutItemList.get(i);
-//            Optional<Keranjang> keranjang = keranjangRepository.findById(checkoutItem.getIdKeranjang());
-//            Keranjang k = keranjang.get();
-//            k.setStatusKeranjang(ItemStatus.PAID);
-//            Keranjang keranjangNewStatus = keranjangRepository.save(k);
-//            checkoutItem.setKeranjang(keranjangNewStatus);
-//            checkoutItemRepository.save(checkoutItem);
-//        }
-        return checkoutOrderRepository.save(checkoutOrder);
+        return checkoutOrderRepository.save(checkoutOrderNew);
     }
 
     @DeleteMapping("/{id}")
@@ -197,16 +160,4 @@ public class BuktiPembayaranApi {
         buktiPembayaranRepository.deleteById(id);
     }
 
-//    @GetMapping(path = "/all")
-//    public @ResponseBody
-//    Iterable<CheckoutOrder> getAllOrders() {
-//        return checkoutOrderService.getAllOrders();
-//    }
-
-
-    //1. API = nampilin list item yg mau di checkout
-    //2. proses centang item
-    //3. tombol place order:
-    //      1. nangkep apa aja yg mau dicentang
-    //      2. buat json array yg berisi item yg di centang
 }
