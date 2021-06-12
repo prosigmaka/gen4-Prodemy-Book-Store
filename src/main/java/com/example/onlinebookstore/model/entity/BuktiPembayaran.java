@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class BuktiPembayaran {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 //    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="tanggal_pembayaran", nullable = false)
-    private LocalDateTime tanggalPembayaran;
+    private Date tanggalPembayaran;
     @Column(name="gambar_bukti_pembayaran")
     private String gambarBuktiPembayaran;
 

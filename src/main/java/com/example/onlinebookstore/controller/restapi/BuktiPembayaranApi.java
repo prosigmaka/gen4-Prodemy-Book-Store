@@ -41,7 +41,7 @@ public class BuktiPembayaranApi {
     public ModelMapper modelMapper;
 
 
-    @GetMapping("/{idAja}")
+    @GetMapping("/payment/{idCO}")
     public BuktiPembayaranDto paymentCheckoutOrder(@PathVariable Integer idCO) {
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(idCO).get();
         BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findByIdCo(idCO);
@@ -132,7 +132,7 @@ public class BuktiPembayaranApi {
         return buktiPembayaranDtos;
     }
 
-    @GetMapping("/{idBP}")
+    @GetMapping("/validate/{idBP}")
     public CheckoutOrderDto validateCheckoutOrder(@PathVariable Integer idBP) {
         BuktiPembayaran buktiPembayaran = buktiPembayaranRepository.findById(idBP).get();
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(buktiPembayaran.getIdCo()).get();
@@ -142,7 +142,7 @@ public class BuktiPembayaranApi {
         return checkoutOrderDto;
     }
 
-    @PostMapping("/change-status-berhasil")
+    @PostMapping("/change-status-berhasil/{idBP}")
     public CheckoutOrder changeStatusBerhasil(@PathVariable Integer idBP/*@RequestBody CheckoutOrderDto checkoutOrderDto*/){
         BuktiPembayaran bpConfirmed = buktiPembayaranRepository.findById(idBP).get();
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(bpConfirmed.getIdCo()).get();
@@ -167,7 +167,7 @@ public class BuktiPembayaranApi {
         return checkoutOrderRepository.save(checkoutOrderNew);
     }
 
-    @PostMapping("/change-status-gagal")
+    @PostMapping("/change-status-gagal/{idBP}")
     public CheckoutOrder changeStatusGagal(@PathVariable Integer idBP/*@RequestBody CheckoutOrderDto checkoutOrderDto*/){
         BuktiPembayaran bpCanceled = buktiPembayaranRepository.findById(idBP).get();
         CheckoutOrder checkoutOrder = checkoutOrderRepository.findById(bpCanceled.getIdCo()).get();

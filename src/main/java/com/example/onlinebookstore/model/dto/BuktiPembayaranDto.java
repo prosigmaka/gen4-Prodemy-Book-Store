@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class BuktiPembayaranDto {
     private Integer id;
-    private LocalDateTime tanggalPembayaran;
+    private Date tanggalPembayaran;
     private String gambarBuktiPembayaran;
 
     private Date tanggalOrder;
