@@ -29,12 +29,6 @@ public class KeranjangApi {
     @Autowired
     private ModelMapper modelMapper;
 
-//    private Long currentIdCustomer(){
-//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-//        Long idCustomer = userRepository.findIdByUserName(userName);
-//        return idCustomer;
-//    }
-
     @GetMapping
     public List<KeranjangDto> getAll() {
         Long num = 1L;

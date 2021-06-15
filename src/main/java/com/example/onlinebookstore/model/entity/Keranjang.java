@@ -1,6 +1,4 @@
 package com.example.onlinebookstore.model.entity;
-
-import com.example.onlinebookstore.model.dto.DirectAddToCartDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,13 +17,11 @@ public class Keranjang {
     private Integer kuantitasBuku;
     @Column(name="subtotal_harga_buku", nullable = false)
     private Long subTotalHargaBuku;
-//    @Enumerated(EnumType.STRING)
+
     @Column(name="status")
-    //private ItemStatus statusKeranjang;
+
     private String statusKeranjang;
 
-//    @Column(name = "status", nullable = false)
-//    private String status;
 
 
 
