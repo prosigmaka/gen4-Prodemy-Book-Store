@@ -8,4 +8,12 @@ import org.springframework.stereotype.Service;
 public class CostumerLoginDTO {
     private Long id;
 
+    //<idKeranjang,totalPrice>
+//    private Map<Integer, Integer> keranjang;
+
+    //<idKeranjang>
+//    private List<String> MahasiswaId;
+
+//    {cartsId:{1,2,,}}
+
 }
